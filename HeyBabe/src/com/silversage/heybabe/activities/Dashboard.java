@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class Dashboard extends Activity {
+public class Dashboard extends HeyBabeActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

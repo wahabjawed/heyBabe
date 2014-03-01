@@ -1,5 +1,7 @@
 package com.silversage.heybabe.activities;
 
-public class HeyBabeActivity {
+import android.app.Activity;
+
+public class HeyBabeActivity extends Activity{
 
 }

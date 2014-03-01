@@ -2,7 +2,7 @@ package com.silversage.heybabe.braodcastManager;
 
 import java.util.Calendar;
 
-import com.silversage.heybabe.serviceManager.ServiceManager;
+import com.silversage.heybabe.service.ServiceManager;
 import com.silversage.heybabe.util.SQLHelper;
 
 

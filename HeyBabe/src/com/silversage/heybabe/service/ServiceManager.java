@@ -1,4 +1,4 @@
-package com.silversage.heybabe.serviceManager;
+package com.silversage.heybabe.service;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

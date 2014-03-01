@@ -60,4 +60,9 @@ public class SQLHelper {
 		return db.rawQuery("select * from Restaurant where name like '"
 				+ searchString + "%' order by name", null);
 	}
+
+	public static Object getUser() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

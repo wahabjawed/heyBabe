@@ -1,12 +1,9 @@
 package com.silversage.heybabe.activities;
 
-import com.silversage.heybabe.R;
-import com.silversage.heybabe.R.layout;
-import com.silversage.heybabe.R.menu;
-
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.Menu;
+
+import com.silversage.heybabe.R;
 
 public class Dashboard extends HeyBabeActivity {
 

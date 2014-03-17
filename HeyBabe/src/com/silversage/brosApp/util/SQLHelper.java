@@ -15,6 +15,28 @@ public class SQLHelper {
 
 	}
 
+	public static boolean isFirstTime() {
+		Log.d("BrosApp--SQLHelper", "isFirstTime--Checking!");
+		if ((db.rawQuery("select * from Preference", null)).getCount() > 0) {
+			Log.d("BrosApp--SQLHelper", "isFirstTime--Dashboard");
+			return false;
+		} else {
+			Log.d("BrosApp--SQLHelper", "isFirstTime--Splash");
+			return true;
+
+		}
+
+	}
+
+	public static void setFirstTime() {
+
+		ContentValues insertValues = new ContentValues();
+		insertValues.put("isFirst", "1");
+
+		db.insert("Preference", null, insertValues);
+		Log.d("BrosApp--SQLHelper", "Preference--Data inserted");
+	}
+
 	public static Cursor getMenuItems(String resID) {
 		return db.rawQuery(
 				"select * from MenuItem where ID = '" + resID + "' ", null);

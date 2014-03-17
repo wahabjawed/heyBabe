@@ -31,14 +31,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.silversage.brosApp.Registarion"
-            android:label="@string/title_activity_registarion" >
-        </activity>
+       
         <activity
             android:name="com.silversage.brosApp.activities.Slider"
-            android:label="@string/title_activity_registration" >
+            android:label="@string/title_activity_registration" android:screenOrientation="portrait">
         </activity>
+        <activity android:name=".activities.SplashScreen" android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

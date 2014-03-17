@@ -1,5 +1,6 @@
 package com.silversage.brosApp.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 
@@ -10,7 +11,18 @@ public class Dashboard extends BrosAppActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_dashboard);
+
+		if (!db.isFirstTime()) {
+
+			setContentView(R.layout.dashboard);
+
+		} else {
+			
+			startActivity(new Intent(this, SplashScreen.class));
+			this.finish();
+		}
+		
+		
 	}
 
 	@Override

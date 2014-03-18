@@ -9,15 +9,18 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import com.silversage.brosApp.BrosApp;
 import com.silversage.brosApp.R;
+import com.silversage.brosApp.util.SQLHelper;
 
 public class SliderImage extends Fragment {
 
 	int index = 0;
 	static int[] imageIndex = new int[5];
 	Button finish;
+	RelativeLayout relLayout;
 
 	public Fragment newInstance(Context context, int index) {
 		SliderImage f = new SliderImage();
@@ -32,10 +35,10 @@ public class SliderImage extends Fragment {
 
 		ViewGroup root = (ViewGroup) inflater.inflate(R.layout.slider, null);
 
-		// question = (TextView) root.findViewById(R.id.textView1);
+		relLayout = (RelativeLayout) root.findViewById(R.id.relLayout);
 		finish = (Button) root.findViewById(R.id.button1);
 
-		if(index<4){
+		if (index < 6) {
 			finish.setVisibility(View.INVISIBLE);
 		}
 		finish.setOnClickListener(new OnClickListener() {
@@ -43,21 +46,35 @@ public class SliderImage extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-
+				SQLHelper.setFirstTime();
 				startActivity(new Intent(BrosApp.context, Dashboard.class));
 				getActivity().finish();
 			}
 		});
 
-		setUI(index);
+		setUI();
 
 		return root;
 
 	}
 
-	private void setUI(int index2) {
+	private void setUI() {
 		// TODO Auto-generated method stub
-	
-	}
+		if (index == 0) {
+			relLayout.setBackgroundResource(R.drawable.splash2);
+		} else if (index == 1) {
+			relLayout.setBackgroundResource(R.drawable.splash2);
+		} else if (index == 2) {
+			relLayout.setBackgroundResource(R.drawable.splash3);
+		} else if (index == 3) {
+			relLayout.setBackgroundResource(R.drawable.splash4);
+		} else if (index == 4) {
+			relLayout.setBackgroundResource(R.drawable.splash5);
+		} else if (index == 5) {
+			relLayout.setBackgroundResource(R.drawable.splash6);
+		} else if (index == 6) {
+			relLayout.setBackgroundResource(R.drawable.splash7);
+		}
 
+	}
 }

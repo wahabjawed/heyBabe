@@ -37,6 +37,12 @@ public class SliderAdapter extends FragmentPagerAdapter {
 		case 4:
 			f = new SliderImage().newInstance(_context,4);
 			break;
+		case 5:
+			f = new SliderImage().newInstance(_context,5);
+			break;
+		case 6:
+			f = new SliderImage().newInstance(_context,6);
+			break;
 
 		}
 		return f;
@@ -44,7 +50,7 @@ public class SliderAdapter extends FragmentPagerAdapter {
 
 	@Override
 	public int getCount() {
-		return 5;
+		return 7;
 	}
 
 }

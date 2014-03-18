@@ -31,7 +31,7 @@ public class BrosApp extends Application{
 	db.execSQL("CREATE TABLE IF NOT EXISTS Contact(ID TEXT, number TEXT,name TEXT, pic BLOB);");
 	db.execSQL("CREATE TABLE IF NOT EXISTS Contract(ID TEXT, sender TEXT,receiver TEXT, status TEXT);");
 	db.execSQL("CREATE TABLE IF NOT EXISTS ContractDetail(ContractID TEXT,name TEXT,desc TEXT,do TEXT, dont TEXT, pic BLOB);");
-	
+	context=getApplicationContext();
 	super.onCreate();
 	
 	}

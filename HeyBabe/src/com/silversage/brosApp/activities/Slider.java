@@ -1,36 +1,32 @@
 package com.silversage.brosApp.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.TextView;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 
 import com.silversage.brosApp.R;
+import com.silversage.brosApp.adapters.SliderAdapter;
 
-public class Slider extends BrosAppActivity {
+public class Slider extends FragmentActivity {
+	ViewPager _mViewPager;
+	SliderAdapter _adapter;
 
-	Button getStarted;
-
+	/** Called when the activity is first created. */
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.slider);
+		setContentView(R.layout.pager);
+		setUpView();
+		
+	}
 
-		getStarted = (Button) findViewById(R.id.button1);
-		getStarted.setOnClickListener(new OnClickListener() {
+	private void setUpView() {
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				db.setFirstTime();
-				startActivity(new Intent(Slider.this, Dashboard.class));
-				Slider.this.finish();
-			}
-		});
-
+		_mViewPager = (ViewPager) findViewById(R.id.viewPager);
+		_adapter = new SliderAdapter(getApplicationContext(),
+				getSupportFragmentManager());
+		_mViewPager.setAdapter(_adapter);
+		_mViewPager.setCurrentItem(0);
 	}
 
 }

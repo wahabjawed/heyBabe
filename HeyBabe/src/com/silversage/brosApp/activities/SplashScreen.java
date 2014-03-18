@@ -28,6 +28,24 @@ public class SplashScreen extends BrosAppActivity {
 
 	}
 
+	@Override
+	public void PostExecute() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void PreExecute() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void ProgressUpdate(String update) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 	
 }

@@ -1,6 +1,5 @@
 package com.silversage.brosApp.activities;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -9,16 +8,18 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.provider.ContactsContract.Contacts;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -27,12 +28,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.silversage.brosApp.R;
 import com.silversage.brosApp.adapters.DashboardAdapter;
@@ -52,7 +51,9 @@ public class Dashboard extends BrosAppActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		if (!db.isFirstTime()) {
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		if (prefs.getBoolean("first_time", false)) {
 
 			setContentView(R.layout.dashboard);
 			setupView();
@@ -67,7 +68,7 @@ public class Dashboard extends BrosAppActivity {
 		Display display = getWindowManager().getDefaultDisplay();
 		screen_width = display.getWidth(); // deprecated
 		// if (isListEmpty)
-		// showPopup(Dashboard.this, p);
+		showPopup();
 
 	}
 
@@ -229,19 +230,18 @@ public class Dashboard extends BrosAppActivity {
 	}
 
 	// The method that displays the popup.
-	private void showPopup(Activity context, Point p) {
+	private void showPopup() {
 		int popupWidth = 200;
 		int popupHeight = 150;
 
 		// Inflate the popup_layout.xml
-		RelativeLayout viewGroup = (RelativeLayout) context
-				.findViewById(R.id.popup);
-		LayoutInflater layoutInflater = (LayoutInflater) context
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View layout = layoutInflater.inflate(R.layout.popup_layout, viewGroup);
+		RelativeLayout viewGroup = (RelativeLayout) findViewById(R.id.popup);
+		LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		final View layout = layoutInflater.inflate(R.layout.popup_layout,
+				viewGroup);
 
 		// Creating the PopupWindow
-		final PopupWindow popup = new PopupWindow(context);
+		final PopupWindow popup = new PopupWindow(this);
 		popup.setContentView(layout);
 		popup.setWidth(popupWidth);
 		popup.setHeight(popupHeight);
@@ -249,9 +249,13 @@ public class Dashboard extends BrosAppActivity {
 
 		// Clear the default translucent background
 		popup.setBackgroundDrawable(new BitmapDrawable());
-
-		// Displaying the popup at the specified location, + offsets.
-		popup.showAtLocation(layout, Gravity.NO_GRAVITY, screen_width - 100, 90);
+		layout.post(new Runnable() {
+			public void run() {
+				// Displaying the popup at the specified location, + offsets.
+				popup.showAtLocation(layout, Gravity.NO_GRAVITY,
+						screen_width - 100, 90);
+			}
+		});
 
 	}
 

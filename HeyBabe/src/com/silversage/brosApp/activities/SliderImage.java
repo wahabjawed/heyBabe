@@ -2,7 +2,9 @@ package com.silversage.brosApp.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +15,6 @@ import android.widget.RelativeLayout;
 
 import com.silversage.brosApp.BrosApp;
 import com.silversage.brosApp.R;
-import com.silversage.brosApp.util.SQLHelper;
 
 public class SliderImage extends Fragment {
 
@@ -46,7 +47,11 @@ public class SliderImage extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				SQLHelper.setFirstTime();
+				SharedPreferences prefs = PreferenceManager
+						.getDefaultSharedPreferences(getActivity());
+				SharedPreferences.Editor editor = prefs.edit();
+				editor.putBoolean("first_time", true);
+				editor.commit();
 				startActivity(new Intent(BrosApp.context, Dashboard.class));
 				getActivity().finish();
 			}

@@ -80,7 +80,7 @@ public class Dashboard extends BrosAppActivity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				startActivity(new Intent(Dashboard.this, Slider.class));
+				startActivity(new Intent(Dashboard.this, messages.class));
 
 			}
 		});
@@ -124,7 +124,7 @@ public class Dashboard extends BrosAppActivity {
 							.getString(phones
 									.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 
-					//retrieveContactPhoto();
+					// retrieveContactPhoto();
 					db.insertContact(name, phoneNumber, null);
 					PreExecute();
 

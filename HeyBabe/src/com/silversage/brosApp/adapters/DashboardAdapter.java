@@ -2,11 +2,15 @@ package com.silversage.brosApp.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.text.Html.ImageGetter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.silversage.brosApp.R;
@@ -26,6 +30,7 @@ public class DashboardAdapter extends ArrayAdapter<DashboardObject> {
 
 		public TextView text;
 		public TextView number;
+		public ImageView displayPic;
 
 	}
 
@@ -44,13 +49,17 @@ public class DashboardAdapter extends ArrayAdapter<DashboardObject> {
 
 			viewHolder.text = (TextView) vi.findViewById(R.id.name);
 			viewHolder.number = (TextView) vi.findViewById(R.id.timestamp);
-
+			viewHolder.displayPic = (ImageView) vi
+					.findViewById(R.id.list_image);
 			vi.setTag(viewHolder);
 		}
 		ViewHolder holder = (ViewHolder) vi.getTag();
-		DashboardObject list = data[position];
-		holder.text.setText(list.getName());
-		holder.number.setText(list.getID());
+		DashboardObject obj = data[position];
+		Bitmap bmp = BitmapFactory.decodeByteArray(obj.getDisplayPic(), 0,
+				obj.getDisplayPic().length);
+		holder.displayPic.setImageBitmap(bmp);
+		holder.text.setText(obj.getName());
+		holder.number.setText(obj.getNumber());
 
 		return vi;
 	}

@@ -3,6 +3,8 @@ package com.silversage.brosApp.util;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 
 import com.silversage.brosApp.BrosApp;
 
@@ -34,4 +36,16 @@ public class NetworkStatus {
 		return false;
 	}
 
+	public static void isOnGirlWifi(String ID) {
+		Setup();
+		if (mWifi.isConnected() && activeNetworkInfo != null) {
+			final WifiManager wifiManager = (WifiManager) context
+					.getSystemService(Context.WIFI_SERVICE);
+			final WifiInfo _WifiInfo = wifiManager.getConnectionInfo();
+			if (_WifiInfo != null) {
+				_WifiInfo.getBSSID();
+			}
+		}
+
+	}
 }

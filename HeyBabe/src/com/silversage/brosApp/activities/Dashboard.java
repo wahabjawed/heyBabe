@@ -1,5 +1,6 @@
 package com.silversage.brosApp.activities;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -12,10 +13,8 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
@@ -67,8 +66,8 @@ public class Dashboard extends BrosAppActivity {
 
 		Display display = getWindowManager().getDefaultDisplay();
 		screen_width = display.getWidth(); // deprecated
-		// if (isListEmpty)
-		showPopup();
+		if (isListEmpty)
+			showPopup();
 
 	}
 
@@ -125,8 +124,11 @@ public class Dashboard extends BrosAppActivity {
 							.getString(phones
 									.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 
-					// retrieveContactPhoto();
-					db.insertContact(name, phoneNumber, null);
+					ByteArrayOutputStream stream = new ByteArrayOutputStream();
+					(retrieveContactPhoto()).compress(
+							Bitmap.CompressFormat.PNG, 10, stream);
+					byte[] byteArray = stream.toByteArray();
+					db.insertContact(name, phoneNumber, byteArray);
 					PreExecute();
 
 				}
@@ -134,7 +136,7 @@ public class Dashboard extends BrosAppActivity {
 		}
 	}
 
-	private void retrieveContactPhoto() {
+	private Bitmap retrieveContactPhoto() {
 
 		Bitmap photo = null;
 
@@ -158,6 +160,7 @@ public class Dashboard extends BrosAppActivity {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return photo;
 
 	}
 
@@ -203,8 +206,11 @@ public class Dashboard extends BrosAppActivity {
 				for (int i = 0; i < _cursor.getCount(); i++) {
 
 					dashboardItem[i] = (new DashboardObject(
+							_cursor.getString(_cursor.getColumnIndex("ID")),
 							_cursor.getString(_cursor.getColumnIndex("name")),
-							_cursor.getString(_cursor.getColumnIndex("number"))));
+							_cursor.getString(_cursor.getColumnIndex("number")),
+							_cursor.getBlob(_cursor
+									.getColumnIndex("displayPic"))));
 
 					_cursor.moveToNext();
 				}

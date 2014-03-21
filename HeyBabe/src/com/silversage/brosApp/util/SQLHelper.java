@@ -59,6 +59,7 @@ public class SQLHelper {
 		ContentValues insertValues = new ContentValues();
 		insertValues.put("name", name);
 		insertValues.put("number", no);
+		insertValues.put("displayPic", pic);
 
 		db.insert("Contact", null, insertValues);
 

@@ -910,16 +910,21 @@ containing a value of this type.
         public static final int abs__textfield_searchview_right_holo_dark=0x7f02006d;
         public static final int abs__textfield_searchview_right_holo_light=0x7f02006e;
         public static final int abs__toast_frame=0x7f02006f;
-        public static final int ic_launcher=0x7f020070;
-        public static final int person=0x7f020071;
-        public static final int plus=0x7f020072;
-        public static final int popup_bg=0x7f020073;
-        public static final int splash2=0x7f020074;
-        public static final int splash3=0x7f020075;
-        public static final int splash4=0x7f020076;
-        public static final int splash5=0x7f020077;
-        public static final int splash6=0x7f020078;
-        public static final int splash7=0x7f020079;
+        public static final int back=0x7f020070;
+        public static final int black_plus=0x7f020071;
+        public static final int border=0x7f020072;
+        public static final int ic_launcher=0x7f020073;
+        public static final int next=0x7f020074;
+        public static final int person=0x7f020075;
+        public static final int plus=0x7f020076;
+        public static final int popup_bg=0x7f020077;
+        public static final int splash2=0x7f020078;
+        public static final int splash3=0x7f020079;
+        public static final int splash4=0x7f02007a;
+        public static final int splash5=0x7f02007b;
+        public static final int splash6=0x7f02007c;
+        public static final int splash7=0x7f02007d;
+        public static final int timestamp=0x7f02007e;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f040020;

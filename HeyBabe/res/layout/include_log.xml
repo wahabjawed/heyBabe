@@ -1,26 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layradio"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_horizontal" >
-
-    <RelativeLayout
-        android:id="@+id/hor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="81dp" >
-
-        <ImageView
-            android:id="@+id/in_play"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="235dp"
-            android:layout_marginLeft="150dp"
-            />
-
-    </RelativeLayout>
-
-</RelativeLayout>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+   
+  <!-- Screen Design for Photos -->
+  <TextView android:text="PHOTOS HERE"
+            android:padding="15dip"
+            android:textSize="18dip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+     
+</LinearLayout>

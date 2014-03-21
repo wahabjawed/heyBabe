@@ -1,46 +1,36 @@
 package com.silversage.brosApp.activities;
 
-import com.silversage.brosApp.R;
-
-import android.app.Activity;
-import android.content.res.Resources;
+import android.app.TabActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
-public class messages extends Activity {
+import com.silversage.brosApp.R;
+
+public class messages extends TabActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.messages);
 
-		Resources resources = getResources();
+		TabHost tabHost = getTabHost();
 
-		TabHost th = (TabHost) findViewById(R.id.tabhost);
-		th.setup();
+		TabSpec newmsg = tabHost.newTabSpec("tab1");
+		newmsg.setIndicator("",
+				getResources().getDrawable(android.R.drawable.ic_dialog_map));
+		Intent newmsgIntent = new Intent(this, newMsg.class);
+		newmsg.setContent(newmsgIntent);
 
-		TabSpec specs = th.newTabSpec("tag1");
+		TabSpec log = tabHost.newTabSpec("tab2");
+		log.setIndicator("",
+				getResources().getDrawable(android.R.drawable.star_off));
+		Intent logIntent = new Intent(this, msgLogs.class);
+		log.setContent(logIntent);
 
-		specs = th.newTabSpec("tag1");
-		specs.setContent(R.id.log);
-		specs.setIndicator("",
-				resources.getDrawable(android.R.drawable.ic_dialog_map));
-		th.addTab(specs);
-
-		specs = th.newTabSpec("tag2");
-		specs.setContent(R.id.newMessage);
-		specs.setIndicator("",
-				resources.getDrawable(android.R.drawable.star_off));
-		th.addTab(specs);
-
+		tabHost.addTab(newmsg);
+		tabHost.addTab(log);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.dashboard, menu);
-		return true;
-	}
 }

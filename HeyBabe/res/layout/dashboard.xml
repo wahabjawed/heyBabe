@@ -43,6 +43,8 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="12dp" >
         </ListView>
+        
+    
 
        
     </RelativeLayout>

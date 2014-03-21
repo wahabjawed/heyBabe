@@ -53,4 +53,16 @@ public class SQLHelper {
 		Log.d(" BrosApp--SQLHelper", "Contact--Querying Data");
 		return db.rawQuery("select * from Contact order by name", null);
 	}
+
+	public static void insertContact(String name, String no, byte[] pic) {
+		Log.d("BrosApp--SQLHelper", "Contact--Data" + name + " " + no);
+		ContentValues insertValues = new ContentValues();
+		insertValues.put("name", name);
+		insertValues.put("number", no);
+
+		db.insert("Contact", null, insertValues);
+
+		Log.d("BrosApp--SQLHelper", "Contact--Data inserted");
+
+	}
 }

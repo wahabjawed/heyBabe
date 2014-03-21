@@ -1,16 +1,36 @@
 package com.silversage.brosApp.activities;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.ContentUris;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.Contacts;
 import android.util.Log;
-import android.view.Menu;
+import android.view.Display;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,10 +40,13 @@ import com.silversage.brosApp.adapters.DashboardObject;
 
 public class Dashboard extends BrosAppActivity {
 
+	int screen_width;
+	boolean isListEmpty = true;
 	private static final int PICK_CONTACT = 3;
 	ListView List;
 	TextView ProText;
 	DashboardObject[] dashboardItem;
+	private String contactId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +64,26 @@ public class Dashboard extends BrosAppActivity {
 			this.finish();
 		}
 
+		Display display = getWindowManager().getDefaultDisplay();
+		screen_width = display.getWidth(); // deprecated
+		// if (isListEmpty)
+		// showPopup(Dashboard.this, p);
+
 	}
 
 	private void setupView() {
 		// TODO Auto-generated method stub
 		List = (ListView) findViewById(R.id.dListView);
 		ProText = (TextView) findViewById(R.id.mProText);
+		List.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				startActivity(new Intent(Dashboard.this, Slider.class));
+
+			}
+		});
 
 	}
 
@@ -68,7 +105,14 @@ public class Dashboard extends BrosAppActivity {
 		case (PICK_CONTACT):
 			if (resultCode == Activity.RESULT_OK) {
 				Uri contactData = data.getData();
+				ContentResolver cr = getContentResolver();
+
 				Cursor c = managedQuery(contactData, null, null, null, null);
+
+				contactId = c.getString(c
+						.getColumnIndex(ContactsContract.Contacts._ID));
+				Cursor phones = cr.query(Phone.CONTENT_URI, null,
+						Phone.CONTACT_ID + " = " + contactId, null, null);
 
 				if (c.moveToFirst()) {
 					// other data is available for the Contact. I have decided
@@ -76,13 +120,44 @@ public class Dashboard extends BrosAppActivity {
 					String name = c
 							.getString(c
 									.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME));
-					Toast.makeText(getApplicationContext(), name,
-							Toast.LENGTH_SHORT).show();
-					dashboardItem[0]=new DashboardObject(name, "0");
+					String phoneNumber = phones
+							.getString(phones
+									.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+
+					//retrieveContactPhoto();
+					db.insertContact(name, phoneNumber, null);
+					PreExecute();
 
 				}
 			}
 		}
+	}
+
+	private void retrieveContactPhoto() {
+
+		Bitmap photo = null;
+
+		try {
+			InputStream inputStream = ContactsContract.Contacts
+					.openContactPhotoInputStream(getContentResolver(),
+							ContentUris.withAppendedId(
+									ContactsContract.Contacts.CONTENT_URI,
+									new Long(contactId)));
+
+			if (inputStream != null) {
+				photo = BitmapFactory.decodeStream(inputStream);
+				// ImageView imageView = (ImageView)
+				// findViewById(R.id.img_contact);
+				// imageView.setImageBitmap(photo);
+			}
+
+			assert inputStream != null;
+			inputStream.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	@Override
@@ -92,6 +167,7 @@ public class Dashboard extends BrosAppActivity {
 		switch (item.getItemId()) {
 
 		case (R.id.new_message):
+
 			Intent intent = new Intent(Intent.ACTION_PICK,
 					ContactsContract.Contacts.CONTENT_URI);
 			startActivityForResult(intent, PICK_CONTACT);
@@ -116,17 +192,21 @@ public class Dashboard extends BrosAppActivity {
 
 		Log.d(" BrosApp--DashboardList", "Cursor populated");
 		if (_cursor.getCount() > 0) {
+			dashboardItem = new DashboardObject[_cursor.getCount()];
 			Log.d(" BrosApp--DashboardList", "Data Exist");
 			_cursor.moveToFirst();
 			Log.d(" BrosApp--DashboardList", "Populating Adapter");
 
-			for (int i = 0; i < _cursor.getCount(); i++) {
+			if (_cursor.getCount() > 0) {
+				isListEmpty = false;
+				for (int i = 0; i < _cursor.getCount(); i++) {
 
-				dashboardItem[i] = (new DashboardObject(
-						_cursor.getString(_cursor.getColumnIndex("name")),
-						_cursor.getString(_cursor.getColumnIndex("ID"))));
+					dashboardItem[i] = (new DashboardObject(
+							_cursor.getString(_cursor.getColumnIndex("name")),
+							_cursor.getString(_cursor.getColumnIndex("number"))));
 
-				_cursor.moveToNext();
+					_cursor.moveToNext();
+				}
 			}
 			_cursor.close();
 
@@ -136,6 +216,7 @@ public class Dashboard extends BrosAppActivity {
 			ProText.setVisibility(View.INVISIBLE);
 			Log.d(" BrosApp--DashboardList", "Populated");
 		} else {
+
 			Log.d(" BrosApp--DashboardList", "No Data Found");
 		}
 
@@ -144,6 +225,33 @@ public class Dashboard extends BrosAppActivity {
 	@Override
 	public void ProgressUpdate(String update) {
 		// TODO Auto-generated method stub
+
+	}
+
+	// The method that displays the popup.
+	private void showPopup(Activity context, Point p) {
+		int popupWidth = 200;
+		int popupHeight = 150;
+
+		// Inflate the popup_layout.xml
+		RelativeLayout viewGroup = (RelativeLayout) context
+				.findViewById(R.id.popup);
+		LayoutInflater layoutInflater = (LayoutInflater) context
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View layout = layoutInflater.inflate(R.layout.popup_layout, viewGroup);
+
+		// Creating the PopupWindow
+		final PopupWindow popup = new PopupWindow(context);
+		popup.setContentView(layout);
+		popup.setWidth(popupWidth);
+		popup.setHeight(popupHeight);
+		popup.setFocusable(true);
+
+		// Clear the default translucent background
+		popup.setBackgroundDrawable(new BitmapDrawable());
+
+		// Displaying the popup at the specified location, + offsets.
+		popup.showAtLocation(layout, Gravity.NO_GRAVITY, screen_width - 100, 90);
 
 	}
 

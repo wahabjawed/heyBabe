@@ -55,9 +55,9 @@ public class DashboardAdapter extends ArrayAdapter<DashboardObject> {
 		}
 		ViewHolder holder = (ViewHolder) vi.getTag();
 		DashboardObject obj = data[position];
-		Bitmap bmp = BitmapFactory.decodeByteArray(obj.getDisplayPic(), 0,
-				obj.getDisplayPic().length);
-		holder.displayPic.setImageBitmap(bmp);
+		// Bitmap bmp = BitmapFactory.decodeByteArray(obj.getDisplayPic(), 0,
+		// obj.getDisplayPic().length);
+		// holder.displayPic.setImageBitmap(bmp);
 		holder.text.setText(obj.getName());
 		holder.number.setText(obj.getNumber());
 

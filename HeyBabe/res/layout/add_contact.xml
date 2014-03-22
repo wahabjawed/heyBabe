@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffdd00"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/intro_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingTop="25dip"
+        android:text="Bro Who&apos; s Your \nGirlfriend?"
+        android:textSize="25dip"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/need_number"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/intro_text"
+        android:paddingLeft="20dp"
+        android:text="We need your girlfriends number to begin"
+        android:textSize="12dip"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/need_number"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dip"
+        android:background="@drawable/border"
+        android:padding="10dip" />
+
+    <EditText
+        android:id="@+id/number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/border"
+        android:padding="10dip" />
+
+    <ImageView
+        android:id="@+id/contact_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/need_number"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/number"
+        android:background="@drawable/photo" />
+
+    <Button
+        android:id="@+id/ChoosefromContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/number"
+        android:layout_centerHorizontal="true"
+        android:background="#ffee80"
+        android:layout_marginTop="15dp"
+        android:text="Choose From Contacts" />
+
+</RelativeLayout>

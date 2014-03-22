@@ -64,10 +64,8 @@ public class Dashboard extends BrosAppActivity {
 			this.finish();
 		}
 
-		Display display = getWindowManager().getDefaultDisplay();
-		screen_width = display.getWidth(); // deprecated
-		//if (isListEmpty)
-			//showPopup();
+		// if (isListEmpty)
+		// showPopup();
 
 	}
 
@@ -124,11 +122,12 @@ public class Dashboard extends BrosAppActivity {
 							.getString(phones
 									.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 
-					ByteArrayOutputStream stream = new ByteArrayOutputStream();
-					(retrieveContactPhoto()).compress(
-							Bitmap.CompressFormat.PNG, 10, stream);
-					byte[] byteArray = stream.toByteArray();
-					db.insertContact(name, phoneNumber, byteArray);
+					// ByteArrayOutputStream stream = new
+					// ByteArrayOutputStream();
+					// (retrieveContactPhoto()).compress(
+					// Bitmap.CompressFormat.PNG, 10, stream);
+					// byte[] byteArray = stream.toByteArray();
+					db.insertContact(name, phoneNumber, null);
 					PreExecute();
 
 				}
@@ -237,6 +236,8 @@ public class Dashboard extends BrosAppActivity {
 
 	// The method that displays the popup.
 	private void showPopup() {
+		Display display = getWindowManager().getDefaultDisplay();
+		screen_width = display.getWidth(); // deprecated
 		int popupWidth = 200;
 		int popupHeight = 150;
 

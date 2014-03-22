@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
 import com.silversage.brosApp.R;
 
 public class newMsg extends Activity {
@@ -29,7 +28,7 @@ public class newMsg extends Activity {
 
 			}
 		});
-		
+
 		next.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -38,7 +37,7 @@ public class newMsg extends Activity {
 
 			}
 		});
-		
+
 		back.setOnClickListener(new View.OnClickListener() {
 
 			@Override

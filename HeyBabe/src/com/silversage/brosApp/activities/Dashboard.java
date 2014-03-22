@@ -66,8 +66,8 @@ public class Dashboard extends BrosAppActivity {
 
 		Display display = getWindowManager().getDefaultDisplay();
 		screen_width = display.getWidth(); // deprecated
-		if (isListEmpty)
-			showPopup();
+		//if (isListEmpty)
+			//showPopup();
 
 	}
 

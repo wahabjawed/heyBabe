@@ -971,10 +971,10 @@ containing a value of this type.
         public static final int abs__textButton=0x7f040013;
         public static final int abs__title=0x7f04001b;
         public static final int abs__up=0x7f04000b;
-        public static final int action_settings=0x7f040052;
+        public static final int action_settings=0x7f040054;
         public static final int add_message=0x7f040045;
         public static final int back=0x7f040049;
-        public static final int button1=0x7f040050;
+        public static final int button1=0x7f040052;
         public static final int contact_photo=0x7f040036;
         public static final int dListView=0x7f04003c;
         public static final int default_messages=0x7f040046;
@@ -990,17 +990,19 @@ containing a value of this type.
         public static final int list_image=0x7f04004d;
         public static final int mProText=0x7f04003b;
         public static final int mainRelative=0x7f04003e;
+        public static final int message=0x7f040050;
         public static final int name=0x7f040034;
         public static final int need_number=0x7f040033;
-        public static final int new_message=0x7f040051;
+        public static final int new_message=0x7f040053;
         public static final int next=0x7f040048;
         public static final int normal=0x7f040001;
         public static final int number=0x7f040035;
         public static final int popup=0x7f04004b;
         public static final int rSearch=0x7f04003d;
         public static final int rel=0x7f040039;
-        public static final int relLayout=0x7f04004f;
+        public static final int relLayout=0x7f040051;
         public static final int schedule=0x7f04003f;
+        public static final int select=0x7f04004f;
         public static final int showCustom=0x7f040008;
         public static final int showHome=0x7f040005;
         public static final int showTitle=0x7f040007;
@@ -1045,10 +1047,11 @@ containing a value of this type.
         public static final int pager=0x7f03001a;
         public static final int popup_layout=0x7f03001b;
         public static final int row_dashboard=0x7f03001c;
-        public static final int sherlock_spinner_dropdown_item=0x7f03001d;
-        public static final int sherlock_spinner_item=0x7f03001e;
-        public static final int slider=0x7f03001f;
-        public static final int splash_screen=0x7f030020;
+        public static final int row_message=0x7f03001d;
+        public static final int sherlock_spinner_dropdown_item=0x7f03001e;
+        public static final int sherlock_spinner_item=0x7f03001f;
+        public static final int slider=0x7f030020;
+        public static final int splash_screen=0x7f030021;
     }
     public static final class menu {
         public static final int dashboard=0x7f0b0000;

@@ -15,6 +15,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
@@ -34,7 +35,8 @@ import android.widget.TextView;
 
 import com.silversage.brosApp.R;
 import com.silversage.brosApp.adapters.DashboardAdapter;
-import com.silversage.brosApp.adapters.DashboardObject;
+import com.silversage.brosApp.objects.DashboardObject;
+import com.silversage.brosApp.util.SQLHelper;
 
 public class Dashboard extends BrosAppActivity {
 
@@ -59,7 +61,7 @@ public class Dashboard extends BrosAppActivity {
 			PreExecute();
 
 		} else {
-
+			new Task().execute();
 			startActivity(new Intent(this, SplashScreen.class));
 			this.finish();
 		}
@@ -200,20 +202,18 @@ public class Dashboard extends BrosAppActivity {
 			_cursor.moveToFirst();
 			Log.d(" BrosApp--DashboardList", "Populating Adapter");
 
-			if (_cursor.getCount() > 0) {
-				isListEmpty = false;
-				for (int i = 0; i < _cursor.getCount(); i++) {
+			isListEmpty = false;
+			for (int i = 0; i < _cursor.getCount(); i++) {
 
-					dashboardItem[i] = (new DashboardObject(
-							_cursor.getString(_cursor.getColumnIndex("ID")),
-							_cursor.getString(_cursor.getColumnIndex("name")),
-							_cursor.getString(_cursor.getColumnIndex("number")),
-							_cursor.getBlob(_cursor
-									.getColumnIndex("displayPic"))));
+				dashboardItem[i] = (new DashboardObject(
+						_cursor.getString(_cursor.getColumnIndex("ID")),
+						_cursor.getString(_cursor.getColumnIndex("name")),
+						_cursor.getString(_cursor.getColumnIndex("number")),
+						_cursor.getBlob(_cursor.getColumnIndex("displayPic"))));
 
-					_cursor.moveToNext();
-				}
+				_cursor.moveToNext();
 			}
+
 			_cursor.close();
 
 			DashboardAdapter adapter = new DashboardAdapter(this, dashboardItem);
@@ -263,6 +263,18 @@ public class Dashboard extends BrosAppActivity {
 						screen_width - 100, 90);
 			}
 		});
+
+	}
+
+	class Task extends AsyncTask<Void, Void, Void> {
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+
+			SQLHelper.PopulateReferenceData();
+			return null;
+		}
 
 	}
 

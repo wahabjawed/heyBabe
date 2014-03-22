@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.silversage.brosApp.R;
+import com.silversage.brosApp.objects.DashboardObject;
 
 public class DashboardAdapter extends ArrayAdapter<DashboardObject> {
 
@@ -55,9 +56,11 @@ public class DashboardAdapter extends ArrayAdapter<DashboardObject> {
 		}
 		ViewHolder holder = (ViewHolder) vi.getTag();
 		DashboardObject obj = data[position];
-		// Bitmap bmp = BitmapFactory.decodeByteArray(obj.getDisplayPic(), 0,
-		// obj.getDisplayPic().length);
-		// holder.displayPic.setImageBitmap(bmp);
+		if (obj.getDisplayPic() != null) {
+			Bitmap bmp = BitmapFactory.decodeByteArray(obj.getDisplayPic(), 0,
+					obj.getDisplayPic().length);
+			holder.displayPic.setImageBitmap(bmp);
+		}
 		holder.text.setText(obj.getName());
 		holder.number.setText(obj.getNumber());
 

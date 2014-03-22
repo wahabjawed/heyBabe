@@ -52,7 +52,7 @@
 
         <!-- New Msg Activity -->
         <activity
-            android:name="com.silversage.brosApp.activities.newMsg"
+            android:name="com.silversage.brosApp.activities.NewMessage"
             android:label="@string/app_name" >
         </activity>
         <activity

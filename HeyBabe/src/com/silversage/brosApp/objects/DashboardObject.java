@@ -1,4 +1,4 @@
-package com.silversage.brosApp.adapters;
+package com.silversage.brosApp.objects;
 
 public class DashboardObject {
 	private String Name;

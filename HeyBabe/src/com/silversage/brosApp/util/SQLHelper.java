@@ -11,7 +11,13 @@ import com.silversage.brosApp.BrosApp;
 public class SQLHelper {
 	static SQLiteDatabase db = BrosApp.db;
 
-	public static void SetupSQL(Context context) {
+	public static void SetupDB(Context context) {
+		db = context
+				.openOrCreateDatabase("brosApp", context.MODE_PRIVATE, null);
+		db.execSQL("CREATE TABLE IF NOT EXISTS Preference(isFirst TEXT);");
+		db.execSQL("CREATE TABLE IF NOT EXISTS Contact(ID TEXT, number TEXT,name TEXT, displayPic BLOB);");
+		db.execSQL("CREATE TABLE IF NOT EXISTS Ref_Message(ID TEXT, message TEXT);");
+		db.execSQL("CREATE TABLE IF NOT EXISTS ContractDetail(ContractID TEXT,name TEXT,desc TEXT,do TEXT, dont TEXT, pic BLOB);");
 
 	}
 
@@ -65,5 +71,33 @@ public class SQLHelper {
 
 		Log.d("BrosApp--SQLHelper", "Contact--Data inserted");
 
+	}
+
+	public static void PopulateReferenceData() {
+		// TODO Auto-generated method stub
+		String data[][] = { { "1", "Hemani" }, { "2", "Wahab" },
+				{ "3", "Zainu" }, { "4", "Ali" } };
+		Log.d("BrosApp--SQLHelper", "Ref_Message---Truncate");
+		db.delete("Ref_Message", null, null);
+		Log.d("BrosApp--SQLHelper", "Ref_Message---Inserting");
+
+		ContentValues insertValues;
+		for (int i = 0; i < data.length; i++) {
+			insertValues = new ContentValues();
+			insertValues.put("ID", data[i][0]);
+			insertValues.put("message", data[i][1]);
+			
+			Log.d("BrosApp--SQLHelper", "Ref_Message--"+data[i][1]);
+			db.insert("Ref_Message", null, insertValues);
+			
+		}
+		Log.d("BrosApp--SQLHelper", "Ref_Message--Data inserted");
+
+	}
+
+	public static Cursor getMessageList() {
+		// TODO Auto-generated method stub
+		Log.d(" BrosApp--SQLHelper", "Message--Querying Data");
+		return db.rawQuery("select * from Ref_Message", null);
 	}
 }

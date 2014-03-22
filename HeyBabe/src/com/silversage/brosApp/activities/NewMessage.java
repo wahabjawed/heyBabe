@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.silversage.brosApp.R;
@@ -16,6 +17,7 @@ public class NewMessage extends BrosAppActivity {
 	Button timestamp;
 	Button next;
 	Button back;
+	EditText selectTime;
 	ListView messageList;
 	MessageObject[] messageItem;
 
@@ -31,7 +33,10 @@ public class NewMessage extends BrosAppActivity {
 		timestamp = (Button) findViewById(R.id.time_selection);
 		next = (Button) findViewById(R.id.next);
 		back = (Button) findViewById(R.id.back);
+		selectTime=(EditText) findViewById(R.id.Select_Time);
 		messageList = (ListView) findViewById(R.id.default_messages);
+		
+		selectTime.setHint("Enter Bro Time:");
 		timestamp.setOnClickListener(new View.OnClickListener() {
 
 			@Override

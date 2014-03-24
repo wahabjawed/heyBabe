@@ -59,6 +59,8 @@ public class Dashboard extends BrosAppActivity {
 			setContentView(R.layout.dashboard);
 			setupView();
 			PreExecute();
+			 if (isListEmpty)
+				  showPopup();
 
 		} else {
 			setContentView(R.layout.splash_screen);
@@ -80,8 +82,7 @@ public class Dashboard extends BrosAppActivity {
 			// this.finish();
 		}
 
-		 if (isListEmpty)
-		  showPopup();
+		
 
 	}
 

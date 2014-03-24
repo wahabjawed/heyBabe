@@ -1,6 +1,5 @@
 package com.silversage.brosApp.activities;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -17,6 +16,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -61,13 +61,27 @@ public class Dashboard extends BrosAppActivity {
 			PreExecute();
 
 		} else {
+			setContentView(R.layout.splash_screen);
+			final Handler handler = new Handler();
+			final Runnable r = new Runnable() {
+
+				public void run() {
+
+					startActivity(new Intent(Dashboard.this, Slider.class));
+					Dashboard.this.finish();
+
+				}
+			};
+			handler.postDelayed(r, 1000 * 3);
+
 			new Task().execute();
-			startActivity(new Intent(this, SplashScreen.class));
-			this.finish();
+
+			// startActivity(new Intent(this, SplashScreen.class));
+			// this.finish();
 		}
 
-		// if (isListEmpty)
-		// showPopup();
+		 if (isListEmpty)
+		  showPopup();
 
 	}
 
@@ -236,8 +250,7 @@ public class Dashboard extends BrosAppActivity {
 
 	// The method that displays the popup.
 	private void showPopup() {
-		Display display = getWindowManager().getDefaultDisplay();
-		screen_width = display.getWidth(); // deprecated
+		
 		int popupWidth = 200;
 		int popupHeight = 150;
 
@@ -259,8 +272,10 @@ public class Dashboard extends BrosAppActivity {
 		layout.post(new Runnable() {
 			public void run() {
 				// Displaying the popup at the specified location, + offsets.
+				Display display = getWindowManager().getDefaultDisplay();
+				screen_width = display.getWidth(); // deprecated
 				popup.showAtLocation(layout, Gravity.NO_GRAVITY,
-						screen_width - 100, 90);
+						500 - 100, 90);
 			}
 		});
 
@@ -271,7 +286,7 @@ public class Dashboard extends BrosAppActivity {
 		@Override
 		protected Void doInBackground(Void... params) {
 			// TODO Auto-generated method stub
-
+			SQLHelper.SetupDB(getBaseContext());
 			SQLHelper.PopulateReferenceData();
 			return null;
 		}

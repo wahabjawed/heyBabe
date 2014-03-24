@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
 import com.silversage.brosApp.R;
@@ -35,6 +37,7 @@ public class MessageAdapter extends ArrayAdapter<MessageObject> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		View vi = convertView;
+		final int pos = position;
 		if (vi == null) {
 			LayoutInflater inflater = (LayoutInflater) activity
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -53,6 +56,16 @@ public class MessageAdapter extends ArrayAdapter<MessageObject> {
 		MessageObject obj = data[position];
 		holder.text.setText(obj.getMessageText());
 		holder.select.setChecked(obj.isSelected());
+		holder.select.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				// TODO Auto-generated method stub
+
+				data[pos].setSelected(isChecked);
+			}
+		});
 
 		return vi;
 	}

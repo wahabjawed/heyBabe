@@ -22,11 +22,7 @@ public class BrosApp extends Application {
 		// TODO Auto-generated method stub
 
 		db = openOrCreateDatabase("brosApp", MODE_PRIVATE, null);
-		db.execSQL("CREATE TABLE IF NOT EXISTS Preference(isFirst TEXT);");
-		db.execSQL("CREATE TABLE IF NOT EXISTS Contact(ID TEXT, number TEXT,name TEXT, displayPic BLOB);");
-		db.execSQL("CREATE TABLE IF NOT EXISTS Ref_Message(ID TEXT, message TEXT);");
-		db.execSQL("CREATE TABLE IF NOT EXISTS ContractDetail(ContractID TEXT,name TEXT,desc TEXT,do TEXT, dont TEXT, pic BLOB);");
-		context = getApplicationContext();
+			context = getApplicationContext();
 		super.onCreate();
 
 	}

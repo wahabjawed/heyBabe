@@ -1,25 +1,14 @@
 package com.silversage.brosApp.activities;
 
-import java.io.IOException;
-import java.io.InputStream;
-
-import android.app.Activity;
-import android.content.ContentResolver;
-import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.provider.ContactsContract;
-import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -42,11 +31,11 @@ public class Dashboard extends BrosAppActivity {
 
 	int screen_width;
 	boolean isListEmpty = true;
-	private static final int PICK_CONTACT = 3;
+
 	ListView List;
 	TextView ProText;
 	DashboardObject[] dashboardItem;
-	private String contactId;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +48,8 @@ public class Dashboard extends BrosAppActivity {
 			setContentView(R.layout.dashboard);
 			setupView();
 			PreExecute();
-			 if (isListEmpty)
-				  showPopup();
+			if (isListEmpty)
+				showPopup();
 
 		} else {
 			setContentView(R.layout.splash_screen);
@@ -81,8 +70,6 @@ public class Dashboard extends BrosAppActivity {
 			// startActivity(new Intent(this, SplashScreen.class));
 			// this.finish();
 		}
-
-		
 
 	}
 
@@ -112,73 +99,7 @@ public class Dashboard extends BrosAppActivity {
 		return super.onCreateOptionsMenu(menu);
 	}
 
-	@Override
-	public void onActivityResult(int reqCode, int resultCode, Intent data) {
-		super.onActivityResult(reqCode, resultCode, data);
-
-		switch (reqCode) {
-		case (PICK_CONTACT):
-			if (resultCode == Activity.RESULT_OK) {
-				Uri contactData = data.getData();
-				ContentResolver cr = getContentResolver();
-
-				Cursor c = managedQuery(contactData, null, null, null, null);
-
-				contactId = c.getString(c
-						.getColumnIndex(ContactsContract.Contacts._ID));
-				Cursor phones = cr.query(Phone.CONTENT_URI, null,
-						Phone.CONTACT_ID + " = " + contactId, null, null);
-
-				if (c.moveToFirst()) {
-					// other data is available for the Contact. I have decided
-					// to only get the name of the Contact.
-					String name = c
-							.getString(c
-									.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME));
-					String phoneNumber = phones
-							.getString(phones
-									.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-
-					// ByteArrayOutputStream stream = new
-					// ByteArrayOutputStream();
-					// (retrieveContactPhoto()).compress(
-					// Bitmap.CompressFormat.PNG, 10, stream);
-					// byte[] byteArray = stream.toByteArray();
-					db.insertContact(name, phoneNumber, null);
-					PreExecute();
-
-				}
-			}
-		}
-	}
-
-	private Bitmap retrieveContactPhoto() {
-
-		Bitmap photo = null;
-
-		try {
-			InputStream inputStream = ContactsContract.Contacts
-					.openContactPhotoInputStream(getContentResolver(),
-							ContentUris.withAppendedId(
-									ContactsContract.Contacts.CONTENT_URI,
-									new Long(contactId)));
-
-			if (inputStream != null) {
-				photo = BitmapFactory.decodeStream(inputStream);
-				// ImageView imageView = (ImageView)
-				// findViewById(R.id.img_contact);
-				// imageView.setImageBitmap(photo);
-			}
-
-			assert inputStream != null;
-			inputStream.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return photo;
-
-	}
+	
 
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
@@ -187,10 +108,8 @@ public class Dashboard extends BrosAppActivity {
 		switch (item.getItemId()) {
 
 		case (R.id.new_message):
+			startActivity(new Intent(Dashboard.this, AddContact.class));
 
-			Intent intent = new Intent(Intent.ACTION_PICK,
-					ContactsContract.Contacts.CONTENT_URI);
-			startActivityForResult(intent, PICK_CONTACT);
 		}
 
 		return super.onMenuItemSelected(featureId, item);
@@ -251,7 +170,7 @@ public class Dashboard extends BrosAppActivity {
 
 	// The method that displays the popup.
 	private void showPopup() {
-		
+
 		int popupWidth = 200;
 		int popupHeight = 150;
 
@@ -275,8 +194,7 @@ public class Dashboard extends BrosAppActivity {
 				// Displaying the popup at the specified location, + offsets.
 				Display display = getWindowManager().getDefaultDisplay();
 				screen_width = display.getWidth(); // deprecated
-				popup.showAtLocation(layout, Gravity.NO_GRAVITY,
-						500 - 100, 90);
+				popup.showAtLocation(layout, Gravity.NO_GRAVITY, 500 - 100, 90);
 			}
 		});
 
@@ -289,6 +207,7 @@ public class Dashboard extends BrosAppActivity {
 			// TODO Auto-generated method stub
 			SQLHelper.SetupDB(getBaseContext());
 			SQLHelper.PopulateReferenceData();
+
 			return null;
 		}
 

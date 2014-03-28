@@ -32,6 +32,7 @@ public class AddContact extends Activity {
 	TextView intro_text;
 	Button choosefromContact;
 	ImageView displayPic;
+	Button nextButton;
 	private static final int PICK_CONTACT = 3;
 	private String contactId;
 
@@ -69,6 +70,18 @@ public class AddContact extends Activity {
 				Intent intent = new Intent(Intent.ACTION_PICK,
 						ContactsContract.Contacts.CONTENT_URI);
 				startActivityForResult(intent, PICK_CONTACT);
+			}
+		});
+		
+		nextButton= (Button) findViewById(R.id.gonext);
+		nextButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(AddContact.this,messages.class);
+				startActivity(i);
+				
 			}
 		});
 

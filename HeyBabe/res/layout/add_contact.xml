@@ -101,7 +101,7 @@
             android:background="@drawable/backbutton" />
 
         <Button
-            android:id="@+id/next"
+            android:id="@+id/gonext"
             android:layout_width="wrap_content"
             android:layout_height="70dp"
             android:layout_weight="1"

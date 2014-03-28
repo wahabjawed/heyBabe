@@ -75,31 +75,35 @@
         android:id="@+id/default_messages"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/Select_bro_message" >
+        android:layout_below="@id/Select_bro_message"
+        android:layout_above="@+id/linear2" >
     </ListView>
 
     <LinearLayout
         android:id="@+id/linear2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:orientation="horizontal" >
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true" >
 
         <Button
             android:id="@+id/back"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:layout_weight="1"
             android:background="@drawable/backbutton" />
 
         <Button
             android:id="@+id/next"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:layout_weight="1"
-            android:background="@drawable/nextbuttton" />
+            android:background="@drawable/nextbuttton"
+             />
     </LinearLayout>
 
 </RelativeLayout>

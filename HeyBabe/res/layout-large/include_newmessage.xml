@@ -13,7 +13,7 @@
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:text="SCHEDULE:"
-        android:textSize="21sp" />
+        android:textSize="30sp" />
 
     <LinearLayout
         android:id="@+id/linear1"
@@ -48,7 +48,7 @@
         android:layout_centerHorizontal="true"
         android:paddingTop="15dp"
         android:text="BRO MESSSAGES!"
-        android:textSize="25dp"
+        android:textSize="40dp"
         android:textStyle="bold" />
 
     <TextView
@@ -59,13 +59,13 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:text="Select one BRO POWERED message \nfrom the list below!"
-        android:textSize="12dp"
+        android:textSize="20dp"
         android:textStyle="bold" />
 
     <Button
         android:id="@+id/add_message"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_below="@id/Bro_messages"
         android:layout_marginLeft="15dp"
         android:layout_toRightOf="@id/Select_bro_message"
@@ -75,7 +75,8 @@
         android:id="@+id/default_messages"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/Select_bro_message" >
+        android:layout_below="@id/Select_bro_message"
+        android:layout_above="@+id/linear2" >
     </ListView>
 
     <LinearLayout

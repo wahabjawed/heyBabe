@@ -25,7 +25,7 @@ import android.widget.TextView;
 
 import com.silversage.brosApp.R;
 
-public class addContact extends Activity {
+public class AddContact extends Activity {
 
 	EditText name;
 	EditText number;

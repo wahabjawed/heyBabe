@@ -13,7 +13,7 @@
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:text="SCHEDULE:"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
     <LinearLayout
         android:id="@+id/linear1"
@@ -24,7 +24,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/button_border"
         android:orientation="horizontal"
-        android:padding="15dp" >
+        android:padding="10dp" >
 
         <EditText
             android:id="@+id/Select_Time"
@@ -48,7 +48,7 @@
         android:layout_centerHorizontal="true"
         android:paddingTop="15dp"
         android:text="BRO MESSSAGES!"
-        android:textSize="25dp"
+        android:textSize="20dp"
         android:textStyle="bold" />
 
     <TextView
@@ -59,7 +59,7 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:text="Select one BRO POWERED message \nfrom the list below!"
-        android:textSize="12dp"
+        android:textSize="10dp"
         android:textStyle="bold" />
 
     <Button

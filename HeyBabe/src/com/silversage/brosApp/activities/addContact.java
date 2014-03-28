@@ -3,8 +3,6 @@ package com.silversage.brosApp.activities;
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.silversage.brosApp.R;
-
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentUris;
@@ -16,7 +14,6 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.provider.Contacts.Phones;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.util.Log;
 import android.view.View;
@@ -26,7 +23,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class AddContact extends Activity {
+import com.silversage.brosApp.R;
+
+public class addContact extends Activity {
 
 	EditText name;
 	EditText number;

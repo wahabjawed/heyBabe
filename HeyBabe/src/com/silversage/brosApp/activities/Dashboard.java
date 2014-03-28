@@ -108,7 +108,7 @@ public class Dashboard extends BrosAppActivity {
 		switch (item.getItemId()) {
 
 		case (R.id.new_message):
-			startActivity(new Intent(Dashboard.this, AddContact.class));
+			startActivity(new Intent(Dashboard.this, addContact.class));
 
 		}
 

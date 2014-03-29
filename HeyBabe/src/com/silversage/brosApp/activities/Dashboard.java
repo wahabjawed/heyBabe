@@ -10,9 +10,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -82,11 +85,47 @@ public class Dashboard extends BrosAppSherlockActivity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				startActivity(new Intent(Dashboard.this, messages.class));
+				Intent activity = new Intent(Dashboard.this, messages.class);
+				activity.putExtra("REQUEST", "CREATE");
+				startActivity(activity);
 
 			}
 		});
+		registerForContextMenu(List);
 
+	}
+
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
+				.getMenuInfo();
+		if (item.getItemId() == R.id.dLUpdate) {
+
+			Intent activity = new Intent(Dashboard.this, AddContact.class);
+			activity.putExtra("REQUEST", "UPDATE");
+			activity.putExtra("ID", dashboardItem[info.position].getID());
+			startActivity(activity);
+		} else if (item.getItemId() == R.id.dLDelete) {
+
+			db.DeleteContact(dashboardItem[info.position].getID());
+			PreExecute();
+		}
+
+		return super.onContextItemSelected(item);
+
+	}
+
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		if (v.getId() == R.id.dListView) {
+			AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+			menu.setHeaderTitle(dashboardItem[info.position].getName());
+			Log.d("BroApp--Dashboard", "Index " + info.position);
+
+			MenuInflater inflater = getMenuInflater();
+			inflater.inflate(R.menu.dashboard_listmenu, menu);
+		}
 	}
 
 	@Override
@@ -106,7 +145,9 @@ public class Dashboard extends BrosAppSherlockActivity {
 		switch (item.getItemId()) {
 
 		case (R.id.new_message):
-			startActivity(new Intent(Dashboard.this, AddContact.class));
+			Intent activity = new Intent(Dashboard.this, AddContact.class);
+			activity.putExtra("REQUEST", "CREATE");
+			startActivity(activity);
 
 		}
 
@@ -125,7 +166,7 @@ public class Dashboard extends BrosAppSherlockActivity {
 
 		Cursor _cursor = null;
 
-		_cursor = db.getDashboardList();
+		_cursor = db.getDashboardContactList();
 
 		Log.d(" BrosApp--DashboardList", "Cursor populated");
 		if (_cursor.getCount() > 0) {
@@ -137,11 +178,11 @@ public class Dashboard extends BrosAppSherlockActivity {
 			isListEmpty = false;
 			for (int i = 0; i < _cursor.getCount(); i++) {
 
-				dashboardItem[i] = (new DashboardObject(
-						_cursor.getString(_cursor.getColumnIndex("ID")),
-						_cursor.getString(_cursor.getColumnIndex("name")),
-						_cursor.getString(_cursor.getColumnIndex("number")),
-						_cursor.getBlob(_cursor.getColumnIndex("displayPic"))));
+				dashboardItem[i] = (new DashboardObject(_cursor.getInt(_cursor
+						.getColumnIndex("ID")), _cursor.getString(_cursor
+						.getColumnIndex("name")), _cursor.getString(_cursor
+						.getColumnIndex("number")), _cursor.getBlob(_cursor
+						.getColumnIndex("displayPic"))));
 
 				_cursor.moveToNext();
 			}
@@ -154,7 +195,7 @@ public class Dashboard extends BrosAppSherlockActivity {
 			ProText.setVisibility(View.INVISIBLE);
 			Log.d(" BrosApp--DashboardList", "Populated");
 		} else {
-
+			ProText.setVisibility(View.VISIBLE);
 			Log.d(" BrosApp--DashboardList", "No Data Found");
 		}
 
@@ -164,7 +205,11 @@ public class Dashboard extends BrosAppSherlockActivity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		PreExecute();
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		if (prefs.getBoolean("first_time", false)) {
+			PreExecute();
+		}
 	}
 
 	@Override

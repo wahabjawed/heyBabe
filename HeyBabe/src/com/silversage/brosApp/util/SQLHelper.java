@@ -12,10 +12,10 @@ public class SQLHelper {
 	static SQLiteDatabase db = BrosApp.db;
 
 	public static void SetupDB(Context context) {
-		//db = context
-			//	.openOrCreateDatabase("brosApp", context.MODE_PRIVATE, null);
+		// db = context
+		// .openOrCreateDatabase("brosApp", context.MODE_PRIVATE, null);
 		db.execSQL("CREATE TABLE IF NOT EXISTS ContactList(number TEXT,name TEXT, displayPic BLOB);");
-		db.execSQL("CREATE TABLE IF NOT EXISTS Contact(ID TEXT, number TEXT,name TEXT, displayPic BLOB);");
+		db.execSQL("CREATE TABLE IF NOT EXISTS Contact(ID INTEGER PRIMARY KEY, number TEXT,name TEXT, displayPic BLOB);");
 		db.execSQL("CREATE TABLE IF NOT EXISTS Ref_Message(ID TEXT, message TEXT);");
 		db.execSQL("CREATE TABLE IF NOT EXISTS ContractDetail(ContractID TEXT,name TEXT,desc TEXT,do TEXT, dont TEXT, pic BLOB);");
 
@@ -49,15 +49,27 @@ public class SQLHelper {
 
 	}
 
+	public static void DeleteContact(int id) {
+		db.delete("Contact", "ID=" + id, null);
+		Log.d(" BrosApp--SQLHelper", "Dashboard List--Data Deleted");
+
+	}
+
 	public static Object getUser() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public static Cursor getDashboardList() {
+	public static Cursor getDashboardContactList() {
 		// TODO Auto-generated method stub
 		Log.d(" BrosApp--SQLHelper", "Contact--Querying Data");
 		return db.rawQuery("select * from Contact order by name", null);
+	}
+
+	public static Cursor getDashboardContactList(int ID) {
+		// TODO Auto-generated method stub
+		Log.d(" BrosApp--SQLHelper", "Contact--Querying Data");
+		return db.rawQuery("select * from Contact where ID = " + ID, null);
 	}
 
 	public static void insertContact(String name, String no, byte[] pic) {
@@ -73,6 +85,18 @@ public class SQLHelper {
 
 	}
 
+	public static void updateContact(int id, String name, String no, byte[] pic) {
+		Log.d("BrosApp--SQLHelper", "Contact--Data" + name + " " + no);
+		ContentValues updateValues = new ContentValues();
+		updateValues.put("name", name);
+		updateValues.put("number", no);
+		updateValues.put("displayPic", pic);
+
+		db.update("Contact", updateValues, "ID= " + id, null);
+
+		Log.d("BrosApp--SQLHelper", "Contact--Data uptated");
+	}
+
 	public static void PopulateReferenceData() {
 		// TODO Auto-generated method stub
 		String data[][] = { { "1", "Hemani" }, { "2", "Wahab" },
@@ -86,10 +110,10 @@ public class SQLHelper {
 			insertValues = new ContentValues();
 			insertValues.put("ID", data[i][0]);
 			insertValues.put("message", data[i][1]);
-			
-			Log.d("BrosApp--SQLHelper", "Ref_Message--"+data[i][1]);
+
+			Log.d("BrosApp--SQLHelper", "Ref_Message--" + data[i][1]);
 			db.insert("Ref_Message", null, insertValues);
-			
+
 		}
 		Log.d("BrosApp--SQLHelper", "Ref_Message--Data inserted");
 

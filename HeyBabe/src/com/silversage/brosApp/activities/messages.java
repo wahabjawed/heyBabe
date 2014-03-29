@@ -19,13 +19,13 @@ public class messages extends TabActivity {
 
 		TabSpec newmsg = tabHost.newTabSpec("tab1");
 		newmsg.setIndicator("",
-				getResources().getDrawable(android.R.drawable.ic_dialog_map));
+				getResources().getDrawable(R.drawable.compose));
 		Intent newmsgIntent = new Intent(this, NewMessage.class);
 		newmsg.setContent(newmsgIntent);
 
 		TabSpec log = tabHost.newTabSpec("tab2");
 		log.setIndicator("",
-				getResources().getDrawable(android.R.drawable.star_off));
+				getResources().getDrawable(R.drawable.logs));
 		Intent logIntent = new Intent(this, msgLogs.class);
 		log.setContent(logIntent);
 

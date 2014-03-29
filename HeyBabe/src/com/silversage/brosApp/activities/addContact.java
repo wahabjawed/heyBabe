@@ -1,5 +1,6 @@
 package com.silversage.brosApp.activities;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -22,10 +23,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.silversage.brosApp.R;
+import com.silversage.brosApp.activities.abstracts.BrosAppActivity;
 
-public class AddContact extends Activity {
+public class AddContact extends BrosAppActivity {
 
 	EditText name;
 	EditText number;
@@ -33,8 +36,10 @@ public class AddContact extends Activity {
 	Button choosefromContact;
 	ImageView displayPic;
 	Button nextButton;
+	Button backButton;
 	private static final int PICK_CONTACT = 3;
 	private String contactId;
+	InputStream input = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +60,17 @@ public class AddContact extends Activity {
 		choosefromContact = (Button) findViewById(R.id.ChoosefromContact);
 		choosefromContact.setTypeface(face);
 
-		name = (EditText) findViewById(R.id.name);
+		backButton = (Button) findViewById(R.id.back);
+		backButton.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				AddContact.this.finish();
+			}
+		});
+
+		name = (EditText) findViewById(R.id.name);
 		name.setHint("Enter name here");
 
 		number = (EditText) findViewById(R.id.number);
@@ -72,16 +86,54 @@ public class AddContact extends Activity {
 				startActivityForResult(intent, PICK_CONTACT);
 			}
 		});
-		
-		nextButton= (Button) findViewById(R.id.gonext);
+
+		nextButton = (Button) findViewById(R.id.next);
 		nextButton.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(AddContact.this,messages.class);
-				startActivity(i);
-				
+
+				if (name.getText().toString() == null
+						&& number.getText() == null) {
+
+					Toast.makeText(AddContact.this,
+							"Kindly Enter a Valid Name and Number",
+							Toast.LENGTH_SHORT).show();
+				} else if (name.getText().toString() == null) {
+
+					Toast.makeText(AddContact.this,
+							"Kindly Enter a Valid Name", Toast.LENGTH_SHORT)
+							.show();
+
+				} else if (number.getText().toString() == null) {
+
+					Toast.makeText(AddContact.this,
+							"Kindly Enter a Valid Number", Toast.LENGTH_SHORT)
+							.show();
+
+				} else if (number.getText().toString().length() < 9) {
+
+					Toast.makeText(AddContact.this,
+							"Kindly Enter a Valid Number", Toast.LENGTH_SHORT)
+							.show();
+
+				} else {
+					if (input != null) {
+						ByteArrayOutputStream stream = new ByteArrayOutputStream();
+						(retrieveContactPhoto()).compress(
+								Bitmap.CompressFormat.PNG, 10, stream);
+						byte[] byteArray = stream.toByteArray();
+						db.insertContact(name.getText().toString(), number
+								.getText().toString(), byteArray);
+					} else {
+						db.insertContact(name.getText().toString(), number
+								.getText().toString(), null);
+					}
+					AddContact.this.finish();
+
+				}
+
 			}
 		});
 
@@ -128,19 +180,12 @@ public class AddContact extends Activity {
 											.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)));
 								}
 
-								// ByteArrayOutputStream stream = new
-								// ByteArrayOutputStream();
-								// (retrieveContactPhoto()).compress(
-								// Bitmap.CompressFormat.PNG, 10, stream);
-								// byte[] byteArray = stream.toByteArray();
-								// db.insertContact(name, phoneNumber, null);
-
 							}
 						}
 						Uri uri = ContentUris.withAppendedId(
 								ContactsContract.Contacts.CONTENT_URI,
 								Long.parseLong(contactId));
-						InputStream input = ContactsContract.Contacts
+						input = ContactsContract.Contacts
 								.openContactPhotoInputStream(cr, uri);
 						if (input != null) {
 							displayPic.setImageBitmap(BitmapFactory
@@ -182,6 +227,24 @@ public class AddContact extends Activity {
 			Log.d("image ex", e.getMessage());
 		}
 		return photo;
+
+	}
+
+	@Override
+	public void PostExecute() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void PreExecute() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void ProgressUpdate(String update) {
+		// TODO Auto-generated method stub
 
 	}
 }

@@ -23,11 +23,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.silversage.brosApp.R;
+import com.silversage.brosApp.activities.abstracts.BrosAppSherlockActivity;
 import com.silversage.brosApp.adapters.DashboardAdapter;
-import com.silversage.brosApp.objects.DashboardObject;
+import com.silversage.brosApp.objects.adapters.DashboardObject;
 import com.silversage.brosApp.util.SQLHelper;
 
-public class Dashboard extends BrosAppActivity {
+public class Dashboard extends BrosAppSherlockActivity {
 
 	int screen_width;
 	boolean isListEmpty = true;
@@ -35,7 +36,6 @@ public class Dashboard extends BrosAppActivity {
 	ListView List;
 	TextView ProText;
 	DashboardObject[] dashboardItem;
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -99,8 +99,6 @@ public class Dashboard extends BrosAppActivity {
 		return super.onCreateOptionsMenu(menu);
 	}
 
-	
-
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
 		// TODO Auto-generated method stub
@@ -160,6 +158,13 @@ public class Dashboard extends BrosAppActivity {
 			Log.d(" BrosApp--DashboardList", "No Data Found");
 		}
 
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		PreExecute();
 	}
 
 	@Override

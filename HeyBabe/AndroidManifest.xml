@@ -25,7 +25,7 @@
         <activity
             android:name="com.silversage.brosApp.activities.Dashboard"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,7 +35,7 @@
         <activity
             android:name="com.silversage.brosApp.activities.messages"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait">
         </activity>
         <activity
             android:name="com.silversage.brosApp.activities.Slider"
@@ -52,19 +52,19 @@
         <activity
             android:name="com.silversage.brosApp.activities.msgLogs"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait">
         </activity>
 
         <!-- New Msg Activity -->
         <activity
             android:name="com.silversage.brosApp.activities.NewMessage"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait">
         </activity>
         <activity
             android:name="com.silversage.brosApp.activities.AddContact"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait">
             </activity>
     </application>
 

@@ -13,7 +13,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
 import com.silversage.brosApp.R;
-import com.silversage.brosApp.objects.MessageObject;
+import com.silversage.brosApp.objects.adapters.MessageObject;
 
 public class MessageAdapter extends ArrayAdapter<MessageObject> {
 

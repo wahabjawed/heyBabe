@@ -1,6 +1,7 @@
 package com.silversage.brosApp.activities;
 
 import com.silversage.brosApp.R;
+import com.silversage.brosApp.activities.abstracts.BrosAppActivity;
 
 import android.content.Intent;
 import android.os.Bundle;

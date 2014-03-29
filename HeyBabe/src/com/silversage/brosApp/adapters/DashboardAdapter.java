@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.silversage.brosApp.R;
-import com.silversage.brosApp.objects.DashboardObject;
+import com.silversage.brosApp.objects.adapters.DashboardObject;
 
 public class DashboardAdapter extends ArrayAdapter<DashboardObject> {
 

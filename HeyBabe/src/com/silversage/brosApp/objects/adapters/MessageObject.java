@@ -1,4 +1,4 @@
-package com.silversage.brosApp.objects;
+package com.silversage.brosApp.objects.adapters;
 
 public class MessageObject {
 

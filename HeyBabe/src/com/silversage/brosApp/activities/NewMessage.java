@@ -13,8 +13,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.silversage.brosApp.R;
+import com.silversage.brosApp.activities.abstracts.BrosAppActivity;
 import com.silversage.brosApp.adapters.MessageAdapter;
-import com.silversage.brosApp.objects.MessageObject;
+import com.silversage.brosApp.objects.adapters.MessageObject;
 
 public class NewMessage extends BrosAppActivity {
 
@@ -64,7 +65,7 @@ public class NewMessage extends BrosAppActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-
+				NewMessage.this.finish();
 			}
 		});
 		messageList.setOnItemClickListener(new OnItemClickListener() {

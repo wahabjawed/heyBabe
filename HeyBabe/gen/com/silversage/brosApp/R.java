@@ -983,7 +983,7 @@ containing a value of this type.
         public static final int abs__textButton=0x7f040013;
         public static final int abs__title=0x7f04001b;
         public static final int abs__up=0x7f04000b;
-        public static final int action_settings=0x7f040063;
+        public static final int action_settings=0x7f040065;
         public static final int add_message=0x7f04004a;
         public static final int back=0x7f04003b;
         public static final int button1=0x7f040061;
@@ -998,6 +998,8 @@ containing a value of this type.
         public static final int frame=0x7f04003d;
         public static final int homeAsUp=0x7f040006;
         public static final int intro_text=0x7f040032;
+        public static final int item1=0x7f040063;
+        public static final int item2=0x7f040064;
         public static final int line_break=0x7f040038;
         public static final int linear=0x7f04003f;
         public static final int linear1=0x7f040045;
@@ -1079,7 +1081,7 @@ containing a value of this type.
     }
     public static final class menu {
         public static final int dashboard=0x7f0b0000;
-        public static final int registarion=0x7f0b0001;
+        public static final int display_pic_menu=0x7f0b0001;
         public static final int registration=0x7f0b0002;
     }
     public static final class string {

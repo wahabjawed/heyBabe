@@ -15,9 +15,14 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.provider.MediaStore;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,7 +34,8 @@ import com.silversage.brosApp.R;
 import com.silversage.brosApp.activities.abstracts.BrosAppActivity;
 
 public class AddContact extends BrosAppActivity {
-
+	private static final int CAMERA = 0;
+	private static final int GALLERY = 1;
 	EditText name;
 	EditText number;
 	TextView intro_text;
@@ -76,6 +82,19 @@ public class AddContact extends BrosAppActivity {
 		number = (EditText) findViewById(R.id.number);
 		number.setHint("Enter number here");
 		displayPic = (ImageView) findViewById(R.id.contact_photo);
+		displayPic.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
+				registerForContextMenu(displayPic);
+				openContextMenu(displayPic);
+				unregisterForContextMenu(displayPic);
+
+			}
+		});
+
 		choosefromContact.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -144,6 +163,33 @@ public class AddContact extends BrosAppActivity {
 		super.onActivityResult(reqCode, resultCode, data);
 
 		switch (reqCode) {
+		case (CAMERA):
+			if (resultCode == RESULT_OK) {
+				Bundle extras = data.getExtras();
+				Bitmap bmp = (Bitmap) extras.get("data");
+				displayPic.setImageBitmap(bmp);
+			}
+			break;
+
+		case (GALLERY):
+			if (resultCode == RESULT_OK) {
+				Uri selectedImage = data.getData();
+				if (selectedImage != null) {
+					String[] filePathColumn = { MediaStore.Images.Media.DATA };
+					Cursor cursor = getContentResolver().query(selectedImage,
+							filePathColumn, null, null, null);
+					cursor.moveToFirst();
+					int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+					String picturePath = cursor.getString(columnIndex);
+					cursor.close();
+
+					displayPic.setImageBitmap(BitmapFactory
+							.decodeFile(picturePath));
+				}
+			}
+
+			break;
+
 		case (PICK_CONTACT):
 			if (resultCode == Activity.RESULT_OK) {
 				Uri contactData = data.getData();
@@ -202,6 +248,8 @@ public class AddContact extends BrosAppActivity {
 				}
 
 			}
+			break;
+
 		}
 	}
 
@@ -247,4 +295,35 @@ public class AddContact extends BrosAppActivity {
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		if (item.getItemId() == R.id.item1) {
+
+			Intent intent = new Intent(
+					android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+			startActivityForResult(intent, CAMERA);
+
+		} else if (item.getItemId() == R.id.item2) {
+			Intent intent = new Intent(Intent.ACTION_PICK);
+			intent.setType("image/*");
+			startActivityForResult(intent, GALLERY);
+
+		}
+
+		return super.onContextItemSelected(item);
+
+	}
+
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		// TODO Auto-generated method stub
+		super.onCreateContextMenu(menu, v, menuInfo);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.display_pic_menu, menu);
+
+	}
+
 }

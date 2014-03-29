@@ -1,5 +1,6 @@
 package com.silversage.brosApp.activities;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -56,7 +57,8 @@ public class NewMessage extends BrosAppActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-
+				Intent i = new Intent(NewMessage.this,MessageDetails.class);
+				startActivity(i);
 			}
 		});
 

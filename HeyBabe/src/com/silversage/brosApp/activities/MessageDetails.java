@@ -27,7 +27,11 @@ public class MessageDetails extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.message_details);
 
-		setCurrentTimeOnView();
+		tvDisplayTime = (TextView) findViewById(R.id.Select_Time);
+
+		final Calendar c = Calendar.getInstance();
+		hour = c.get(Calendar.HOUR_OF_DAY);
+		minute = c.get(Calendar.MINUTE);
 
 		timeSelection = (Button) findViewById(R.id.time_selection);
 
@@ -41,23 +45,6 @@ public class MessageDetails extends Activity {
 			}
 
 		});
-
-	}
-
-	// display current time
-	public void setCurrentTimeOnView() {
-
-		tvDisplayTime = (TextView) findViewById(R.id.time_selection);
-
-		final Calendar c = Calendar.getInstance();
-		hour = c.get(Calendar.HOUR_OF_DAY);
-		minute = c.get(Calendar.MINUTE);
-
-		// set current time into textview
-		tvDisplayTime.setText(new StringBuilder().append(pad(hour)).append(":")
-				.append(pad(minute)));
-
-		// set current time into timepicker
 
 	}
 

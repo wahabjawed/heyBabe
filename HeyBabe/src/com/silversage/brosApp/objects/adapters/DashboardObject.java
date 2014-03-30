@@ -2,7 +2,7 @@ package com.silversage.brosApp.objects.adapters;
 
 public class DashboardObject {
 	private String Name;
-	private String ID;
+	private int ID;
 	private String Number;
 	private byte[] DisplayPic;
 
@@ -14,15 +14,15 @@ public class DashboardObject {
 		Name = name;
 	}
 
-	public String getID() {
+	public int getID() {
 		return ID;
 	}
 
-	public void setID(String iD) {
+	public void setID(int iD) {
 		ID = iD;
 	}
 
-	public DashboardObject(String iD, String name, String number,
+	public DashboardObject(int iD, String name, String number,
 			byte[] displayPic) {
 		super();
 		Name = name;

@@ -1,7 +1,6 @@
 package com.silversage.brosApp.activities;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 
 import android.app.Activity;
@@ -12,17 +11,18 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.provider.MediaStore;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
@@ -46,11 +46,15 @@ public class AddContact extends BrosAppActivity {
 	private static final int PICK_CONTACT = 3;
 	private String contactId;
 	InputStream input = null;
+	boolean hasImage = false;
+	int ID;
+	boolean isUpdate = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_contact);
+
 		setupView();
 
 	}
@@ -113,19 +117,19 @@ public class AddContact extends BrosAppActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 
-				if (name.getText().toString() == null
-						&& number.getText() == null) {
+				if (name.getText().toString() == ""
+						&& number.getText().toString() == "") {
 
 					Toast.makeText(AddContact.this,
 							"Kindly Enter a Valid Name and Number",
 							Toast.LENGTH_SHORT).show();
-				} else if (name.getText().toString() == null) {
+				} else if (name.getText().toString() == "") {
 
 					Toast.makeText(AddContact.this,
 							"Kindly Enter a Valid Name", Toast.LENGTH_SHORT)
 							.show();
 
-				} else if (number.getText().toString() == null) {
+				} else if (number.getText().toString() == "") {
 
 					Toast.makeText(AddContact.this,
 							"Kindly Enter a Valid Number", Toast.LENGTH_SHORT)
@@ -138,16 +142,29 @@ public class AddContact extends BrosAppActivity {
 							.show();
 
 				} else {
-					if (input != null) {
+					if (hasImage) {
+
 						ByteArrayOutputStream stream = new ByteArrayOutputStream();
-						(retrieveContactPhoto()).compress(
+						(((BitmapDrawable) displayPic.getDrawable())
+								.getBitmap()).compress(
 								Bitmap.CompressFormat.PNG, 10, stream);
 						byte[] byteArray = stream.toByteArray();
-						db.insertContact(name.getText().toString(), number
-								.getText().toString(), byteArray);
+						if (!isUpdate) {
+							db.insertContact(name.getText().toString(), number
+									.getText().toString(), byteArray);
+						} else {
+							db.updateContact(ID, name.getText().toString(),
+									number.getText().toString(), byteArray);
+						}
 					} else {
-						db.insertContact(name.getText().toString(), number
-								.getText().toString(), null);
+
+						if (!isUpdate) {
+							db.insertContact(name.getText().toString(), number
+									.getText().toString(), null);
+						} else {
+							db.updateContact(ID, name.getText().toString(),
+									number.getText().toString(), null);
+						}
 					}
 					AddContact.this.finish();
 
@@ -155,6 +172,29 @@ public class AddContact extends BrosAppActivity {
 
 			}
 		});
+
+		if (getIntent().getExtras().getString("REQUEST").equals("UPDATE")) {
+			Log.d(" BrosApp--AddContact", "Activity--Update Mode");
+			isUpdate = true;
+			ID = getIntent().getExtras().getInt("ID");
+			Cursor _cursor = db.getDashboardContactList(ID);
+			if (_cursor.moveToFirst()) {
+				name.setText(_cursor.getString(_cursor.getColumnIndex("name")));
+				number.setText(_cursor.getString(_cursor
+						.getColumnIndex("number")));
+
+				byte[] pic = _cursor.getBlob(_cursor
+						.getColumnIndex("displayPic"));
+
+				if (pic != null) {
+					Bitmap bmp = BitmapFactory.decodeByteArray(pic, 0,
+							pic.length);
+					displayPic.setImageBitmap(bmp);
+					hasImage = true;
+				}
+
+			}
+		}
 
 	}
 
@@ -168,6 +208,7 @@ public class AddContact extends BrosAppActivity {
 				Bundle extras = data.getExtras();
 				Bitmap bmp = (Bitmap) extras.get("data");
 				displayPic.setImageBitmap(bmp);
+				hasImage = true;
 			}
 			break;
 
@@ -185,6 +226,7 @@ public class AddContact extends BrosAppActivity {
 
 					displayPic.setImageBitmap(BitmapFactory
 							.decodeFile(picturePath));
+					hasImage = true;
 				}
 			}
 
@@ -236,12 +278,12 @@ public class AddContact extends BrosAppActivity {
 						if (input != null) {
 							displayPic.setImageBitmap(BitmapFactory
 									.decodeStream(input));
+							hasImage = true;
 
 						} else {
 							displayPic.setImageResource(R.drawable.photo);
+							hasImage = false;
 						}
-
-						// retrieveContactPhoto();
 
 					}
 
@@ -251,31 +293,6 @@ public class AddContact extends BrosAppActivity {
 			break;
 
 		}
-	}
-
-	private Bitmap retrieveContactPhoto() {
-
-		Bitmap photo = null;
-
-		try {
-			InputStream inputStream = ContactsContract.Contacts
-					.openContactPhotoInputStream(getContentResolver(),
-							ContentUris.withAppendedId(
-									ContactsContract.Contacts.CONTENT_URI,
-									new Long(contactId)));
-
-			if (inputStream != null) {
-				photo = BitmapFactory.decodeStream(inputStream);
-			}
-
-			assert inputStream != null;
-			inputStream.close();
-
-		} catch (IOException e) {
-			Log.d("image ex", e.getMessage());
-		}
-		return photo;
-
 	}
 
 	@Override

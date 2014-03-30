@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.text.Html.ImageGetter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,6 +59,9 @@ public class DashboardAdapter extends ArrayAdapter<DashboardObject> {
 			Bitmap bmp = BitmapFactory.decodeByteArray(obj.getDisplayPic(), 0,
 					obj.getDisplayPic().length);
 			holder.displayPic.setImageBitmap(bmp);
+		} else {
+			holder.displayPic.setImageResource(R.drawable.person);
+
 		}
 		holder.text.setText(obj.getName());
 		holder.number.setText(obj.getNumber());

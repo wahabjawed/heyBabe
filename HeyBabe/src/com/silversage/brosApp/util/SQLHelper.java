@@ -17,7 +17,7 @@ public class SQLHelper {
 		db.execSQL("CREATE TABLE IF NOT EXISTS ContactList(number TEXT,name TEXT, displayPic BLOB);");
 		db.execSQL("CREATE TABLE IF NOT EXISTS Contact(ID INTEGER PRIMARY KEY, number TEXT,name TEXT, displayPic BLOB);");
 		db.execSQL("CREATE TABLE IF NOT EXISTS Ref_Message(ID TEXT, message TEXT);");
-		db.execSQL("CREATE TABLE IF NOT EXISTS ContractDetail(ContractID TEXT,name TEXT,desc TEXT,do TEXT, dont TEXT, pic BLOB);");
+		db.execSQL("CREATE TABLE IF NOT EXISTS Ref_WiFi(ID INTEGER PRIMARY KEY, ssid TEXT,bssid TEXT);");
 
 	}
 
@@ -72,6 +72,12 @@ public class SQLHelper {
 		return db.rawQuery("select * from Contact where ID = " + ID, null);
 	}
 
+	public static Cursor getWiFiList(int ID) {
+		// TODO Auto-generated method stub
+		Log.d(" BrosApp--SQLHelper", "WiFi List--Querying Data");
+		return db.rawQuery("select * from Ref_WiFi order by ssid", null);
+	}
+	
 	public static void insertContact(String name, String no, byte[] pic) {
 		Log.d("BrosApp--SQLHelper", "Contact--Data" + name + " " + no);
 		ContentValues insertValues = new ContentValues();
@@ -97,7 +103,28 @@ public class SQLHelper {
 		Log.d("BrosApp--SQLHelper", "Contact--Data uptated");
 	}
 
-	public static void PopulateReferenceData() {
+	public static void PopulateWiFiList(String[][] data) {
+
+		Log.d("BrosApp--SQLHelper", "Ref_WiFi---Truncate");
+		db.delete("Ref_WiFi", null, null);
+		Log.d("BrosApp--SQLHelper", "Ref_WiFi---Inserting");
+
+		ContentValues insertValues;
+		for (int i = 0; i < data.length; i++) {
+			insertValues = new ContentValues();
+			insertValues.put("ssid", data[i][0]);
+			insertValues.put("bssid", data[i][1]);
+
+			Log.d("BrosApp--SQLHelper", "Ref_WiFi--" + data[i][0]);
+			db.insert("Ref_WiFi", null, insertValues);
+
+		}
+		Log.d("BrosApp--SQLHelper", "Ref_WiFi--Data inserted");
+
+
+	}
+
+	public static void PopulateMessageList() {
 		// TODO Auto-generated method stub
 		String data[][] = { { "1", "Hemani" }, { "2", "Wahab" },
 				{ "3", "Zainu" }, { "4", "Ali" } };

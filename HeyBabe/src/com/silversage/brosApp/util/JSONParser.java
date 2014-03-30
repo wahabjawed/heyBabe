@@ -1,4 +1,4 @@
-package com.silversage.brosApp.communicator;
+package com.silversage.brosApp.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;

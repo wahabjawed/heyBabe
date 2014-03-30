@@ -8,6 +8,7 @@ public class BrosApp extends Application {
 
 	public static SQLiteDatabase db;
 	public static Context context;
+	public static String[][] WifiList;
 
 	public static SQLiteDatabase getDb() {
 		return db;

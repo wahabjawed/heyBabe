@@ -29,6 +29,7 @@ import com.silversage.brosApp.R;
 import com.silversage.brosApp.activities.abstracts.BrosAppSherlockActivity;
 import com.silversage.brosApp.adapters.DashboardAdapter;
 import com.silversage.brosApp.objects.adapters.DashboardObject;
+import com.silversage.brosApp.util.NetworkStatus;
 import com.silversage.brosApp.util.SQLHelper;
 
 public class Dashboard extends BrosAppSherlockActivity {
@@ -50,9 +51,7 @@ public class Dashboard extends BrosAppSherlockActivity {
 
 			setContentView(R.layout.dashboard);
 			setupView();
-			PreExecute();
-			if (isListEmpty)
-				showPopup();
+			
 
 		} else {
 			setContentView(R.layout.splash_screen);
@@ -209,6 +208,10 @@ public class Dashboard extends BrosAppSherlockActivity {
 				.getDefaultSharedPreferences(this);
 		if (prefs.getBoolean("first_time", false)) {
 			PreExecute();
+			NetworkStatus.FetchWiFi();
+
+			if (isListEmpty)
+				showPopup();
 		}
 	}
 
@@ -256,7 +259,8 @@ public class Dashboard extends BrosAppSherlockActivity {
 		protected Void doInBackground(Void... params) {
 			// TODO Auto-generated method stub
 			SQLHelper.SetupDB(getBaseContext());
-			SQLHelper.PopulateReferenceData();
+			SQLHelper.PopulateMessageList();
+			NetworkStatus.FetchWiFi();
 
 			return null;
 		}

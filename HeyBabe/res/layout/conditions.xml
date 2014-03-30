@@ -38,7 +38,7 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/add_message"
+        android:id="@+id/add_wifi"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_below="@id/Bro_messages"
@@ -48,11 +48,11 @@
         android:background="@drawable/black_plus" />
 
     <ListView
-        android:id="@+id/default_messages"
+        android:id="@+id/wifi_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/linear2"
-        android:layout_below="@id/add_message" >
+        android:layout_below="@id/add_wifi" >
     </ListView>
 
     <LinearLayout
@@ -114,14 +114,14 @@
             <Button
                 android:id="@+id/back"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="70dp"
                 android:layout_weight="1"
                 android:background="@drawable/backbutton" />
 
             <Button
                 android:id="@+id/next"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="70dp"
                 android:layout_weight="1"
                 android:background="@drawable/nextbuttton" />
         </LinearLayout>

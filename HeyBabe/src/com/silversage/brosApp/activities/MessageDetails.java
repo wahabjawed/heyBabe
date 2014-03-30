@@ -7,6 +7,7 @@ import com.silversage.brosApp.R;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,6 +19,8 @@ public class MessageDetails extends Activity {
 
 	private TextView tvDisplayTime;
 	private Button timeSelection;
+	private Button nextbutton;
+	private Button backbutton;
 	private int hour;
 	private int minute;
 
@@ -32,6 +35,26 @@ public class MessageDetails extends Activity {
 		final Calendar c = Calendar.getInstance();
 		hour = c.get(Calendar.HOUR_OF_DAY);
 		minute = c.get(Calendar.MINUTE);
+		nextbutton = (Button) findViewById(R.id.nextbutton);
+		nextbutton.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(MessageDetails.this, Conditions.class);
+				startActivity(i);
+			}
+		});
+
+		backbutton = (Button) findViewById(R.id.back);
+		backbutton.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				MessageDetails.this.finish();
+			}
+		});
 
 		timeSelection = (Button) findViewById(R.id.time_selection);
 

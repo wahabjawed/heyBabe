@@ -144,11 +144,11 @@
             android:background="@drawable/backbutton" />
 
         <Button
-            android:id="@+id/save"
+            android:id="@+id/nextbutton"
             android:layout_width="wrap_content"
             android:layout_height="70dp"
             android:layout_weight="1"
-            android:background="@drawable/save" />
+            android:background="@drawable/nextbuttton" />
     </LinearLayout>
 
 </RelativeLayout>

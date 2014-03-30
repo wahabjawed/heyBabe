@@ -2,7 +2,7 @@ package com.silversage.brosApp.objects;
 
 import java.util.ArrayList;
 
-public class Contact {
+public class ContactVO {
 
 	String name;
 	String no;

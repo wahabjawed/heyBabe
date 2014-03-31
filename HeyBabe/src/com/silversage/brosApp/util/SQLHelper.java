@@ -150,6 +150,17 @@ public class SQLHelper {
 
 	}
 
+	public static void insertRefMessage(int ID, String message) {
+
+		ContentValues insertValues = new ContentValues();
+		insertValues.put("message", message);
+		insertValues.put("refID", ID);
+
+		Log.d("BrosApp--SQLHelper", "Ref_Message--" + message);
+		db.insert("Ref_Message", null, insertValues);
+
+	}
+
 	public static Cursor getMessageList(int ID) {
 		// TODO Auto-generated method stub
 		Log.d(" BrosApp--SQLHelper", "Message--Querying Data");

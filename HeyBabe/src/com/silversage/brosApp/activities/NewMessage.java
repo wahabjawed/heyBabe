@@ -1,10 +1,14 @@
 package com.silversage.brosApp.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -27,6 +31,7 @@ public class NewMessage extends BrosAppActivity {
 	EditText selectTime;
 	ListView messageList;
 	MessageObject[] messageItem;
+	Button addMessage;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,8 +46,62 @@ public class NewMessage extends BrosAppActivity {
 		back = (Button) findViewById(R.id.back);
 		selectTime = (EditText) findViewById(R.id.Select_Time);
 		messageList = (ListView) findViewById(R.id.default_messages);
-
+		addMessage = (Button) findViewById(R.id.add_message);
 		selectTime.setHint("Enter Bro Time:");
+
+		addMessage.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				// get prompts.xml view
+				LayoutInflater li = LayoutInflater.from(NewMessage.this);
+				View promptsView = li
+						.inflate(R.layout.new_message_prompt, null);
+
+				AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+						NewMessage.this);
+
+				// set prompts.xml to alertdialog builder
+				alertDialogBuilder.setView(promptsView);
+
+				final EditText userInput = (EditText) promptsView
+						.findViewById(R.id.editTextDialogUserInput);
+
+				// set dialog message
+				alertDialogBuilder
+						.setCancelable(false)
+						.setPositiveButton("OK",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int id) {
+										// get user input and set it to result
+										// edit text
+										if (userInput.getText().toString() != "") {
+											db.insertRefMessage(
+													BrosApp.contact.ID,
+													userInput.getText()
+															.toString());
+											PreExecute();
+										}
+									}
+								})
+						.setNegativeButton("Cancel",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int id) {
+										dialog.cancel();
+									}
+								});
+
+				// create alert dialog
+				AlertDialog alertDialog = alertDialogBuilder.create();
+
+				// show it
+				alertDialog.show();
+			}
+		});
+
 		timestamp.setOnClickListener(new View.OnClickListener() {
 
 			@Override

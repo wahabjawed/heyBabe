@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.silversage.brosApp.BrosApp;
 import com.silversage.brosApp.R;
 import com.silversage.brosApp.activities.abstracts.BrosAppActivity;
 import com.silversage.brosApp.adapters.MessageAdapter;
@@ -30,7 +31,6 @@ public class NewMessage extends BrosAppActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.include_newmessage);
-
 		SetupView();
 		PreExecute();
 	}
@@ -57,7 +57,7 @@ public class NewMessage extends BrosAppActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(NewMessage.this,MessageDetails.class);
+				Intent i = new Intent(NewMessage.this, MessageDetails.class);
 				startActivity(i);
 			}
 		});
@@ -102,7 +102,7 @@ public class NewMessage extends BrosAppActivity {
 
 		Cursor _cursor = null;
 
-		_cursor = db.getMessageList();
+		_cursor = db.getMessageList(BrosApp.contact.ID);
 
 		Log.d(" BrosApp--MessageList", "Cursor populated");
 		if (_cursor.getCount() > 0) {

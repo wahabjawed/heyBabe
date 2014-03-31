@@ -25,9 +25,11 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.silversage.brosApp.BrosApp;
 import com.silversage.brosApp.R;
 import com.silversage.brosApp.activities.abstracts.BrosAppSherlockActivity;
 import com.silversage.brosApp.adapters.DashboardAdapter;
+import com.silversage.brosApp.objects.ContactVO;
 import com.silversage.brosApp.objects.adapters.DashboardObject;
 import com.silversage.brosApp.util.NetworkManager;
 import com.silversage.brosApp.util.SQLHelper;
@@ -51,7 +53,6 @@ public class Dashboard extends BrosAppSherlockActivity {
 
 			setContentView(R.layout.dashboard);
 			setupView();
-			
 
 		} else {
 			setContentView(R.layout.splash_screen);
@@ -84,8 +85,11 @@ public class Dashboard extends BrosAppSherlockActivity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
+                BrosApp.contact=new ContactVO();
+				BrosApp.contact.ID = dashboardItem[arg2].getID();
+				BrosApp.contact.name = dashboardItem[arg2].getName();
+				BrosApp.contact.number = dashboardItem[arg2].getNumber();
 				Intent activity = new Intent(Dashboard.this, messages.class);
-				activity.putExtra("REQUEST", "CREATE");
 				startActivity(activity);
 
 			}
@@ -260,7 +264,6 @@ public class Dashboard extends BrosAppSherlockActivity {
 			// TODO Auto-generated method stub
 			SQLHelper.SetupDB(getBaseContext());
 			SQLHelper.PopulateMessageList();
-			NetworkManager.FetchWiFi();
 
 			return null;
 		}

@@ -5,11 +5,14 @@ import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.Checkable;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.silversage.brosApp.R;
@@ -19,6 +22,8 @@ public class MessageAdapter extends ArrayAdapter<MessageObject> {
 
 	private Activity activity;
 	private MessageObject[] data;
+	private RadioButton mSelectedRB;
+	private int mSelectedPosition = -1;
 
 	public MessageAdapter(Activity context, MessageObject[] _data) {
 		super(context, R.layout.row_message, _data);
@@ -29,12 +34,12 @@ public class MessageAdapter extends ArrayAdapter<MessageObject> {
 	static class ViewHolder {
 
 		public TextView text;
-		public CheckBox select;
+		public RadioButton select;
 
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		View vi = convertView;
 		final int pos = position;
@@ -48,7 +53,7 @@ public class MessageAdapter extends ArrayAdapter<MessageObject> {
 			ViewHolder viewHolder = new ViewHolder();
 
 			viewHolder.text = (TextView) vi.findViewById(R.id.message);
-			viewHolder.select = (CheckBox) vi.findViewById(R.id.select);
+			viewHolder.select = (RadioButton) vi.findViewById(R.id.select);
 
 			vi.setTag(viewHolder);
 		}
@@ -56,18 +61,31 @@ public class MessageAdapter extends ArrayAdapter<MessageObject> {
 		MessageObject obj = data[position];
 		holder.text.setText(obj.getMessageText());
 		holder.select.setChecked(obj.isSelected());
-		holder.select.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+		holder.select.setOnClickListener(new OnClickListener() {
 
 			@Override
-			public void onCheckedChanged(CompoundButton buttonView,
-					boolean isChecked) {
+			public void onClick(View v) {
 				// TODO Auto-generated method stub
 
-				data[pos].setSelected(isChecked);
+				if (position != mSelectedPosition && mSelectedRB != null) {
+					mSelectedRB.setChecked(false);
+				}
+
+				mSelectedPosition = position;
+				mSelectedRB = (RadioButton) v;
+				data[pos].setSelected(!data[pos].isSelected());
+
 			}
 		});
 
+		if (mSelectedPosition != position) {
+			holder.select.setChecked(false);
+		} else {
+			holder.select.setChecked(true);
+			if (mSelectedRB != null && holder.select != mSelectedRB) {
+				mSelectedRB = holder.select;
+			}
+		}
 		return vi;
 	}
-
 }

@@ -686,10 +686,11 @@ containing a value of this type.
         public static final int abs__bright_foreground_disabled_holo_light=0x7f060005;
         public static final int abs__bright_foreground_holo_dark=0x7f060002;
         public static final int abs__bright_foreground_holo_light=0x7f060003;
-        public static final int abs__primary_text_disable_only_holo_dark=0x7f060006;
-        public static final int abs__primary_text_disable_only_holo_light=0x7f060007;
-        public static final int abs__primary_text_holo_dark=0x7f060008;
-        public static final int abs__primary_text_holo_light=0x7f060009;
+        public static final int abs__primary_text_disable_only_holo_dark=0x7f060007;
+        public static final int abs__primary_text_disable_only_holo_light=0x7f060008;
+        public static final int abs__primary_text_holo_dark=0x7f060009;
+        public static final int abs__primary_text_holo_light=0x7f06000a;
+        public static final int msgDiv=0x7f060006;
     }
     public static final class dimen {
         /**  Default height of an action bar. 
@@ -918,26 +919,27 @@ containing a value of this type.
         public static final int calendar=0x7f020075;
         public static final int clock=0x7f020076;
         public static final int compose=0x7f020077;
-        public static final int ic_launcher=0x7f020078;
-        public static final int linebreak=0x7f020079;
-        public static final int logs=0x7f02007a;
-        public static final int loop=0x7f02007b;
-        public static final int new_wifi=0x7f02007c;
-        public static final int next=0x7f02007d;
-        public static final int nextbuttton=0x7f02007e;
-        public static final int person=0x7f02007f;
-        public static final int photo=0x7f020080;
-        public static final int plus=0x7f020081;
-        public static final int popup_bg=0x7f020082;
-        public static final int save=0x7f020083;
-        public static final int splash2=0x7f020084;
-        public static final int splash3=0x7f020085;
-        public static final int splash4=0x7f020086;
-        public static final int splash5=0x7f020087;
-        public static final int splash6=0x7f020088;
-        public static final int splash7=0x7f020089;
-        public static final int timestamp=0x7f02008a;
-        public static final int wifi_button=0x7f02008b;
+        public static final int customshape=0x7f020078;
+        public static final int ic_launcher=0x7f020079;
+        public static final int linebreak=0x7f02007a;
+        public static final int logs=0x7f02007b;
+        public static final int loop=0x7f02007c;
+        public static final int new_wifi=0x7f02007d;
+        public static final int next=0x7f02007e;
+        public static final int nextbuttton=0x7f02007f;
+        public static final int person=0x7f020080;
+        public static final int photo=0x7f020081;
+        public static final int plus=0x7f020082;
+        public static final int popup_bg=0x7f020083;
+        public static final int save=0x7f020084;
+        public static final int splash2=0x7f020085;
+        public static final int splash3=0x7f020086;
+        public static final int splash4=0x7f020087;
+        public static final int splash5=0x7f020088;
+        public static final int splash6=0x7f020089;
+        public static final int splash7=0x7f02008a;
+        public static final int timestamp=0x7f02008b;
+        public static final int wifi_button=0x7f02008c;
     }
     public static final class id {
         public static final int Bro_messages=0x7f04003e;

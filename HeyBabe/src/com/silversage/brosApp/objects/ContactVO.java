@@ -4,15 +4,16 @@ import java.util.ArrayList;
 
 public class ContactVO {
 
-	int ID;
-	String name;
-	MessageVO message = new MessageVO();
+	public int ID;
+	public String name;
+	public String number;
+	public MessageVO message = new MessageVO();
 
 	class MessageVO {
 
-		String time;
-		String repeat;
-		ArrayList<WiFiConditionList> WifiCondition;
+		public String time;
+		public String repeat;
+		public ArrayList<WiFiConditionList> WifiCondition;
 
 		class WiFiConditionList {
 

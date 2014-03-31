@@ -1,5 +1,7 @@
 package com.silversage.brosApp;
 
+import com.silversage.brosApp.objects.ContactVO;
+
 import android.app.Application;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,6 +11,7 @@ public class BrosApp extends Application {
 	public static SQLiteDatabase db;
 	public static Context context;
 	public static String[][] WifiList;
+	public static ContactVO contact;
 
 	public static SQLiteDatabase getDb() {
 		return db;

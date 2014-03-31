@@ -16,7 +16,7 @@ public class SQLHelper {
 		// .openOrCreateDatabase("brosApp", context.MODE_PRIVATE, null);
 		db.execSQL("CREATE TABLE IF NOT EXISTS ContactList(number TEXT,name TEXT, displayPic BLOB);");
 		db.execSQL("CREATE TABLE IF NOT EXISTS Contact(ID INTEGER PRIMARY KEY, number TEXT,name TEXT, displayPic BLOB);");
-		db.execSQL("CREATE TABLE IF NOT EXISTS Ref_Message(ID TEXT, message TEXT);");
+		db.execSQL("CREATE TABLE IF NOT EXISTS Ref_Message(ID INTEGER PRIMARY KEY, message TEXT, refID INTEGER);");
 		db.execSQL("CREATE TABLE IF NOT EXISTS Ref_WiFi(ID INTEGER PRIMARY KEY, ssid TEXT,bssid TEXT);");
 
 	}
@@ -77,7 +77,7 @@ public class SQLHelper {
 		Log.d(" BrosApp--SQLHelper", "WiFi List--Querying Data");
 		return db.rawQuery("select * from Ref_WiFi order by ssid", null);
 	}
-	
+
 	public static void insertContact(String name, String no, byte[] pic) {
 		Log.d("BrosApp--SQLHelper", "Contact--Data" + name + " " + no);
 		ContentValues insertValues = new ContentValues();
@@ -121,13 +121,16 @@ public class SQLHelper {
 		}
 		Log.d("BrosApp--SQLHelper", "Ref_WiFi--Data inserted");
 
-
 	}
 
 	public static void PopulateMessageList() {
 		// TODO Auto-generated method stub
-		String data[][] = { { "1", "Hemani" }, { "2", "Wahab" },
-				{ "3", "Zainu" }, { "4", "Ali" } };
+		String data[][] = { { "1", "hey babe, how was your day?" },
+				{ "2", "Miss you :)" },
+				{ "3", "Hi darl, how did you go today?" },
+				{ "4", "Hey babe, what are you up to tonight?" },
+				{ "5", "Hi! How was your day?" },
+				{ "6", "See you tonight darl :)" } };
 		Log.d("BrosApp--SQLHelper", "Ref_Message---Truncate");
 		db.delete("Ref_Message", null, null);
 		Log.d("BrosApp--SQLHelper", "Ref_Message---Inserting");
@@ -135,8 +138,9 @@ public class SQLHelper {
 		ContentValues insertValues;
 		for (int i = 0; i < data.length; i++) {
 			insertValues = new ContentValues();
-			insertValues.put("ID", data[i][0]);
+			insertValues.put("ID", Integer.parseInt(data[i][0]));
 			insertValues.put("message", data[i][1]);
+			insertValues.put("refID", -1);
 
 			Log.d("BrosApp--SQLHelper", "Ref_Message--" + data[i][1]);
 			db.insert("Ref_Message", null, insertValues);
@@ -146,9 +150,11 @@ public class SQLHelper {
 
 	}
 
-	public static Cursor getMessageList() {
+	public static Cursor getMessageList(int ID) {
 		// TODO Auto-generated method stub
 		Log.d(" BrosApp--SQLHelper", "Message--Querying Data");
-		return db.rawQuery("select * from Ref_Message", null);
+		return db.rawQuery(
+				"select * from Ref_Message where refID = -1 or refID=" + ID,
+				null);
 	}
 }

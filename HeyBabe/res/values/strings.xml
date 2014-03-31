@@ -6,5 +6,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_registarion">Registarion</string>
     <string name="title_activity_registration">Registration</string>
+   <color name="msgDiv">#c4a900</color>
 
 </resources>

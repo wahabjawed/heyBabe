@@ -4,45 +4,23 @@ import java.util.ArrayList;
 
 public class ContactVO {
 
+	int ID;
 	String name;
-	String no;
-	byte pic;
-	String countryID;
-	ArrayList messagesScheduler= new ArrayList<MessagesScheduler>();
+	MessageVO message = new MessageVO();
 
-	public String getName() {
-		return name;
-	}
+	class MessageVO {
 
-	public void setName(String name) {
-		this.name = name;
-	}
+		String time;
+		String repeat;
+		ArrayList<WiFiConditionList> WifiCondition;
 
-	public String getNo() {
-		return no;
-	}
+		class WiFiConditionList {
 
-	public void setNo(String no) {
-		this.no = no;
-	}
+			boolean isEnabled;
+			String SSID;
+			boolean whenConnected;
 
-	public byte getPic() {
-		return pic;
-	}
-
-	public void setPic(byte pic) {
-		this.pic = pic;
-	}
-
-	public String getCountryID() {
-		return countryID;
-	}
-
-	public void setCountryID(String countryID) {
-		this.countryID = countryID;
-	}
-
-	class MessagesScheduler {
+		}
 
 	}
 

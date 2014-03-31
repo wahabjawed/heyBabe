@@ -8,12 +8,14 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.ScanResult;
+import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.util.Log;
 
 import com.silversage.brosApp.BrosApp;
 
-public class NetworkStatus {
+public class NetworkManager {
 
 	// static Context context;
 	static ConnectivityManager connManager;
@@ -25,6 +27,7 @@ public class NetworkStatus {
 	static WifiManager mainWifi;
 	static WifiReceiver receiverWifi;
 	static List<ScanResult> wifiList;
+	static List<WifiConfiguration> LastWifi;
 
 	public static void Setup() {
 		connManager = (ConnectivityManager) context
@@ -62,9 +65,15 @@ public class NetworkStatus {
 
 		mainWifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 		mainWifi.setWifiEnabled(true);
+		LastWifi = mainWifi.getConfiguredNetworks();
+		for (int i = 0; i < LastWifi.size(); i++) {
+
+			Log.d("Wifi List", LastWifi.get(i).SSID);
+
+		}
 		receiverWifi = new WifiReceiver();
 		context.registerReceiver(receiverWifi, new IntentFilter(
-				WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
+				WifiManager.ACTION_PICK_WIFI_NETWORK));
 		mainWifi.startScan();
 
 	}
@@ -73,15 +82,17 @@ public class NetworkStatus {
 		public void onReceive(Context c, Intent intent) {
 
 			wifiList = mainWifi.getScanResults();
-			String[][] data = new String[wifiList.size()][2];
+			if (wifiList.size() > 0) {
+				String[][] data = new String[wifiList.size()][2];
 
-			for (int i = 0; i < wifiList.size(); i++) {
+				for (int i = 0; i < wifiList.size(); i++) {
 
-				data[i][0] = (wifiList.get(i)).SSID;
-				data[i][1] = (wifiList.get(i)).BSSID;
+					data[i][0] = (wifiList.get(i)).SSID;
+					data[i][1] = (wifiList.get(i)).BSSID;
+				}
+				BrosApp.WifiList = data;
+				SQLHelper.PopulateWiFiList(data);
 			}
-			BrosApp.WifiList = data;
-			SQLHelper.PopulateWiFiList(data);
 		}
 	}
 }

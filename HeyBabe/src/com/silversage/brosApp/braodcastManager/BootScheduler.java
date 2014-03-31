@@ -17,7 +17,7 @@ import android.util.Log;
 public class BootScheduler extends BroadcastReceiver {
 
 	// Restart service every 30 seconds
-	private static final long REPEAT_TIME = 1000 * 10;
+	private static final long REPEAT_TIME = 1000 * 60;
 
 	@Override
 	public void onReceive(Context context, Intent intent) {

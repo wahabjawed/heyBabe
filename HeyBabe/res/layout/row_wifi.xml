@@ -5,30 +5,38 @@
     android:gravity="center_vertical"
     android:orientation="horizontal" >
 
+    <Button
+        android:id="@+id/delete"
+        android:layout_width="1dp"
+        android:layout_height="20dp"
+        android:layout_weight="0.76"
+        android:background="@drawable/cross_button" 
+        android:paddingLeft="7dp"/>
+
     <TextView
         android:id="@+id/name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="8"
-        android:textColor="#000"
-        android:textSize="14sp"
-        android:textStyle="bold"
         android:lines="2"
         android:maxLines="2"
-        android:minLines="1" 
+        android:minLines="1"
         android:paddingLeft="5dp"
-        android:text="No Text"/>
+        android:text="No Text"
+        android:textColor="#000"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
     <ToggleButton
         android:id="@+id/tog_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="4"
-        android:textOff="When Not Connected"
-        android:textOn="When Conntected"
-        android:textSize="12sp" 
+        android:alpha="0.9"
         android:textColorHighlight="#eccf54"
         android:textColorHint="#eccf54"
-        android:alpha="0.9"/>
+        android:textOff="When Not Connected"
+        android:textOn="When Conntected"
+        android:textSize="12sp" />
 
 </LinearLayout>

@@ -7,48 +7,13 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/schedule"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:text="SCHEDULE:"
-        android:textSize="45sp" />
-
-    <LinearLayout
-        android:id="@+id/linear1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/schedule"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/button_border"
-        android:orientation="horizontal"
-        android:padding="25dp" >
-
-        <EditText
-            android:id="@+id/Select_Time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center" />
-
-        <Button
-            android:id="@+id/time_selection"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/timestamp" />
-    </LinearLayout>
-
-    <TextView
         android:id="@+id/Bro_messages"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/linear1"
         android:layout_centerHorizontal="true"
-        android:paddingTop="15dp"
+        android:layout_marginTop="20dp"
         android:text="BRO MESSSAGES!"
-        android:textSize="50dp"
+        android:textSize="60sp"
         android:textStyle="bold" />
 
     <TextView
@@ -59,7 +24,7 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:text="Select one BRO POWERED message \nfrom the list below!"
-        android:textSize="25dp"
+        android:textSize="30sp"
         android:textStyle="bold" />
 
     <Button
@@ -75,8 +40,12 @@
         android:id="@+id/default_messages"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/linear2"
         android:layout_below="@id/Select_bro_message"
-        android:layout_above="@+id/linear2" >
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/customshape" >
     </ListView>
 
     <LinearLayout
@@ -86,8 +55,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal" >
 
         <Button

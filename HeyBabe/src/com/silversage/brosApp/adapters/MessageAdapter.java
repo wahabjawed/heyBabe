@@ -2,6 +2,7 @@ package com.silversage.brosApp.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.silversage.brosApp.BrosApp;
 import com.silversage.brosApp.R;
 import com.silversage.brosApp.objects.adapters.MessageObject;
 
@@ -54,6 +56,9 @@ public class MessageAdapter extends ArrayAdapter<MessageObject> {
 
 			viewHolder.text = (TextView) vi.findViewById(R.id.message);
 			viewHolder.select = (RadioButton) vi.findViewById(R.id.select);
+			Typeface face = Typeface.createFromAsset(BrosApp.getContext().getAssets(),
+					"AdobeGothicStd.otf");
+			viewHolder.text.setTypeface(face);
 
 			vi.setTag(viewHolder);
 		}

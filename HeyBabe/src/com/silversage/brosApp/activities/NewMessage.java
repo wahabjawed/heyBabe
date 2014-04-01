@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.silversage.brosApp.BrosApp;
@@ -25,10 +27,11 @@ import com.silversage.brosApp.objects.adapters.MessageObject;
 
 public class NewMessage extends BrosAppActivity {
 
-	Button timestamp;
 	Button next;
 	Button back;
-	EditText selectTime;
+	TextView broMessage;
+	TextView Selectbropowered;
+
 	ListView messageList;
 	MessageObject[] messageItem;
 	Button addMessage;
@@ -41,13 +44,21 @@ public class NewMessage extends BrosAppActivity {
 	}
 
 	public void SetupView() {
-		timestamp = (Button) findViewById(R.id.time_selection);
 		next = (Button) findViewById(R.id.next);
 		back = (Button) findViewById(R.id.back);
-		selectTime = (EditText) findViewById(R.id.Select_Time);
 		messageList = (ListView) findViewById(R.id.default_messages);
 		addMessage = (Button) findViewById(R.id.add_message);
-		selectTime.setHint("Enter Bro Time:");
+
+		broMessage = (TextView) findViewById(R.id.Bro_messages);
+		Selectbropowered = (TextView) findViewById(R.id.Select_bro_message);
+		
+		Typeface face = Typeface.createFromAsset(getAssets(),
+				"ufonts.com_gotham_medium.ttf");
+		broMessage.setTypeface(face);
+		
+		Typeface face2 = Typeface.createFromAsset(getAssets(),
+				"AdobeGothicStd.otf");
+		Selectbropowered.setTypeface(face2);
 
 		addMessage.setOnClickListener(new OnClickListener() {
 
@@ -99,15 +110,6 @@ public class NewMessage extends BrosAppActivity {
 
 				// show it
 				alertDialog.show();
-			}
-		});
-
-		timestamp.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-
 			}
 		});
 

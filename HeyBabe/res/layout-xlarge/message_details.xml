@@ -5,6 +5,18 @@
     android:background="#ffdd00"
     android:orientation="vertical" >
 
+    <TextView
+        android:id="@+id/sendingtime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/whole_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="Message will be \nsent on:"
+        android:textSize="70sp"
+        android:textStyle="bold" />
+
     <LinearLayout
         android:id="@+id/whole_layout"
         android:layout_width="wrap_content"
@@ -13,15 +25,6 @@
         android:layout_centerVertical="true"
         android:orientation="vertical"
         android:paddingBottom="50dp" >
-
-        <TextView
-            android:id="@+id/sendingtime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:text="Message will be sent on:"
-            android:textSize="35sp"
-            android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/firstbox"
@@ -56,8 +59,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/firstbox"
+            android:layout_marginTop="45dp"
             android:paddingLeft="10dp"
-            android:paddingTop="10dp"
             android:text="Reminder"
             android:textSize="35sp"
             android:textStyle="bold" />
@@ -95,8 +98,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/secondbox"
+            android:layout_marginTop="45dp"
             android:paddingLeft="10dp"
-            android:paddingTop="10dp"
             android:text="Repitition"
             android:textSize="35sp"
             android:textStyle="bold" />
@@ -117,8 +120,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="150dp"
                 android:gravity="center"
-                android:textSize="40sp"
-                android:text="Every Sunday" />
+                android:text="Every Sunday"
+                android:textSize="40sp" />
 
             <Button
                 android:id="@+id/days_Button"

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.silversage.brosApp.R;
 import com.silversage.brosApp.objects.adapters.WiFiObject;
@@ -29,7 +30,7 @@ public class WiFiAdapter extends ArrayAdapter<WiFiObject> {
 	static class ViewHolder {
 
 		public TextView text;
-		public CheckBox select;
+		public ToggleButton select;
 
 	}
 
@@ -48,7 +49,7 @@ public class WiFiAdapter extends ArrayAdapter<WiFiObject> {
 			ViewHolder viewHolder = new ViewHolder();
 
 			viewHolder.text = (TextView) vi.findViewById(R.id.name);
-			viewHolder.select = (CheckBox) vi.findViewById(R.id.select);
+			viewHolder.select = (ToggleButton) vi.findViewById(R.id.tog_button);
 
 			vi.setTag(viewHolder);
 		}

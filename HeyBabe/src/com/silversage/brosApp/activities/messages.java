@@ -26,7 +26,7 @@ public class messages extends TabActivity {
 		TabSpec log = tabHost.newTabSpec("tab2");
 		log.setIndicator("",
 				getResources().getDrawable(R.drawable.logs));
-		Intent logIntent = new Intent(this, msgLogs.class);
+		Intent logIntent = new Intent(this, MessageLog.class);
 		log.setContent(logIntent);
 
 		tabHost.addTab(newmsg);

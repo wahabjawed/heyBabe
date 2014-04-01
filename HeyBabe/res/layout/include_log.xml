@@ -1,15 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent">
-   
-  <!-- Screen Design for Photos -->
-  <TextView android:text="PHOTOS HERE"
-            android:padding="15dip"
-            android:textSize="18dip"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"/>
-     
-</LinearLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/logRelative"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffdd00"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/Bro_messages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="BRO MESSSAGES!"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/Select_bro_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Bro_messages"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="Update or Delete the configured messages"
+        android:textSize="10sp"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/default_messages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linear2"
+        android:layout_below="@id/Select_bro_message"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/customshape" >
+    </ListView>
+
+</RelativeLayout>

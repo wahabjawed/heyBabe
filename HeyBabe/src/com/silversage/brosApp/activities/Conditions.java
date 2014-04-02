@@ -47,6 +47,19 @@ public class Conditions extends BrosAppActivity {
 
 		openWiFi = (Button) findViewById(R.id.add_wifi);
 		WiFiList = (ListView) findViewById(R.id.wifi_list);
+
+		nextButton = (Button) findViewById(R.id.next);
+		nextButton.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(Conditions.this,Confirmation.class);
+				startActivity(i);
+
+			}
+		});
+
 		backButton = (Button) findViewById(R.id.back);
 		backButton.setOnClickListener(new OnClickListener() {
 

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffdd00"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/Confirm_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="Confirm Details !"
+        android:textSize="55sp"
+        android:textStyle="bold|italic" />
+
+    <ScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/all_good"
+        android:layout_below="@id/Confirm_details"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="30dp" >
+
+        <RelativeLayout
+            android:id="@+id/relative1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_border"
+            android:orientation="vertical"
+            android:paddingBottom="40dp"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:paddingTop="20dp" >
+
+            <TextView
+                android:id="@+id/willSend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="We will send message to:"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <FrameLayout
+                android:id="@+id/frame"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/willSend" >
+
+                <ImageView
+                    android:id="@+id/profile_picture"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/roundperson" />
+
+                <ImageView
+                    android:id="@+id/round_picture"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/transparent" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/text_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/willSend"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@id/frame"
+                android:text="Name"
+                android:textStyle="bold"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/text_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_number"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/frame"
+                android:text="Phone Number"
+                android:textStyle="bold"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/text_time_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_name"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/frame"
+                android:text="9:00 AM Sunday"
+                android:textStyle="bold"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/text_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/frame"
+                android:layout_marginTop="20dp"
+                android:text="The customized message"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_wifi_condition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_message"
+                android:layout_marginTop="20dp"
+                android:text="The Wifi Conditions are"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_repeat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_wifi_condition"
+                android:layout_marginTop="20dp"
+                android:text="Repeat on sunday and Monday"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/all_good"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_border"
+        android:src="@drawable/allgoodbutton" />
+
+</RelativeLayout>

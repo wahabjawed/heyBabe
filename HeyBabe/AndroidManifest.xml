@@ -90,7 +90,7 @@
             android:windowSoftInputMode="adjustPan" >
         </activity>
 
-        <receiver android:name="com.example.Textin.BroadcastReceiver.BootScheduler" >
+        <receiver android:name=".braodcastManager.BootScheduler" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>

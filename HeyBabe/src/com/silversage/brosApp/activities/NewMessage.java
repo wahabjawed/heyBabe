@@ -31,7 +31,7 @@ public class NewMessage extends BrosAppActivity {
 	Button back;
 	TextView broMessage;
 	TextView Selectbropowered;
-
+	public int selectedMsgID = -1;
 	ListView messageList;
 	MessageObject[] messageItem;
 	Button addMessage;
@@ -51,11 +51,11 @@ public class NewMessage extends BrosAppActivity {
 
 		broMessage = (TextView) findViewById(R.id.Bro_messages);
 		Selectbropowered = (TextView) findViewById(R.id.Select_bro_message);
-		
+
 		Typeface face = Typeface.createFromAsset(getAssets(),
 				"ufonts.com_gotham_medium.ttf");
 		broMessage.setTypeface(face);
-		
+
 		Typeface face2 = Typeface.createFromAsset(getAssets(),
 				"AdobeGothicStd.otf");
 		Selectbropowered.setTypeface(face2);
@@ -94,6 +94,7 @@ public class NewMessage extends BrosAppActivity {
 													userInput.getText()
 															.toString());
 											PreExecute();
+											selectedMsgID = -1;
 										}
 									}
 								})
@@ -118,8 +119,20 @@ public class NewMessage extends BrosAppActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(NewMessage.this, MessageDetails.class);
-				startActivity(i);
+				if (selectedMsgID != -1) {
+					BrosApp.contact.messageID = Integer
+							.parseInt(messageItem[selectedMsgID].getID());
+					BrosApp.contact.messageText = messageItem[selectedMsgID]
+							.getMessageText();
+					Intent i = new Intent(NewMessage.this, MessageDetails.class);
+					startActivity(i);
+				} else {
+					Toast.makeText(NewMessage.this,
+							"Hey Bro, Select a message!", Toast.LENGTH_SHORT)
+							.show();
+
+				}
+
 			}
 		});
 
@@ -131,24 +144,7 @@ public class NewMessage extends BrosAppActivity {
 				NewMessage.this.finish();
 			}
 		});
-		messageList.setOnItemClickListener(new OnItemClickListener() {
 
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// TODO Auto-generated method stub
-				CheckBox cBox = (CheckBox) view.findViewById(R.id.select);
-				cBox.toggle();
-
-				Toast.makeText(
-						NewMessage.this,
-						messageItem[0].isSelected() + "  "
-								+ messageItem[1].isSelected(),
-						Toast.LENGTH_SHORT).show();
-				Log.d("BrosApp--MessageList", messageItem[0].isSelected()
-						+ "  " + messageItem[1].isSelected());
-			}
-		});
 	}
 
 	@Override

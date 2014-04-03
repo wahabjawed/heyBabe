@@ -54,7 +54,9 @@ public class Conditions extends BrosAppActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(Conditions.this,Confirmation.class);
+				BrosApp.contact.setWifiCondition(PickList);
+
+				Intent i = new Intent(Conditions.this, Confirmation.class);
 				startActivity(i);
 
 			}

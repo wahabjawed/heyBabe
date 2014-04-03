@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import com.silversage.brosApp.BrosApp;
 import com.silversage.brosApp.R;
+import com.silversage.brosApp.activities.Dashboard;
+import com.silversage.brosApp.activities.NewMessage;
 import com.silversage.brosApp.objects.adapters.MessageObject;
 
 public class MessageAdapter extends ArrayAdapter<MessageObject> {
@@ -56,8 +58,8 @@ public class MessageAdapter extends ArrayAdapter<MessageObject> {
 
 			viewHolder.text = (TextView) vi.findViewById(R.id.message);
 			viewHolder.select = (RadioButton) vi.findViewById(R.id.select);
-			Typeface face = Typeface.createFromAsset(BrosApp.getContext().getAssets(),
-					"AdobeGothicStd.otf");
+			Typeface face = Typeface.createFromAsset(BrosApp.getContext()
+					.getAssets(), "AdobeGothicStd.otf");
 			viewHolder.text.setTypeface(face);
 
 			vi.setTag(viewHolder);
@@ -74,11 +76,13 @@ public class MessageAdapter extends ArrayAdapter<MessageObject> {
 
 				if (position != mSelectedPosition && mSelectedRB != null) {
 					mSelectedRB.setChecked(false);
+					data[pos].setSelected(!data[mSelectedPosition].isSelected());
 				}
 
 				mSelectedPosition = position;
 				mSelectedRB = (RadioButton) v;
 				data[pos].setSelected(!data[pos].isSelected());
+				((NewMessage) activity).selectedMsgID = pos;
 
 			}
 		});

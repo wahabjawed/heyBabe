@@ -3,10 +3,7 @@ package com.silversage.brosApp.activities;
 import java.util.ArrayList;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -15,14 +12,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.silversage.brosApp.BrosApp;
 import com.silversage.brosApp.R;
 import com.silversage.brosApp.activities.abstracts.BrosAppActivity;
-import com.silversage.brosApp.adapters.DashboardAdapter;
 import com.silversage.brosApp.adapters.WiFiAdapter;
 import com.silversage.brosApp.objects.adapters.WiFiObject;
 

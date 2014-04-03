@@ -20,9 +20,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/all_good"
-        android:layout_margin="20dp"
         android:layout_below="@id/Confirm_details"
-        android:layout_centerHorizontal="true" >
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp" >
 
         <RelativeLayout
             android:id="@+id/relative1"
@@ -102,46 +102,86 @@
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/text_message"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/rel_wifi_condition"
+                android:layout_width="600dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/frame"
-                android:layout_marginTop="20dp"
-                android:text="The customized message"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                android:layout_below="@id/text_time_day"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/confirmation_border" >
 
-            <TextView
-                android:id="@+id/text_wifi_condition"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/text_message"
-                android:layout_marginTop="20dp"
-                android:text="The Wifi Conditions are"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                <ImageView
+                    android:id="@+id/image_wifi"
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/wifi" />
 
-            <TextView
-                android:id="@+id/text_repeat"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/text_wifi_condition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/image_wifi"
+                    android:text="The Wifi conditions are:"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rel_message"
+                android:layout_width="600dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/text_wifi_condition"
-                android:layout_marginTop="20dp"
-                android:text="Repeat on sunday and Monday"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                android:layout_below="@id/rel_wifi_condition"
+                android:layout_marginTop="35dp"
+                android:background="@drawable/confirmation_border" >
+
+                <ImageView
+                    android:id="@+id/image_message"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/msg" />
+
+                <TextView
+                    android:id="@+id/text_repeat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/image_message"
+                    android:text="Repeat on sunday and monday"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
         </RelativeLayout>
     </ScrollView>
 
-    <ImageView
-        android:id="@+id/all_good"
+     <LinearLayout
+        android:id="@+id/footer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/button_border"
-        android:src="@drawable/allgoodbutton" />
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:background="@drawable/back_new" />
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:background="@drawable/broallgood" />
+    </LinearLayout>
 
 </RelativeLayout>

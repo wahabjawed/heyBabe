@@ -12,7 +12,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:background="@drawable/new_wifi" />
+        android:background="@drawable/wifi_button" />
 
     <TextView
         android:id="@+id/Bro_messages"

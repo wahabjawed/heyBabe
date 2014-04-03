@@ -30,18 +30,19 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_border"
             android:orientation="vertical"
-            android:paddingBottom="40dp"
-            android:paddingLeft="40dp"
-            android:paddingRight="40dp"
-            android:paddingTop="20dp" >
+            android:paddingBottom="50dp"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:paddingTop="30dp" >
 
             <TextView
                 android:id="@+id/willSend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:text="We will send message to:"
-                android:textSize="40sp"
+                android:textSize="50sp"
                 android:textStyle="bold" />
 
             <FrameLayout
@@ -52,16 +53,16 @@
 
                 <ImageView
                     android:id="@+id/profile_picture"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="15dp"
                     android:src="@drawable/roundperson" />
 
                 <ImageView
                     android:id="@+id/round_picture"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="15dp"
                     android:src="@drawable/transparent" />
             </FrameLayout>
 
@@ -71,11 +72,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/willSend"
                 android:layout_marginLeft="35dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 android:layout_toRightOf="@id/frame"
                 android:text="Name"
-                android:textStyle="bold"
-                android:textSize="30sp" />
+                android:textSize="35sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/text_name"
@@ -86,8 +87,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@id/frame"
                 android:text="Phone Number"
-                android:textStyle="bold"
-                android:textSize="30sp" />
+                android:textSize="35sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/text_time_day"
@@ -98,49 +99,89 @@
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@id/frame"
                 android:text="9:00 AM Sunday"
-                android:textStyle="bold"
-                android:textSize="30sp" />
-
-            <TextView
-                android:id="@+id/text_message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/frame"
-                android:layout_marginTop="20dp"
-                android:text="The customized message"
-                android:textSize="18sp"
+                android:textSize="35sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/text_wifi_condition"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:id="@+id/rel_wifi_condition"
+                android:layout_width="600dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/text_message"
-                android:layout_marginTop="20dp"
-                android:text="The Wifi Conditions are"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:layout_below="@id/text_time_day"
+                android:layout_marginTop="35dp"
+                android:background="@drawable/confirmation_border" >
 
-            <TextView
-                android:id="@+id/text_repeat"
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/image_wifi"
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/wifi" />
+
+                <TextView
+                    android:id="@+id/text_wifi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@id/image_wifi"
+                    android:text="Send on my Girl Freinds wifi"
+                    android:textSize="35sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rel_message"
+                android:layout_width="600dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/text_wifi_condition"
-                android:layout_marginTop="20dp"
-                android:text="Repeat on sunday and Monday"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:layout_below="@id/rel_wifi_condition"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/confirmation_border" >
+
+                <ImageView
+                    android:id="@+id/image_message"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/msg" />
+
+                <TextView
+                    android:id="@+id/text_wifi_condition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@id/image_message"
+                    android:text="The message is"
+                    android:textSize="35sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
         </RelativeLayout>
     </ScrollView>
 
-    <ImageView
-        android:id="@+id/all_good"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/footer"
+        android:layout_width="500dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/button_border"
-        android:src="@drawable/allgoodbutton" />
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:background="@drawable/back_new" />
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:background="@drawable/broallgood" />
+    </LinearLayout>
 
 </RelativeLayout>

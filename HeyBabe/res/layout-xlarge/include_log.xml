@@ -13,7 +13,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:text="BRO MESSSAGES!"
-        android:textSize="40sp"
+        android:textSize="50sp"
         android:textStyle="bold" />
 
     <TextView
@@ -24,7 +24,7 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:text="Update or Delete the configured messages"
-        android:textSize="10sp"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
     <ListView

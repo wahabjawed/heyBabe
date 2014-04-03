@@ -52,7 +52,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/linear2"
-        android:layout_below="@id/add_message" >
+        android:layout_below="@id/add_message"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/customshape" >
     </ListView>
 
     <LinearLayout
@@ -96,8 +100,9 @@
             <ToggleButton
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp" />
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout

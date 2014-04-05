@@ -6,6 +6,7 @@ import java.io.InputStream;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentUris;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -24,6 +25,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -56,7 +58,10 @@ public class AddContact extends BrosAppActivity {
 		setContentView(R.layout.add_contact);
 
 		setupView();
-
+		 InputMethodManager imm = (InputMethodManager)
+		 getSystemService(Context.INPUT_METHOD_SERVICE);
+		 imm.hideSoftInputFromWindow(name.getWindowToken(), 0);
+		 imm.hideSoftInputFromWindow(number.getWindowToken(), 0);
 	}
 
 	private void setupView() {

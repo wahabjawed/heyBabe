@@ -7,18 +7,17 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.silversage.brosApp.BrosApp;
+import com.silversage.brosApp.objects.ContactVO;
 
 public class SQLHelper {
 	static SQLiteDatabase db = BrosApp.db;
 
 	public static void SetupDB(Context context) {
-		// db = context
-		// .openOrCreateDatabase("brosApp", context.MODE_PRIVATE, null);
 		db.execSQL("CREATE TABLE IF NOT EXISTS ContactList(number TEXT,name TEXT, displayPic BLOB);");
 		db.execSQL("CREATE TABLE IF NOT EXISTS Contact(ID INTEGER PRIMARY KEY, number TEXT,name TEXT, displayPic BLOB);");
 		db.execSQL("CREATE TABLE IF NOT EXISTS Ref_Message(ID INTEGER PRIMARY KEY, message TEXT, refID INTEGER);");
+		db.execSQL("CREATE TABLE IF NOT EXISTS Tran_Message(ID INTEGER PRIMARY KEY, ContactID INTEGER, MessageID INTEGER, Nofity INTEGER, WiFiID INTEGER);");
 		db.execSQL("CREATE TABLE IF NOT EXISTS Ref_WiFi(ID INTEGER PRIMARY KEY, ssid TEXT,bssid TEXT);");
-
 	}
 
 	public static boolean isFirstTime() {
@@ -29,9 +28,7 @@ public class SQLHelper {
 		} else {
 			Log.d("BrosApp--SQLHelper", "isFirstTime--Splash");
 			return true;
-
 		}
-
 	}
 
 	public static void setFirstTime() {
@@ -84,9 +81,7 @@ public class SQLHelper {
 		insertValues.put("name", name);
 		insertValues.put("number", no);
 		insertValues.put("displayPic", pic);
-
 		db.insert("Contact", null, insertValues);
-
 		Log.d("BrosApp--SQLHelper", "Contact--Data inserted");
 
 	}
@@ -97,9 +92,7 @@ public class SQLHelper {
 		updateValues.put("name", name);
 		updateValues.put("number", no);
 		updateValues.put("displayPic", pic);
-
 		db.update("Contact", updateValues, "ID= " + id, null);
-
 		Log.d("BrosApp--SQLHelper", "Contact--Data uptated");
 	}
 
@@ -155,7 +148,6 @@ public class SQLHelper {
 		ContentValues insertValues = new ContentValues();
 		insertValues.put("message", message);
 		insertValues.put("refID", ID);
-
 		Log.d("BrosApp--SQLHelper", "Ref_Message--" + message);
 		db.insert("Ref_Message", null, insertValues);
 
@@ -168,4 +160,15 @@ public class SQLHelper {
 				"select * from Ref_Message where refID = -1 or refID=" + ID,
 				null);
 	}
+
+	public static void insertTran(ContactVO contacts) {
+
+		ContentValues insertValues = new ContentValues();
+		insertValues.put("message", contacts.getMessageID());
+		insertValues.put("refID", contacts.getTime());
+		Log.d("BrosApp--SQLHelper", "Ref_Message--");
+		db.insert("Tran_Message", null, insertValues);
+
+	}
+
 }

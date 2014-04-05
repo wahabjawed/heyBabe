@@ -347,5 +347,7 @@ public class AddContact extends BrosAppActivity {
 		inflater.inflate(R.menu.display_pic_menu, menu);
 
 	}
+	
+	
 
 }

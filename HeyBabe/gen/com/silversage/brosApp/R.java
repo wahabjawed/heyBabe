@@ -1000,16 +1000,16 @@ containing a value of this type.
         public static final int abs__textButton=0x7f040013;
         public static final int abs__title=0x7f04001b;
         public static final int abs__up=0x7f04000b;
-        public static final int action_settings=0x7f040088;
+        public static final int action_settings=0x7f04008a;
         public static final int add_message=0x7f040046;
         public static final int add_wifi=0x7f040040;
         public static final int all_good=0x7f040058;
         public static final int back=0x7f04003b;
         public static final int button=0x7f040044;
-        public static final int button1=0x7f040082;
+        public static final int button1=0x7f040084;
         public static final int contact_photo=0x7f040037;
-        public static final int dLDelete=0x7f040085;
-        public static final int dLUpdate=0x7f040084;
+        public static final int dLDelete=0x7f040087;
+        public static final int dLUpdate=0x7f040086;
         public static final int dListView=0x7f040060;
         public static final int days_Button=0x7f040072;
         public static final int default_messages=0x7f040047;
@@ -1025,8 +1025,8 @@ containing a value of this type.
         public static final int image_picture=0x7f040057;
         public static final int image_wifi=0x7f040054;
         public static final int intro_text=0x7f040032;
-        public static final int item1=0x7f040086;
-        public static final int item2=0x7f040087;
+        public static final int item1=0x7f040088;
+        public static final int item2=0x7f040089;
         public static final int layout_root=0x7f040074;
         public static final int line_break=0x7f040038;
         public static final int linear=0x7f04005e;
@@ -1035,6 +1035,7 @@ containing a value of this type.
         public static final int linear5=0x7f040045;
         public static final int listMode=0x7f040002;
         public static final int list_image=0x7f04007a;
+        public static final int listview=0x7f040082;
         public static final int logRelative=0x7f040062;
         public static final int mProText=0x7f04005f;
         public static final int mainRelative=0x7f040064;
@@ -1042,16 +1043,17 @@ containing a value of this type.
         public static final int name=0x7f040035;
         public static final int name_number=0x7f04007b;
         public static final int need_number=0x7f040033;
-        public static final int new_message=0x7f040083;
+        public static final int new_message=0x7f040085;
         public static final int next=0x7f04003c;
         public static final int nextbutton=0x7f040073;
         public static final int normal=0x7f040001;
         public static final int number=0x7f040036;
         public static final int popup=0x7f040078;
+        public static final int popup_element=0x7f040081;
         public static final int profile_picture=0x7f04004e;
         public static final int rSearch=0x7f040061;
         public static final int rel=0x7f04005d;
-        public static final int relLayout=0x7f040081;
+        public static final int relLayout=0x7f040083;
         public static final int rel_message=0x7f040059;
         public static final int rel_wifi_condition=0x7f040053;
         public static final int relative1=0x7f04004b;
@@ -1129,10 +1131,11 @@ containing a value of this type.
         public static final int row_logmessage=0x7f030021;
         public static final int row_message=0x7f030022;
         public static final int row_wifi=0x7f030023;
-        public static final int sherlock_spinner_dropdown_item=0x7f030024;
-        public static final int sherlock_spinner_item=0x7f030025;
-        public static final int slider=0x7f030026;
-        public static final int splash_screen=0x7f030027;
+        public static final int screen_popup=0x7f030024;
+        public static final int sherlock_spinner_dropdown_item=0x7f030025;
+        public static final int sherlock_spinner_item=0x7f030026;
+        public static final int slider=0x7f030027;
+        public static final int splash_screen=0x7f030028;
     }
     public static final class menu {
         public static final int dashboard=0x7f0b0000;

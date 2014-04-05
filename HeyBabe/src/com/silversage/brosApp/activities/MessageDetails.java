@@ -7,15 +7,22 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.silversage.brosApp.R;
+import com.silversage.brosApp.activities.abstracts.BrosAppActivity;
 
-public class MessageDetails extends Activity {
+public class MessageDetails extends BrosAppActivity {
 
 	private TextView tvDisplayTime;
 	private Button timeSelection;
@@ -23,7 +30,11 @@ public class MessageDetails extends Activity {
 	private Button backbutton;
 	private int hour;
 	private int minute;
-	private Button repeat;
+
+	private Button daySelection;
+	private Button frequency;
+	private TextView tvFrequency;
+	private TextView tvDay;
 
 	static final int TIME_DIALOG_ID = 999;
 
@@ -31,18 +42,41 @@ public class MessageDetails extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.message_details);
 
-		repeat = (Button) findViewById(R.id.days_Button);
-		repeat.setOnClickListener(new View.OnClickListener() {
+		setupView();
+
+	}
+
+	private void setupView() {
+
+		tvDay = (TextView) findViewById(R.id.Select_Days);
+		daySelection = (Button) findViewById(R.id.days_Button);
+		tvFrequency = (TextView) findViewById(R.id.ReminderMe);
+		frequency = (Button) findViewById(R.id.Reminder_Button);
+		tvDisplayTime = (TextView) findViewById(R.id.Select_Time);
+
+		frequency.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 
-			}
+				registerForContextMenu(frequency);
+				openContextMenu(frequency);
+				unregisterForContextMenu(frequency);
 
+			}
 		});
 
-		tvDisplayTime = (TextView) findViewById(R.id.Select_Time);
+		daySelection.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				registerForContextMenu(daySelection);
+				openContextMenu(daySelection);
+				unregisterForContextMenu(daySelection);
+			}
+		});
 
 		final Calendar c = Calendar.getInstance();
 		hour = c.get(Calendar.HOUR_OF_DAY);
@@ -109,11 +143,52 @@ public class MessageDetails extends Activity {
 		}
 	};
 
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		if (v.getId() == R.id.Reminder_Button) {
+			menu.setHeaderTitle("Choose Repeat");
+
+			MenuInflater inflater = getMenuInflater();
+			inflater.inflate(R.menu.repeat, menu);
+		} else if (v.getId() == R.id.days_Button) {
+
+			menu.setHeaderTitle("Choose Day");
+
+			MenuInflater inflater = getMenuInflater();
+			inflater.inflate(R.menu.day_select, menu);
+		}
+	}
+
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+
+		return true;
+	}
+
 	private static String pad(int c) {
 		if (c >= 10)
 			return String.valueOf(c);
 		else
 			return "0" + String.valueOf(c);
+	}
+
+	@Override
+	public void PostExecute() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void PreExecute() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void ProgressUpdate(String update) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

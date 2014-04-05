@@ -31,8 +31,8 @@
         android:id="@+id/add_message"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_below="@id/Bro_messages"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="25dp"
         android:layout_toRightOf="@id/Select_bro_message"
         android:background="@drawable/black_plus" />
 

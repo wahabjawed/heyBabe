@@ -13,7 +13,7 @@
         android:layout_marginTop="20dp"
         android:text="Confirm Details !"
         android:textSize="25sp"
-        android:textStyle="bold|italic" />
+        android:textStyle="bold" />
 
     <ScrollView
         android:id="@+id/scrollview"
@@ -38,6 +38,7 @@
                 android:id="@+id/willSend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:text="We will send message to:"
                 android:textSize="20sp"

@@ -2,38 +2,28 @@ package com.silversage.brosApp.activities;
 
 import java.util.Calendar;
 
-import com.silversage.brosApp.R;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Display;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.TimePicker;
+
+import com.silversage.brosApp.R;
 
 public class MessageDetails extends Activity {
 
 	private TextView tvDisplayTime;
 	private Button timeSelection;
-	private TextView Selectdays;
 	private Button nextbutton;
 	private Button backbutton;
 	private int hour;
 	private int minute;
 	private Button repeat;
-	int screen_width;
 
 	static final int TIME_DIALOG_ID = 999;
 
@@ -41,21 +31,16 @@ public class MessageDetails extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.message_details);
 
-		Selectdays = (TextView) findViewById(R.id.Select_Days);
-
 		repeat = (Button) findViewById(R.id.days_Button);
 		repeat.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				initiatePopupWindow();
 
 			}
 
 		});
-		Display display = getWindowManager().getDefaultDisplay();
-		screen_width = display.getWidth(); // deprecated
 
 		tvDisplayTime = (TextView) findViewById(R.id.Select_Time);
 
@@ -96,44 +81,6 @@ public class MessageDetails extends Activity {
 
 		});
 
-	}
-
-	private void initiatePopupWindow() {
-		// TODO Auto-generated method stub
-		final Button btnOpenPopup = (Button) findViewById(R.id.days_Button);
-		btnOpenPopup.setOnClickListener(new Button.OnClickListener() {
-
-			String[] data = { "Don't Repeat", "Daily", "Weekly", "Monthly" };
-
-			public void onClick(View arg0) {
-				LayoutInflater layoutInflater = (LayoutInflater) getBaseContext()
-						.getSystemService(LAYOUT_INFLATER_SERVICE);
-				View popupView = layoutInflater.inflate(R.layout.screen_popup,
-						null);
-
-				final PopupWindow popupWindow = new PopupWindow(popupView,
-						screen_width, 300, true);
-
-				ListView listView = (ListView) popupView
-						.findViewById(R.id.listview);
-				listView.setAdapter(new ArrayAdapter<String>(
-						getApplicationContext(),
-						android.R.layout.simple_list_item_1, data));
-				listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-					public void onItemClick(AdapterView<?> arg0, View view,
-							int arg2, long arg3) {
-						// TODO Auto-generated method stub
-
-						Selectdays.setText(((TextView) view).getText());
-						popupWindow.dismiss();
-					}
-				});
-
-				popupWindow.showAsDropDown(btnOpenPopup, 20, -5);
-
-			}
-		});
 	}
 
 	@Override

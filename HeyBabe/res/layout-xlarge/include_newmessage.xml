@@ -29,10 +29,10 @@
 
     <Button
         android:id="@+id/add_message"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_below="@id/Bro_messages"
-        android:layout_marginLeft="15dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="70dp"
         android:layout_toRightOf="@id/Select_bro_message"
         android:background="@drawable/black_plus" />
 

@@ -31,15 +31,17 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/sendingtime"
             android:layout_centerHorizontal="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/button_border"
             android:orientation="horizontal"
             android:padding="20dp" >
 
             <TextView
                 android:id="@+id/Select_Time"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
+                android:layout_marginLeft="80dp"
                 android:gravity="center"
                 android:text="Time Stamp"
                 android:textSize="30sp" />
@@ -48,8 +50,8 @@
                 android:id="@+id/time_selection"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
                 android:background="@drawable/clock" />
         </LinearLayout>
 
@@ -58,8 +60,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/firstbox"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="35dp"
-            android:paddingLeft="10dp"
             android:text="Reminder"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -70,15 +72,16 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/reminderText"
             android:layout_centerHorizontal="true"
+            android:layout_marginLeft="5dp"
             android:background="@drawable/button_border"
             android:orientation="horizontal"
             android:padding="20dp" >
 
             <TextView
                 android:id="@+id/ReminderMe"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
+                android:layout_marginLeft="80dp"
                 android:gravity="center"
                 android:text="Remind Me!"
                 android:textSize="30sp" />
@@ -87,8 +90,8 @@
                 android:id="@+id/Reminder_Button"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
                 android:background="@drawable/calendar" />
         </LinearLayout>
 
@@ -97,8 +100,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/secondbox"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="25dp"
-            android:paddingLeft="10dp"
             android:text="Repitition"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -109,15 +112,16 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/Repitition"
             android:layout_centerHorizontal="true"
+            android:layout_marginLeft="5dp"
             android:background="@drawable/button_border"
             android:orientation="horizontal"
             android:padding="20dp" >
 
             <TextView
                 android:id="@+id/Select_Days"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
+                android:layout_marginLeft="80dp"
                 android:gravity="center"
                 android:text="Every Sunday"
                 android:textSize="30sp" />
@@ -126,8 +130,8 @@
                 android:id="@+id/days_Button"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
                 android:background="@drawable/loop" />
         </LinearLayout>
     </LinearLayout>

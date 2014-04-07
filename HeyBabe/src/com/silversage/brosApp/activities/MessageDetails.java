@@ -72,14 +72,14 @@ public class MessageDetails extends BrosAppActivity {
 			}
 		});
 		tvFrequency.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				registerForContextMenu(frequency);
 				openContextMenu(frequency);
 				unregisterForContextMenu(frequency);
-				
+
 			}
 		});
 
@@ -119,16 +119,16 @@ public class MessageDetails extends BrosAppActivity {
 				if (!isTimeSelected) {
 
 					Toast.makeText(MessageDetails.this,
-							"Bro, You Forgot tpo set the Time!",
+							"Bro, You Forgot to set the Time!",
 							Toast.LENGTH_LONG).show();
 				} else if (!isReminderSelected) {
 					Toast.makeText(MessageDetails.this,
-							"Bro, You Forgot tpo set the Reminder!",
+							"Bro, You Forgot to set the Reminder!",
 							Toast.LENGTH_LONG).show();
 
 				} else if (!isDaySelected) {
 					Toast.makeText(MessageDetails.this,
-							"Bro, You Forgot tpo set the Day!",
+							"Bro, You Forgot to set the Day!",
 							Toast.LENGTH_LONG).show();
 
 				} else {
@@ -197,8 +197,22 @@ public class MessageDetails extends BrosAppActivity {
 			minute = selectedMinute;
 
 			// set current time into textview
-			tvDisplayTime.setText(new StringBuilder().append(pad(hour))
-					.append(":").append(pad(minute)));
+			// tvDisplayTime.setText(new StringBuilder().append(pad(hour))
+			// .append(":").append(pad(minute)));
+			if (hour > 12) {
+
+				tvDisplayTime.setText(String.valueOf(hour - 12) + ":"
+						+ (String.valueOf(minute) + " PM"));
+			}
+			if (hour == 12) {
+				tvDisplayTime.setText("12" + ":"
+						+ (String.valueOf(minute) + " PM"));
+			}
+			if (hour < 12) {
+				tvDisplayTime.setText(String.valueOf(hour) + ":"
+						+ (String.valueOf(minute) + " AM"));
+			}
+			
 			isTimeSelected = true;
 		}
 	};

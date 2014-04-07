@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/item1" android:title="Everyday"></item>
-    <item android:id="@+id/item2" android:title="Someday"></item>
-    
+
+    <item
+        android:id="@+id/item1"
+        android:title="2 Mins Before">
+    </item>
+    <item
+        android:id="@+id/item2"
+        android:title="5 Mins Before">
+    </item>
 
 </menu>

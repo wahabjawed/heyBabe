@@ -1,28 +1,23 @@
 package com.silversage.brosApp.activities;
 
-import com.silversage.brosApp.BrosApp;
-import com.silversage.brosApp.R;
-import com.silversage.brosApp.activities.abstracts.BrosAppActivity;
-import com.silversage.brosApp.adapters.LogMessageAdapter;
-import com.silversage.brosApp.adapters.MessageAdapter;
-import com.silversage.brosApp.objects.adapters.MessageObject;
-
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.silversage.brosApp.BrosApp;
+import com.silversage.brosApp.R;
+import com.silversage.brosApp.activities.abstracts.BrosAppActivity;
+import com.silversage.brosApp.objects.adapters.MessageObject;
 
 public class MessageLog extends BrosAppActivity {
 

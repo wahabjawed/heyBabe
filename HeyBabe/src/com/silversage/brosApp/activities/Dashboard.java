@@ -151,6 +151,7 @@ public class Dashboard extends BrosAppSherlockActivity {
 		switch (item.getItemId()) {
 
 		case (R.id.new_message):
+			
 			Intent activity = new Intent(Dashboard.this, AddContact.class);
 			activity.putExtra("REQUEST", "CREATE");
 			startActivity(activity);

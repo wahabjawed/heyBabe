@@ -2,10 +2,6 @@ package com.silversage.brosApp.braodcastManager;
 
 import java.util.Calendar;
 
-import com.silversage.brosApp.BrosApp;
-import com.silversage.brosApp.service.ServiceManager;
-import com.silversage.brosApp.util.SQLHelper;
-
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -14,6 +10,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
+
+import com.silversage.brosApp.service.ServiceManager;
 
 public class BootScheduler extends BroadcastReceiver {
 

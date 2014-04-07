@@ -13,6 +13,25 @@ public class ContactVO {
 	public int messageID;
 	public String time;
 	public String repeat;
+	public String day;
+	public int nofity;
+
+	public String getDay() {
+		return day;
+	}
+
+	public int getNofity() {
+		return nofity;
+	}
+
+	public void setNofity(int nofity) {
+		this.nofity = nofity;
+	}
+
+	public void setDay(String day) {
+		this.day = day;
+	}
+
 	public ArrayList<WiFiObject> WifiCondition;
 
 	public int getID() {

@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.silversage.brosApp.BrosApp;
 import com.silversage.brosApp.objects.ContactVO;
+import com.silversage.brosApp.objects.adapters.WiFiObject;
 
 public class SQLHelper {
 	static SQLiteDatabase db = BrosApp.db;
@@ -16,8 +17,8 @@ public class SQLHelper {
 		db.execSQL("CREATE TABLE IF NOT EXISTS ContactList(number TEXT,name TEXT, displayPic BLOB);");
 		db.execSQL("CREATE TABLE IF NOT EXISTS Contact(ID INTEGER PRIMARY KEY, number TEXT,name TEXT, displayPic BLOB);");
 		db.execSQL("CREATE TABLE IF NOT EXISTS Ref_Message(ID INTEGER PRIMARY KEY, message TEXT, refID INTEGER);");
-		db.execSQL("CREATE TABLE IF NOT EXISTS Tran_Message(ID INTEGER PRIMARY KEY, ContactID INTEGER, MessageID INTEGER, Nofity INTEGER, WiFiID INTEGER);");
-		db.execSQL("CREATE TABLE IF NOT EXISTS Ref_WiFi(ID INTEGER PRIMARY KEY, ssid TEXT,bssid TEXT);");
+		db.execSQL("CREATE TABLE IF NOT EXISTS Tran_Message(ID INTEGER, ContactID INTEGER, MessageID INTEGER, Nofity INTEGER, Time TEXT, Day TEXT, Reminder TEXT);");
+		db.execSQL("CREATE TABLE IF NOT EXISTS Tran_WiFi(ID INTEGER, ssid TEXT,bssid TEXT, whenConnected INTEGER);");
 	}
 
 	public static boolean isFirstTime() {
@@ -163,12 +164,70 @@ public class SQLHelper {
 
 	public static void insertTran(ContactVO contacts) {
 
+		int ID = getTranSequence();
+		Log.d("BrosApp--SQLHelper", "Tran_Message--Sequence ID = " + ID);
 		ContentValues insertValues = new ContentValues();
-		insertValues.put("message", contacts.getMessageID());
-		insertValues.put("refID", contacts.getTime());
-		Log.d("BrosApp--SQLHelper", "Ref_Message--");
+		insertValues.put("ID", ID);
+		insertValues.put("ContactID", contacts.getID());
+		insertValues.put("MessageID", contacts.getMessageID());
+		insertValues.put("Time", contacts.getTime());
+		insertValues.put("Day", contacts.getDay());
+		insertValues.put("Reminder", contacts.getRepeat());
+		insertValues.put("Nofity", contacts.getNofity());
 		db.insert("Tran_Message", null, insertValues);
+		Log.d("BrosApp--SQLHelper", "Tran_Message--Inserted");
 
+		for (int i = 0; i < contacts.getWifiCondition().size(); i++) {
+
+			WiFiObject obj = contacts.getWifiCondition().get(i);
+			insertValues = new ContentValues();
+			insertValues.put("ID", ID);
+			insertValues.put("ssid", obj.getName());
+			insertValues.put("bssid", contacts.getMessageID());
+			db.insert("Tran_WiFi", null, insertValues);
+			Log.d("BrosApp--SQLHelper", "Tran_WiFi--Inserting WiFi No " + i);
+
+		}
+		Log.d("BrosApp--SQLHelper", "Tran_WiFi--Inserted");
+
+	}
+
+	public static int getTranSequence() {
+
+		Cursor c = db.rawQuery("select * from Tran_Message order by ID desc",
+				null);
+		if (c.moveToFirst()) {
+			return c.getInt(c.getColumnIndex("ID")) + 1;
+		} else {
+			return 0;
+
+		}
+
+	}
+
+	public static Cursor getLogMessageList(int iD) {
+		// TODO Auto-generated method stub
+		Log.d("BrosApp--SQLHelper", "Tran_Message--Fetching Log Message");
+
+		return db
+				.rawQuery(
+						"select * from Ref_Message where ID in (select MessageID from Tran_Message where ContactID="
+								+ iD + ")", null);
+
+	}
+
+	public static void DeleteTran(int iD, String msgID) {
+		// TODO Auto-generated method stub
+
+		db.delete("Tran_WiFi",
+				"ID in (select ID from Tran_Message where ContactID =" + iD
+						+ " and MessageID = " + Integer.parseInt(msgID) + ")",
+				null);
+
+		db.delete("Tran_Message", "ContactID=" + iD + " and MessageID = "
+				+ Integer.parseInt(msgID) + " ", null);
+
+		Log.d(" BrosApp--SQLHelper", "Log List--Data Deleted");
 	}
 
 }

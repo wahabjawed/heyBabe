@@ -2,16 +2,17 @@ package com.silversage.brosApp.braodcastManager;
 
 import java.util.Calendar;
 
+import com.silversage.brosApp.BrosApp;
 import com.silversage.brosApp.service.ServiceManager;
 import com.silversage.brosApp.util.SQLHelper;
-
-
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 public class BootScheduler extends BroadcastReceiver {
@@ -21,8 +22,9 @@ public class BootScheduler extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		if (!SQLHelper.getUser().equals("")) {
-
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(context);
+		if (prefs.getBoolean("first_time", false)) {
 			Log.d("dfdf", "dfdf");
 			AlarmManager service = (AlarmManager) context
 					.getSystemService(Context.ALARM_SERVICE);
@@ -44,5 +46,6 @@ public class BootScheduler extends BroadcastReceiver {
 			// REPEAT_TIME, pending);
 
 		}
+
 	}
 }

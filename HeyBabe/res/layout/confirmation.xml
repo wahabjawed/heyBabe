@@ -140,11 +140,12 @@
                     android:background="@drawable/msg" />
 
                 <TextView
-                    android:id="@+id/text_repeat"
+                    android:id="@+id/text_message"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/image_picture"
+                    android:lines="3"
                     android:text="Repeat on sunday and Monday"
                     android:textSize="15sp"
                     android:textStyle="bold" />

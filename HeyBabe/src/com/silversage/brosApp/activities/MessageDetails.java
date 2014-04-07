@@ -18,7 +18,9 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.silversage.brosApp.BrosApp;
 import com.silversage.brosApp.R;
 import com.silversage.brosApp.activities.abstracts.BrosAppActivity;
 
@@ -30,11 +32,14 @@ public class MessageDetails extends BrosAppActivity {
 	private Button backbutton;
 	private int hour;
 	private int minute;
-
+	private View pickView;
 	private Button daySelection;
 	private Button frequency;
 	private TextView tvFrequency;
 	private TextView tvDay;
+	private boolean isDaySelected = false;
+	private boolean isTimeSelected = false;
+	private boolean isReminderSelected = false;
 
 	static final int TIME_DIALOG_ID = 999;
 
@@ -66,12 +71,35 @@ public class MessageDetails extends BrosAppActivity {
 
 			}
 		});
+		tvFrequency.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				registerForContextMenu(frequency);
+				openContextMenu(frequency);
+				unregisterForContextMenu(frequency);
+				
+			}
+		});
 
 		daySelection.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				registerForContextMenu(daySelection);
+				openContextMenu(daySelection);
+				unregisterForContextMenu(daySelection);
+			}
+		});
+
+		tvDay.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
 				registerForContextMenu(daySelection);
 				openContextMenu(daySelection);
 				unregisterForContextMenu(daySelection);
@@ -87,8 +115,31 @@ public class MessageDetails extends BrosAppActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent(MessageDetails.this, Conditions.class);
-				startActivity(i);
+
+				if (!isTimeSelected) {
+
+					Toast.makeText(MessageDetails.this,
+							"Bro, You Forgot tpo set the Time!",
+							Toast.LENGTH_LONG).show();
+				} else if (!isReminderSelected) {
+					Toast.makeText(MessageDetails.this,
+							"Bro, You Forgot tpo set the Reminder!",
+							Toast.LENGTH_LONG).show();
+
+				} else if (!isDaySelected) {
+					Toast.makeText(MessageDetails.this,
+							"Bro, You Forgot tpo set the Day!",
+							Toast.LENGTH_LONG).show();
+
+				} else {
+
+					BrosApp.contact.setDay(tvDay.getText().toString());
+					BrosApp.contact.setRepeat(tvFrequency.getText().toString());
+					BrosApp.contact.setTime(tvDisplayTime.getText().toString());
+
+					Intent i = new Intent(MessageDetails.this, Conditions.class);
+					startActivity(i);
+				}
 			}
 		});
 
@@ -113,6 +164,15 @@ public class MessageDetails extends BrosAppActivity {
 
 			}
 
+		});
+		tvDisplayTime.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
+				showDialog(TIME_DIALOG_ID);
+			}
 		});
 
 	}
@@ -139,13 +199,14 @@ public class MessageDetails extends BrosAppActivity {
 			// set current time into textview
 			tvDisplayTime.setText(new StringBuilder().append(pad(hour))
 					.append(":").append(pad(minute)));
-
+			isTimeSelected = true;
 		}
 	};
 
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
+		pickView = v;
 		if (v.getId() == R.id.Reminder_Button) {
 			menu.setHeaderTitle("Choose Repeat");
 
@@ -163,6 +224,13 @@ public class MessageDetails extends BrosAppActivity {
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 
+		if (pickView.getId() == R.id.Reminder_Button) {
+			tvFrequency.setText(item.getTitle());
+			isReminderSelected = true;
+		} else if (pickView.getId() == R.id.days_Button) {
+			tvDay.setText(item.getTitle());
+			isDaySelected = true;
+		}
 		return true;
 	}
 

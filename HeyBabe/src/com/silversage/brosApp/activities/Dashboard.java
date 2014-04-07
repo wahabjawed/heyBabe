@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -25,6 +26,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.actionbarsherlock.view.Menu;
 import com.silversage.brosApp.BrosApp;
 import com.silversage.brosApp.R;
 import com.silversage.brosApp.activities.abstracts.BrosAppSherlockActivity;
@@ -52,9 +54,12 @@ public class Dashboard extends BrosAppSherlockActivity {
 		if (prefs.getBoolean("first_time", false)) {
 
 			setContentView(R.layout.dashboard);
+
+			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 			setupView();
 
 		} else {
+			this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 			setContentView(R.layout.splash_screen);
 			final Handler handler = new Handler();
 			final Runnable r = new Runnable() {
@@ -85,7 +90,7 @@ public class Dashboard extends BrosAppSherlockActivity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-                BrosApp.contact=new ContactVO();
+				BrosApp.contact = new ContactVO();
 				BrosApp.contact.ID = dashboardItem[arg2].getID();
 				BrosApp.contact.name = dashboardItem[arg2].getName();
 				BrosApp.contact.number = dashboardItem[arg2].getNumber();
@@ -132,11 +137,9 @@ public class Dashboard extends BrosAppSherlockActivity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
-		com.actionbarsherlock.view.MenuInflater inflater = getSupportMenuInflater();
-		inflater.inflate(R.menu.dashboard,
-				(com.actionbarsherlock.view.Menu) menu);
+		getSupportMenuInflater().inflate(R.menu.dashboard, menu);
 
 		return super.onCreateOptionsMenu(menu);
 	}

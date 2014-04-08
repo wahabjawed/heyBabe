@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.silversage.brosApp.BrosApp;
 import com.silversage.brosApp.R;
 import com.silversage.brosApp.activities.abstracts.BrosAppActivity;
+import com.silversage.brosApp.adapters.LogMessageAdapter;
 import com.silversage.brosApp.objects.adapters.MessageObject;
 
 public class MessageLog extends BrosAppActivity {

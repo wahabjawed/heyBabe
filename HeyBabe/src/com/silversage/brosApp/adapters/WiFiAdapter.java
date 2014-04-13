@@ -35,7 +35,6 @@ public class WiFiAdapter extends ArrayAdapter<WiFiObject> {
 		public TextView text;
 		public ToggleButton select;
 		public Button delete;
-
 	}
 
 	@Override

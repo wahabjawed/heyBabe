@@ -1,12 +1,6 @@
 package com.silversage.brosApp.activities;
 
-import com.silversage.brosApp.BrosApp;
-import com.silversage.brosApp.R;
-import com.silversage.brosApp.objects.ContactVO;
-import com.silversage.brosApp.util.SQLHelper;
-
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -16,7 +10,13 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class Confirmation extends Activity {
+import com.silversage.brosApp.BrosApp;
+import com.silversage.brosApp.R;
+import com.silversage.brosApp.activities.abstracts.BrosAppActivity;
+import com.silversage.brosApp.objects.ContactVO;
+import com.silversage.brosApp.util.SQLHelper;
+
+public class Confirmation extends BrosAppActivity {
 
 	Button next;
 	Button back;
@@ -28,6 +28,8 @@ public class Confirmation extends Activity {
 	TextView WiFi;
 	TextView message;
 	ContactVO contact = BrosApp.contact;
+	boolean isDelete = false;
+	String ID;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,11 @@ public class Confirmation extends Activity {
 
 	private void setupView() {
 		// TODO Auto-generated method stub
+		if (getIntent().getExtras().getString("ACTION") == "DELETE") {
+
+			isDelete = true;
+			ID = getIntent().getExtras().getString("ID");
+		}
 		willSend = (TextView) findViewById(R.id.willSend);
 		confirmDetails = (TextView) findViewById(R.id.Confirm_details);
 
@@ -60,12 +67,18 @@ public class Confirmation extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				SQLHelper.insertTran(contact);
-				Intent intent = new Intent(getApplicationContext(),
-						Dashboard.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
+				if (isDelete) {
 
+					db.DeleteTran(BrosApp.contact.ID, ID);
+					Confirmation.this.finish();
+
+				} else {
+					SQLHelper.insertTran(contact);
+					Intent intent = new Intent(getApplicationContext(),
+							Dashboard.class);
+					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(intent);
+				}
 			}
 		});
 		name = (TextView) findViewById(R.id.text_number);
@@ -107,5 +120,23 @@ public class Confirmation extends Activity {
 			android.app.ActionBar actionBar = getActionBar();
 			actionBar.setTitle("Bro All-Good?");
 		}
+	}
+
+	@Override
+	public void PostExecute() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void PreExecute() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void ProgressUpdate(String update) {
+		// TODO Auto-generated method stub
+
 	}
 }

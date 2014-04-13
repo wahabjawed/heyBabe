@@ -137,7 +137,7 @@ public class MessageDetails extends BrosAppActivity {
 					BrosApp.contact.setRepeat(tvFrequency.getText().toString());
 					BrosApp.contact.setTime(tvDisplayTime.getText().toString());
 
-					Intent i = new Intent(MessageDetails.this, Conditions.class);
+					Intent i = new Intent(MessageDetails.this, WiFiCondition.class);
 					startActivity(i);
 				}
 			}

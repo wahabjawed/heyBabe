@@ -33,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.silversage.brosApp.activities.messages"
+            android:name="com.silversage.brosApp.activities.MessageTab"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
@@ -77,7 +77,7 @@
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
-            android:name="com.silversage.brosApp.activities.Conditions"
+            android:name="com.silversage.brosApp.activities.WiFiCondition"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >

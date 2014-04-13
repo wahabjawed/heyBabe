@@ -22,7 +22,7 @@ import com.silversage.brosApp.activities.abstracts.BrosAppActivity;
 import com.silversage.brosApp.adapters.WiFiAdapter;
 import com.silversage.brosApp.objects.adapters.WiFiObject;
 
-public class Conditions extends BrosAppActivity {
+public class WiFiCondition extends BrosAppActivity {
 
 	Button openWiFi;
 	ListView WiFiList;
@@ -55,7 +55,8 @@ public class Conditions extends BrosAppActivity {
 				// TODO Auto-generated method stub
 				BrosApp.contact.setWifiCondition(PickList);
 				BrosApp.contact.nofity = ((notifyVal == true) ? 1 : 0);
-				Intent i = new Intent(Conditions.this, Confirmation.class);
+				Intent i = new Intent(WiFiCondition.this, Confirmation.class);
+				i.putExtra("ACTION", "VIEW");
 				startActivity(i);
 
 			}
@@ -67,7 +68,7 @@ public class Conditions extends BrosAppActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Conditions.this.finish();
+				WiFiCondition.this.finish();
 			}
 		});
 		registerForContextMenu(openWiFi);

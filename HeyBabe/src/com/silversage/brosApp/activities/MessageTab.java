@@ -10,7 +10,7 @@ import android.widget.TabHost.TabSpec;
 
 import com.silversage.brosApp.R;
 
-public class messages extends TabActivity {
+public class MessageTab extends TabActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

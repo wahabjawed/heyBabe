@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.silversage.brosApp.R;
-import com.silversage.brosApp.activities.Conditions;
+import com.silversage.brosApp.activities.WiFiCondition;
 import com.silversage.brosApp.objects.adapters.WiFiObject;
 
 public class WiFiAdapter extends ArrayAdapter<WiFiObject> {
@@ -66,7 +66,7 @@ public class WiFiAdapter extends ArrayAdapter<WiFiObject> {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				data.remove(position);
-				((Conditions)activity).PreExecute();
+				((WiFiCondition)activity).PreExecute();
 			}
 		});
 		return vi;

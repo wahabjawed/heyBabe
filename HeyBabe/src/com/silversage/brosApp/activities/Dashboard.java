@@ -95,7 +95,7 @@ public class Dashboard extends BrosAppSherlockActivity {
 				BrosApp.contact.ID = dashboardItem[arg2].getID();
 				BrosApp.contact.name = dashboardItem[arg2].getName();
 				BrosApp.contact.number = dashboardItem[arg2].getNumber();
-				Intent activity = new Intent(Dashboard.this, messages.class);
+				Intent activity = new Intent(Dashboard.this, MessageTab.class);
 				startActivity(activity);
 
 			}
@@ -207,6 +207,8 @@ public class Dashboard extends BrosAppSherlockActivity {
 			ProText.setVisibility(View.INVISIBLE);
 			Log.d(" BrosApp--DashboardList", "Populated");
 		} else {
+
+			dashboardItem = new DashboardObject[_cursor.getCount()];
 			ProText.setVisibility(View.VISIBLE);
 			Log.d(" BrosApp--DashboardList", "No Data Found");
 		}

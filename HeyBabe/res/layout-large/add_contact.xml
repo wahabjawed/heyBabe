@@ -3,16 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffdd00"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical" >
 
     <TextView
         android:id="@+id/intro_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="20dp"
         android:layout_marginTop="90dip"
+        android:paddingLeft="20dp"
         android:text="Bro, Who&apos; s Your \nGirlfriend?"
-        android:textSize="35dip"
+        android:textSize="35sp"
         android:textStyle="bold" />
 
     <TextView
@@ -22,7 +24,7 @@
         android:layout_below="@id/intro_text"
         android:paddingLeft="22dp"
         android:text="We need your girlfriends number to begin"
-        android:textSize="22dip"
+        android:textSize="22sp"
         android:textStyle="bold" />
 
     <RelativeLayout
@@ -68,8 +70,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/linear3"
-        android:layout_marginTop="60dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
         android:background="@drawable/linebreak" />
 
     <Button

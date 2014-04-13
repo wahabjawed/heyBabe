@@ -37,7 +37,7 @@
 
             <TextView
                 android:id="@+id/Select_Time"
-                android:layout_width="100dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="60dp"
                 android:gravity="center"
@@ -57,8 +57,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/firstbox"
-            android:paddingLeft="10dp"
             android:layout_marginTop="5dp"
+            android:paddingLeft="10dp"
             android:text="Reminder"
             android:textSize="15sp"
             android:textStyle="bold" />
@@ -75,11 +75,11 @@
 
             <TextView
                 android:id="@+id/ReminderMe"
-                android:layout_width="100dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="60dp"
                 android:gravity="center"
-                android:text="Remind Me!" />
+                android:text="10 mins Before" />
 
             <Button
                 android:id="@+id/Reminder_Button"
@@ -95,8 +95,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/secondbox"
-            android:paddingLeft="10dp"
             android:layout_marginTop="5dp"
+            android:paddingLeft="10dp"
             android:text="Repitition"
             android:textSize="15sp"
             android:textStyle="bold" />
@@ -113,11 +113,11 @@
 
             <TextView
                 android:id="@+id/Select_Days"
-                android:layout_width="100dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="60dp"
                 android:gravity="center"
-                android:text="Every Sunday" />
+                android:text="No repeat" />
 
             <Button
                 android:id="@+id/days_Button"

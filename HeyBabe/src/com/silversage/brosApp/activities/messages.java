@@ -1,7 +1,9 @@
 package com.silversage.brosApp.activities;
 
+import android.annotation.TargetApi;
 import android.app.TabActivity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
@@ -14,6 +16,7 @@ public class messages extends TabActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.messages);
+		actionBarSetup();
 
 		TabHost tabHost = getTabHost();
 
@@ -31,6 +34,14 @@ public class messages extends TabActivity {
 
 		tabHost.addTab(newmsg);
 		tabHost.addTab(log);
+	}
+	
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	private void actionBarSetup() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			android.app.ActionBar actionBar = getActionBar();
+			actionBar.setTitle("Messages");
+		}
 	}
 
 }

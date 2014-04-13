@@ -43,28 +43,23 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <FrameLayout
-                android:id="@+id/frame"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/willSend" >
-
-                <ImageView
-                    android:id="@+id/profile_picture"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/roundperson" />
-            </FrameLayout>
+            <ImageView
+                android:id="@+id/profile_picture"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_below="@id/willSend"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/roundperson" />
 
             <TextView
                 android:id="@+id/text_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/willSend"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                android:layout_toRightOf="@id/frame"
+                android:layout_toRightOf="@id/profile_picture"
                 android:text="Name"
                 android:textStyle="bold" />
 
@@ -73,9 +68,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/text_number"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="10dp"
-                android:layout_toRightOf="@id/frame"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/profile_picture"
                 android:text="Phone Number"
                 android:textStyle="bold" />
 
@@ -84,9 +79,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/text_name"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="10dp"
-                android:layout_toRightOf="@id/frame"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/profile_picture"
                 android:text="9:00 AM Sunday"
                 android:textStyle="bold" />
 

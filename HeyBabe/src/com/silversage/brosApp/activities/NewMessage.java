@@ -1,15 +1,20 @@
 package com.silversage.brosApp.activities;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager.LayoutParams;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -105,7 +110,8 @@ public class NewMessage extends BrosAppActivity {
 
 				// create alert dialog
 				AlertDialog alertDialog = alertDialogBuilder.create();
-
+				alertDialog.getWindow().setSoftInputMode(
+						LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 				// show it
 				alertDialog.show();
 			}
@@ -187,4 +193,5 @@ public class NewMessage extends BrosAppActivity {
 		// TODO Auto-generated method stub
 
 	}
+
 }

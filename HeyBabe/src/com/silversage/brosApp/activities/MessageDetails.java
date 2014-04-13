@@ -2,9 +2,11 @@ package com.silversage.brosApp.activities;
 
 import java.util.Calendar;
 
+import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -45,6 +47,7 @@ public class MessageDetails extends BrosAppActivity {
 		setContentView(R.layout.message_details);
 
 		setupView();
+		actionBarSetup();
 
 	}
 
@@ -269,5 +272,11 @@ public class MessageDetails extends BrosAppActivity {
 		// TODO Auto-generated method stub
 
 	}
-
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	private void actionBarSetup() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			android.app.ActionBar actionBar = getActionBar();
+			actionBar.setTitle("Customization Time");
+		}
+	}
 }

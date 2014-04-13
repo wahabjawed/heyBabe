@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/whole_layout"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="15dp"
         android:gravity="center"
         android:text="Message will be \nsent on:"
         android:textSize="70sp"
@@ -38,7 +38,7 @@
 
             <TextView
                 android:id="@+id/Select_Time"
-                android:layout_width="wrap_content"
+                android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="150dp"
                 android:gravity="center"
@@ -77,11 +77,11 @@
 
             <TextView
                 android:id="@+id/ReminderMe"
-                android:layout_width="wrap_content"
+                android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="150dp"
                 android:gravity="center"
-                android:text="Remind Me!"
+                android:text="Don&apos;t Repeat"
                 android:textSize="40sp" />
 
             <Button
@@ -116,11 +116,11 @@
 
             <TextView
                 android:id="@+id/Select_Days"
-                android:layout_width="wrap_content"
+                android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="150dp"
                 android:gravity="center"
-                android:text="Every Sunday"
+                android:text="No repeat"
                 android:textSize="40sp" />
 
             <Button

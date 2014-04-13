@@ -3,11 +3,15 @@
 
     <item
         android:id="@+id/item1"
-        android:title="2 Mins Before">
+        android:title="Don&apos;t remind">
     </item>
     <item
         android:id="@+id/item2"
         android:title="5 Mins Before">
+    </item>
+    <item
+        android:id="@+id/item3"
+        android:title="10 Mins Before">
     </item>
 
 </menu>

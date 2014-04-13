@@ -2,7 +2,9 @@ package com.silversage.brosApp.activities;
 
 import java.util.ArrayList;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -13,7 +15,6 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.ToggleButton;
 
 import com.silversage.brosApp.BrosApp;
 import com.silversage.brosApp.R;
@@ -27,7 +28,7 @@ public class Conditions extends BrosAppActivity {
 	ListView WiFiList;
 	Button nextButton;
 	Button backButton;
-	ToggleButton notify;
+
 	ArrayList<WiFiObject> PickList = new ArrayList<WiFiObject>();
 	String[][] menuItems = BrosApp.WifiList;
 	boolean notifyVal = false;
@@ -36,6 +37,7 @@ public class Conditions extends BrosAppActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.conditions);
 		setupView();
+		actionBarSetup();
 
 	}
 
@@ -44,15 +46,7 @@ public class Conditions extends BrosAppActivity {
 
 		openWiFi = (Button) findViewById(R.id.add_wifi);
 		WiFiList = (ListView) findViewById(R.id.wifi_list);
-		notify = (ToggleButton) findViewById(R.id.notify);
-		notify.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				notifyVal = !notifyVal;
-			}
-		});
 		nextButton = (Button) findViewById(R.id.next);
 		nextButton.setOnClickListener(new View.OnClickListener() {
 
@@ -131,6 +125,13 @@ public class Conditions extends BrosAppActivity {
 	public void ProgressUpdate(String update) {
 		// TODO Auto-generated method stub
 
+	}
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	private void actionBarSetup() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			android.app.ActionBar actionBar = getActionBar();
+			actionBar.setTitle("Wifi Settings");
+		}
 	}
 
 }

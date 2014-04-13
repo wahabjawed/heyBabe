@@ -3,10 +3,10 @@ package com.silversage.brosApp.activities;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentUris;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -14,6 +14,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -58,10 +59,30 @@ public class AddContact extends BrosAppActivity {
 		setContentView(R.layout.add_contact);
 
 		setupView();
-		 InputMethodManager imm = (InputMethodManager)
-		 getSystemService(Context.INPUT_METHOD_SERVICE);
-		 imm.hideSoftInputFromWindow(name.getWindowToken(), 0);
-		 imm.hideSoftInputFromWindow(number.getWindowToken(), 0);
+		actionBarSetup();
+
+		name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				// TODO Auto-generated method stub
+				if (!hasFocus) {
+					hideSoftKeyboard(v);
+				}
+			}
+		});
+
+		number.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				// TODO Auto-generated method stub
+				if (!hasFocus) {
+					hideSoftKeyboard(v);
+				}
+			}
+		});
+
 	}
 
 	private void setupView() {
@@ -343,11 +364,22 @@ public class AddContact extends BrosAppActivity {
 			ContextMenuInfo menuInfo) {
 		// TODO Auto-generated method stub
 		super.onCreateContextMenu(menu, v, menuInfo);
+
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.display_pic_menu, menu);
 
 	}
-	
-	
 
+	public void hideSoftKeyboard(View view) {
+		InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+		inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+	}
+
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	private void actionBarSetup() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			android.app.ActionBar actionBar = getActionBar();
+			actionBar.setTitle("Add Contact");
+		}
+	}
 }

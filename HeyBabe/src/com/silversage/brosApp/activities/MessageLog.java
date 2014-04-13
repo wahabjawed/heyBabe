@@ -1,8 +1,10 @@
 package com.silversage.brosApp.activities;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -17,7 +19,6 @@ import android.widget.TextView;
 import com.silversage.brosApp.BrosApp;
 import com.silversage.brosApp.R;
 import com.silversage.brosApp.activities.abstracts.BrosAppActivity;
-import com.silversage.brosApp.adapters.LogMessageAdapter;
 import com.silversage.brosApp.objects.adapters.MessageObject;
 
 public class MessageLog extends BrosAppActivity {
@@ -32,6 +33,7 @@ public class MessageLog extends BrosAppActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.include_log);
 		setupView();
+
 		PreExecute();
 	}
 
@@ -87,8 +89,8 @@ public class MessageLog extends BrosAppActivity {
 		}
 		_cursor.close();
 
-		LogMessageAdapter adapter = new LogMessageAdapter(this, messageItem);
-		messageList.setAdapter(adapter);
+		// LogMessageAdapter adapter = new LogMessageAdapter(this, messageItem);
+		// messageList.setAdapter(adapter);
 
 		Log.d(" BrosApp--MessageList", "Populated");
 	}

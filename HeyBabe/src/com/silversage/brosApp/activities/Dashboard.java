@@ -26,6 +26,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
 import com.silversage.brosApp.BrosApp;
 import com.silversage.brosApp.R;
@@ -141,6 +142,10 @@ public class Dashboard extends BrosAppSherlockActivity {
 		// TODO Auto-generated method stub
 		getSupportMenuInflater().inflate(R.menu.dashboard, menu);
 
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(false);
+		actionBar.setTitle("Bro-App Contacts");
+
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -151,7 +156,7 @@ public class Dashboard extends BrosAppSherlockActivity {
 		switch (item.getItemId()) {
 
 		case (R.id.new_message):
-			
+
 			Intent activity = new Intent(Dashboard.this, AddContact.class);
 			activity.putExtra("REQUEST", "CREATE");
 			startActivity(activity);

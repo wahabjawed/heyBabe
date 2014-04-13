@@ -5,8 +5,11 @@ import com.silversage.brosApp.R;
 import com.silversage.brosApp.objects.ContactVO;
 import com.silversage.brosApp.util.SQLHelper;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,6 +22,8 @@ public class Confirmation extends Activity {
 	Button back;
 	TextView name;
 	TextView number;
+	TextView willSend;
+	TextView confirmDetails;
 	TextView timeDay;
 	TextView WiFi;
 	TextView message;
@@ -29,13 +34,18 @@ public class Confirmation extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.confirmation);
 		setupView();
+		actionBarSetup();
 
 	}
 
 	private void setupView() {
 		// TODO Auto-generated method stub
+		willSend = (TextView) findViewById(R.id.willSend);
+		confirmDetails = (TextView) findViewById(R.id.Confirm_details);
+
 		next = (Button) findViewById(R.id.next);
 		back = (Button) findViewById(R.id.back);
+
 		back.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -79,5 +89,23 @@ public class Confirmation extends Activity {
 
 		message = (TextView) findViewById(R.id.text_message);
 		message.setText(contact.getMessageText());
+
+		Typeface face = Typeface.createFromAsset(getAssets(),
+				"AdobeGothicStd.otf");
+		name.setTypeface(face);
+		number.setTypeface(face);
+		message.setTypeface(face);
+		timeDay.setTypeface(face);
+		WiFi.setTypeface(face);
+		willSend.setTypeface(face);
+		confirmDetails.setTypeface(face);
+	}
+
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	private void actionBarSetup() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			android.app.ActionBar actionBar = getActionBar();
+			actionBar.setTitle("Bro All-Good?");
+		}
 	}
 }

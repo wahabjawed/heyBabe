@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffdd00"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical" >
 
     <TextView
@@ -12,7 +14,7 @@
         android:paddingLeft="20dp"
         android:paddingTop="60dip"
         android:text="Bro, Who&apos; s Your \nGirlfriend?"
-        android:textSize="25dip"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
     <TextView
@@ -22,7 +24,7 @@
         android:layout_below="@id/intro_text"
         android:paddingLeft="22dp"
         android:text="We need your girlfriends number to begin"
-        android:textSize="12dip"
+        android:textSize="12sp"
         android:textStyle="bold" />
 
     <RelativeLayout
@@ -30,8 +32,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/need_number"
-        android:gravity="center"
-         >
+        android:gravity="center" >
 
         <EditText
             android:id="@+id/name"
@@ -61,17 +62,16 @@
             android:layout_toRightOf="@id/number"
             android:background="@drawable/photo"
             android:scaleType="centerCrop" />
-
     </RelativeLayout>
-    
+
     <ImageView
-            android:id="@+id/line_break"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dip"
-            android:layout_below="@id/linear3"
-            android:background="@drawable/linebreak" />
+        android:id="@+id/line_break"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dip"
+        android:background="@drawable/linebreak" />
 
     <Button
         android:id="@+id/ChoosefromContact"
@@ -88,12 +88,12 @@
         android:id="@+id/linear2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true" >
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
 
         <Button
             android:id="@+id/back"
@@ -107,8 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="70dp"
             android:layout_weight="1"
-            android:background="@drawable/nextbuttton"
-             />
+            android:background="@drawable/nextbuttton" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -6,6 +6,7 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -38,6 +39,11 @@ public class WiFiCondition extends BrosAppActivity {
 		setContentView(R.layout.conditions);
 		setupView();
 		actionBarSetup();
+		if (getIntent().getExtras().getString("REQUEST").equals("UPDATE")) {
+			PickList = BrosApp.contact.getWifiCondition();
+			Log.d("BrosApp--WifiList", PickList.get(0).getName());
+			PreExecute();
+		}
 
 	}
 
@@ -56,7 +62,8 @@ public class WiFiCondition extends BrosAppActivity {
 				BrosApp.contact.setWifiCondition(PickList);
 				BrosApp.contact.nofity = ((notifyVal == true) ? 1 : 0);
 				Intent i = new Intent(WiFiCondition.this, Confirmation.class);
-				i.putExtra("ACTION", "VIEW");
+				i.putExtra("REQUEST",
+						getIntent().getExtras().getString("REQUEST"));
 				startActivity(i);
 
 			}
@@ -118,7 +125,6 @@ public class WiFiCondition extends BrosAppActivity {
 	public void PreExecute() {
 		// TODO Auto-generated method stub
 		WiFiAdapter adapter = new WiFiAdapter(this, PickList);
-
 		WiFiList.setAdapter(adapter);
 	}
 
@@ -127,6 +133,7 @@ public class WiFiCondition extends BrosAppActivity {
 		// TODO Auto-generated method stub
 
 	}
+
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	private void actionBarSetup() {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {

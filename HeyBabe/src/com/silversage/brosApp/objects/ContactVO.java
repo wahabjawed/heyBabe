@@ -7,6 +7,16 @@ import com.silversage.brosApp.objects.adapters.WiFiObject;
 public class ContactVO {
 
 	public int ID;
+	public int messageRefID;
+
+	public int getMessageRefID() {
+		return messageRefID;
+	}
+
+	public void setMessageRefID(int messageRefID) {
+		this.messageRefID = messageRefID;
+	}
+
 	public String name;
 	public String number;
 	public String messageText;

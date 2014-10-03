@@ -1,5 +1,7 @@
 package com.silversage.brosApp.util;
 
+import java.util.ArrayList;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -22,12 +24,12 @@ public class SQLHelper {
 	}
 
 	public static boolean isFirstTime() {
-		Log.d("BrosApp--SQLHelper", "isFirstTime--Checking!");
+		Log.i("BrosApp--SQLHelper", "isFirstTime--Checking!");
 		if ((db.rawQuery("select * from Preference", null)).getCount() > 0) {
-			Log.d("BrosApp--SQLHelper", "isFirstTime--Dashboard");
+			Log.i("BrosApp--SQLHelper", "isFirstTime--Dashboard");
 			return false;
 		} else {
-			Log.d("BrosApp--SQLHelper", "isFirstTime--Splash");
+			Log.i("BrosApp--SQLHelper", "isFirstTime--Splash");
 			return true;
 		}
 	}
@@ -38,18 +40,18 @@ public class SQLHelper {
 		insertValues.put("isFirst", "1");
 
 		db.insert("Preference", null, insertValues);
-		Log.d("BrosApp--SQLHelper", "Preference--Data inserted");
+		Log.i("BrosApp--SQLHelper", "Preference--Data inserted");
 	}
 
 	public static void clearData() {
 		db.delete("Preference", null, null);
-		Log.d(" BrosApp--SQLHelper", "Menu Item--Data Deleted");
+		Log.i(" BrosApp--SQLHelper", "Menu Item--Data Deleted");
 
 	}
 
 	public static void DeleteContact(int id) {
 		db.delete("Contact", "ID=" + id, null);
-		Log.d(" BrosApp--SQLHelper", "Dashboard List--Data Deleted");
+		Log.i(" BrosApp--SQLHelper", "Dashboard List--Data Deleted");
 
 	}
 
@@ -60,48 +62,48 @@ public class SQLHelper {
 
 	public static Cursor getDashboardContactList() {
 		// TODO Auto-generated method stub
-		Log.d(" BrosApp--SQLHelper", "Contact--Querying Data");
+		Log.i(" BrosApp--SQLHelper", "Contact--Querying Data");
 		return db.rawQuery("select * from Contact order by name", null);
 	}
 
 	public static Cursor getDashboardContactList(int ID) {
 		// TODO Auto-generated method stub
-		Log.d(" BrosApp--SQLHelper", "Contact--Querying Data");
+		Log.i(" BrosApp--SQLHelper", "Contact--Querying Data");
 		return db.rawQuery("select * from Contact where ID = " + ID, null);
 	}
 
 	public static Cursor getWiFiList(int ID) {
 		// TODO Auto-generated method stub
-		Log.d(" BrosApp--SQLHelper", "WiFi List--Querying Data");
+		Log.i(" BrosApp--SQLHelper", "WiFi List--Querying Data");
 		return db.rawQuery("select * from Ref_WiFi order by ssid", null);
 	}
 
 	public static void insertContact(String name, String no, byte[] pic) {
-		Log.d("BrosApp--SQLHelper", "Contact--Data" + name + " " + no);
+		Log.i("BrosApp--SQLHelper", "Contact--Data" + name + " " + no);
 		ContentValues insertValues = new ContentValues();
 		insertValues.put("name", name);
 		insertValues.put("number", no);
 		insertValues.put("displayPic", pic);
 		db.insert("Contact", null, insertValues);
-		Log.d("BrosApp--SQLHelper", "Contact--Data inserted");
+		Log.i("BrosApp--SQLHelper", "Contact--Data inserted");
 
 	}
 
 	public static void updateContact(int id, String name, String no, byte[] pic) {
-		Log.d("BrosApp--SQLHelper", "Contact--Data" + name + " " + no);
+		Log.i("BrosApp--SQLHelper", "Contact--Data" + name + " " + no);
 		ContentValues updateValues = new ContentValues();
 		updateValues.put("name", name);
 		updateValues.put("number", no);
 		updateValues.put("displayPic", pic);
 		db.update("Contact", updateValues, "ID= " + id, null);
-		Log.d("BrosApp--SQLHelper", "Contact--Data uptated");
+		Log.i("BrosApp--SQLHelper", "Contact--Data uptated");
 	}
 
 	public static void PopulateWiFiList(String[][] data) {
 
-		Log.d("BrosApp--SQLHelper", "Ref_WiFi---Truncate");
+		Log.i("BrosApp--SQLHelper", "Ref_WiFi---Truncate");
 		db.delete("Ref_WiFi", null, null);
-		Log.d("BrosApp--SQLHelper", "Ref_WiFi---Inserting");
+		Log.i("BrosApp--SQLHelper", "Ref_WiFi---Inserting");
 
 		ContentValues insertValues;
 		for (int i = 0; i < data.length; i++) {
@@ -109,11 +111,11 @@ public class SQLHelper {
 			insertValues.put("ssid", data[i][0]);
 			insertValues.put("bssid", data[i][1]);
 
-			Log.d("BrosApp--SQLHelper", "Ref_WiFi--" + data[i][0]);
+			Log.i("BrosApp--SQLHelper", "Ref_WiFi--" + data[i][0]);
 			db.insert("Ref_WiFi", null, insertValues);
 
 		}
-		Log.d("BrosApp--SQLHelper", "Ref_WiFi--Data inserted");
+		Log.i("BrosApp--SQLHelper", "Ref_WiFi--Data inserted");
 
 	}
 
@@ -125,9 +127,9 @@ public class SQLHelper {
 				{ "4", "Hey babe, what are you up to tonight?" },
 				{ "5", "Hi! How was your day?" },
 				{ "6", "See you tonight darl :)" } };
-		Log.d("BrosApp--SQLHelper", "Ref_Message---Truncate");
+		Log.i("BrosApp--SQLHelper", "Ref_Message---Truncate");
 		db.delete("Ref_Message", null, null);
-		Log.d("BrosApp--SQLHelper", "Ref_Message---Inserting");
+		Log.i("BrosApp--SQLHelper", "Ref_Message---Inserting");
 
 		ContentValues insertValues;
 		for (int i = 0; i < data.length; i++) {
@@ -136,11 +138,11 @@ public class SQLHelper {
 			insertValues.put("message", data[i][1]);
 			insertValues.put("refID", -1);
 
-			Log.d("BrosApp--SQLHelper", "Ref_Message--" + data[i][1]);
+			Log.i("BrosApp--SQLHelper", "Ref_Message--" + data[i][1]);
 			db.insert("Ref_Message", null, insertValues);
 
 		}
-		Log.d("BrosApp--SQLHelper", "Ref_Message--Data inserted");
+		Log.i("BrosApp--SQLHelper", "Ref_Message--Data inserted");
 
 	}
 
@@ -149,14 +151,14 @@ public class SQLHelper {
 		ContentValues insertValues = new ContentValues();
 		insertValues.put("message", message);
 		insertValues.put("refID", ID);
-		Log.d("BrosApp--SQLHelper", "Ref_Message--" + message);
+		Log.i("BrosApp--SQLHelper", "Ref_Message--" + message);
 		db.insert("Ref_Message", null, insertValues);
 
 	}
 
 	public static Cursor getMessageList(int ID) {
 		// TODO Auto-generated method stub
-		Log.d(" BrosApp--SQLHelper", "Message--Querying Data");
+		Log.i(" BrosApp--SQLHelper", "Message--Querying Data");
 		return db.rawQuery(
 				"select * from Ref_Message where refID = -1 or refID=" + ID,
 				null);
@@ -167,11 +169,12 @@ public class SQLHelper {
 				.rawQuery("select * from Tran_Message where ContactID ="
 						+ BrosApp.contact.getID() + " and MessageID="
 						+ messageID, null);
-		Log.d("BrosApp--SQLHelper", "Tran_Message--Record Fetched ID = "
+		Log.i("BrosApp--SQLHelper", "Tran_Message--Record Fetched ID = "
 				+ messageID);
 		if (c.moveToFirst()) {
-			Log.d("BrosApp--SQLHelper",
+			Log.i("BrosApp--SQLHelper",
 					"Tran_Message--Record Found: " + c.getCount());
+			BrosApp.contact.setMessageRefID(c.getInt(c.getColumnIndex("ID")));
 			BrosApp.contact
 					.setMessageID(c.getInt(c.getColumnIndex("MessageID")));
 			BrosApp.contact.setNofity(c.getInt(c.getColumnIndex("Notify")));
@@ -182,26 +185,30 @@ public class SQLHelper {
 			Cursor d = db.rawQuery(
 					"select * from Tran_WiFi where ID ="
 							+ c.getInt(c.getColumnIndex("ID")), null);
-			Log.d("BrosApp--SQLHelper", "Tran_WiFi--Record Fetched Count = "
+			Log.i("BrosApp--SQLHelper", "Tran_WiFi--Record Fetched Count = "
 					+ d.getCount());
 			if (d.moveToFirst()) {
-				for (int i = 1; i < d.getCount(); i++) {
-					BrosApp.contact.getWifiCondition()
-							.add(new WiFiObject(c.getString(c
-									.getColumnIndex("Name")), c.getInt(c
-									.getColumnIndex("ssid"))+"", (c.getInt(c
-									.getColumnIndex("whenConnected"))==1)?true:false));
+				ArrayList<WiFiObject> PickList = new ArrayList<WiFiObject>();
+				for (int i = 0; i < d.getCount(); i++) {
+
+					PickList.add(new WiFiObject(d.getString(d
+							.getColumnIndex("name")), d.getString(d
+							.getColumnIndex("ssid")), (d.getInt(d
+							.getColumnIndex("whenConnected")) == 1) ? true
+							: false));
+					d.moveToNext();
 				}
+				BrosApp.contact.setWifiCondition(PickList);
 			}
 
 		}
-		Log.d("BrosApp--SQLHelper", "Data Replicated in Object");
+		Log.i("BrosApp--SQLHelper", "Data Replicated in Object");
 	}
 
 	public static void insertTran(ContactVO contacts) {
 
 		int ID = getTranSequence();
-		Log.d("BrosApp--SQLHelper", "Tran_Message--Sequence ID = " + ID);
+		Log.i("BrosApp--SQLHelper", "Tran_Message--Sequence ID = " + ID);
 		ContentValues insertValues = new ContentValues();
 		insertValues.put("ID", ID);
 		insertValues.put("ContactID", contacts.getID());
@@ -211,7 +218,7 @@ public class SQLHelper {
 		insertValues.put("Reminder", contacts.getRepeat());
 		insertValues.put("Notify", contacts.getNofity());
 		db.insert("Tran_Message", null, insertValues);
-		Log.d("BrosApp--SQLHelper", "Tran_Message--Inserted");
+		Log.i("BrosApp--SQLHelper", "Tran_Message--Inserted");
 
 		for (int i = 0; i < contacts.getWifiCondition().size(); i++) {
 
@@ -220,12 +227,12 @@ public class SQLHelper {
 			insertValues.put("ID", ID);
 			insertValues.put("ssid", obj.getID());
 			insertValues.put("name", obj.getName());
-			insertValues.put("whenConnected", obj.isRunWhenConnect()?1:0);
+			insertValues.put("whenConnected", obj.isRunWhenConnect() ? 1 : 0);
 			db.insert("Tran_WiFi", null, insertValues);
-			Log.d("BrosApp--SQLHelper", "Tran_WiFi--Inserting WiFi No " + i);
+			Log.i("BrosApp--SQLHelper", "Tran_WiFi--Inserting WiFi No " + i);
 
 		}
-		Log.d("BrosApp--SQLHelper", "Tran_WiFi--Inserted");
+		Log.i("BrosApp--SQLHelper", "Tran_WiFi--Inserted");
 
 	}
 
@@ -244,7 +251,7 @@ public class SQLHelper {
 
 	public static Cursor getLogMessageList(int iD) {
 		// TODO Auto-generated method stub
-		Log.d("BrosApp--SQLHelper", "Tran_Message--Fetching Log Message");
+		Log.i("BrosApp--SQLHelper", "Tran_Message--Fetching Log Message");
 
 		return db
 				.rawQuery(
@@ -264,7 +271,16 @@ public class SQLHelper {
 		db.delete("Tran_Message", "ContactID=" + iD + " and MessageID = "
 				+ Integer.parseInt(msgID) + " ", null);
 
-		Log.d(" BrosApp--SQLHelper", "Log List--Data Deleted");
+		Log.i(" BrosApp--SQLHelper", "Log List--Data Deleted");
 	}
 
+	public static void DeleteTran(int ID) {
+		// TODO Auto-generated method stub
+
+		db.delete("Tran_WiFi", "ID =" + ID, null);
+
+		db.delete("Tran_Message", "ID=" + ID, null);
+
+		Log.i(" BrosApp--SQLHelper", "Log List--Data Deleted");
+	}
 }

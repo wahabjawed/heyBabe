@@ -42,11 +42,6 @@ public class Confirmation extends BrosAppActivity {
 
 	private void setupView() {
 		// TODO Auto-generated method stub
-		if (getIntent().getExtras().getString("ACTION") == "DELETE") {
-
-			isDelete = true;
-			ID = getIntent().getExtras().getString("ID");
-		}
 		willSend = (TextView) findViewById(R.id.willSend);
 		confirmDetails = (TextView) findViewById(R.id.Confirm_details);
 
@@ -67,10 +62,22 @@ public class Confirmation extends BrosAppActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if (isDelete) {
+				if (getIntent().getExtras().getString("REQUEST")
+						.equals("DELETE")) {
 
-					db.DeleteTran(BrosApp.contact.ID, ID);
+					SQLHelper.DeleteTran(BrosApp.contact.ID, getIntent()
+							.getExtras().getString("ID"));
 					Confirmation.this.finish();
+
+				} else if (getIntent().getExtras().getString("REQUEST")
+						.equals("UPDATE")) {
+
+					SQLHelper.DeleteTran(BrosApp.contact.getMessageRefID());
+					SQLHelper.insertTran(contact);
+					Intent intent = new Intent(getApplicationContext(),
+							Dashboard.class);
+					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(intent);
 
 				} else {
 					SQLHelper.insertTran(contact);

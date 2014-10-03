@@ -59,6 +59,13 @@ public class MessageDetails extends BrosAppActivity {
 		frequency = (Button) findViewById(R.id.Reminder_Button);
 		tvDisplayTime = (TextView) findViewById(R.id.Select_Time);
 
+		if (getIntent().getExtras().getString("REQUEST").equals("UPDATE")) {
+			tvFrequency.setText(BrosApp.contact.getRepeat());
+			tvDisplayTime.setText(BrosApp.contact.getTime());
+			tvDay.setText(BrosApp.contact.getDay());
+			isDaySelected = isReminderSelected = isTimeSelected = true;
+		}
+
 		frequency.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -137,7 +144,10 @@ public class MessageDetails extends BrosAppActivity {
 					BrosApp.contact.setRepeat(tvFrequency.getText().toString());
 					BrosApp.contact.setTime(tvDisplayTime.getText().toString());
 
-					Intent i = new Intent(MessageDetails.this, WiFiCondition.class);
+					Intent i = new Intent(MessageDetails.this,
+							WiFiCondition.class);
+					i.putExtra("REQUEST",
+							getIntent().getExtras().getString("REQUEST"));
 					startActivity(i);
 				}
 			}
@@ -212,7 +222,7 @@ public class MessageDetails extends BrosAppActivity {
 				tvDisplayTime.setText(String.valueOf(hour) + ":"
 						+ (String.valueOf(minute) + " AM"));
 			}
-			
+
 			isTimeSelected = true;
 		}
 	};
@@ -272,6 +282,7 @@ public class MessageDetails extends BrosAppActivity {
 		// TODO Auto-generated method stub
 
 	}
+
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	private void actionBarSetup() {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {

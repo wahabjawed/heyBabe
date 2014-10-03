@@ -17,8 +17,8 @@ public class SQLHelper {
 		db.execSQL("CREATE TABLE IF NOT EXISTS ContactList(number TEXT,name TEXT, displayPic BLOB);");
 		db.execSQL("CREATE TABLE IF NOT EXISTS Contact(ID INTEGER PRIMARY KEY, number TEXT,name TEXT, displayPic BLOB);");
 		db.execSQL("CREATE TABLE IF NOT EXISTS Ref_Message(ID INTEGER PRIMARY KEY, message TEXT, refID INTEGER);");
-		db.execSQL("CREATE TABLE IF NOT EXISTS Tran_Message(ID INTEGER, ContactID INTEGER, MessageID INTEGER, Nofity INTEGER, Time TEXT, Day TEXT, Reminder TEXT);");
-		db.execSQL("CREATE TABLE IF NOT EXISTS Tran_WiFi(ID INTEGER, ssid TEXT,bssid TEXT, whenConnected INTEGER);");
+		db.execSQL("CREATE TABLE IF NOT EXISTS Tran_Message(ID INTEGER, ContactID INTEGER, MessageID INTEGER, Notify INTEGER, Time TEXT, Day TEXT, Reminder TEXT);");
+		db.execSQL("CREATE TABLE IF NOT EXISTS Tran_WiFi(ID INTEGER, name,TEXT, ssid TEXT,bssid TEXT, whenConnected INTEGER);");
 	}
 
 	public static boolean isFirstTime() {
@@ -162,6 +162,42 @@ public class SQLHelper {
 				null);
 	}
 
+	public static void getTran(String messageID) {
+		Cursor c = db
+				.rawQuery("select * from Tran_Message where ContactID ="
+						+ BrosApp.contact.getID() + " and MessageID="
+						+ messageID, null);
+		Log.d("BrosApp--SQLHelper", "Tran_Message--Record Fetched ID = "
+				+ messageID);
+		if (c.moveToFirst()) {
+			Log.d("BrosApp--SQLHelper",
+					"Tran_Message--Record Found: " + c.getCount());
+			BrosApp.contact
+					.setMessageID(c.getInt(c.getColumnIndex("MessageID")));
+			BrosApp.contact.setNofity(c.getInt(c.getColumnIndex("Notify")));
+			BrosApp.contact.setDay(c.getString(c.getColumnIndex("Day")));
+			BrosApp.contact.setTime(c.getString(c.getColumnIndex("Time")));
+			BrosApp.contact
+					.setRepeat(c.getString(c.getColumnIndex("Reminder")));
+			Cursor d = db.rawQuery(
+					"select * from Tran_WiFi where ID ="
+							+ c.getInt(c.getColumnIndex("ID")), null);
+			Log.d("BrosApp--SQLHelper", "Tran_WiFi--Record Fetched Count = "
+					+ d.getCount());
+			if (d.moveToFirst()) {
+				for (int i = 1; i < d.getCount(); i++) {
+					BrosApp.contact.getWifiCondition()
+							.add(new WiFiObject(c.getString(c
+									.getColumnIndex("Name")), c.getInt(c
+									.getColumnIndex("ssid"))+"", (c.getInt(c
+									.getColumnIndex("whenConnected"))==1)?true:false));
+				}
+			}
+
+		}
+		Log.d("BrosApp--SQLHelper", "Data Replicated in Object");
+	}
+
 	public static void insertTran(ContactVO contacts) {
 
 		int ID = getTranSequence();
@@ -173,7 +209,7 @@ public class SQLHelper {
 		insertValues.put("Time", contacts.getTime());
 		insertValues.put("Day", contacts.getDay());
 		insertValues.put("Reminder", contacts.getRepeat());
-		insertValues.put("Nofity", contacts.getNofity());
+		insertValues.put("Notify", contacts.getNofity());
 		db.insert("Tran_Message", null, insertValues);
 		Log.d("BrosApp--SQLHelper", "Tran_Message--Inserted");
 
@@ -182,8 +218,9 @@ public class SQLHelper {
 			WiFiObject obj = contacts.getWifiCondition().get(i);
 			insertValues = new ContentValues();
 			insertValues.put("ID", ID);
-			insertValues.put("ssid", obj.getName());
-			insertValues.put("bssid", contacts.getMessageID());
+			insertValues.put("ssid", obj.getID());
+			insertValues.put("name", obj.getName());
+			insertValues.put("whenConnected", obj.isRunWhenConnect()?1:0);
 			db.insert("Tran_WiFi", null, insertValues);
 			Log.d("BrosApp--SQLHelper", "Tran_WiFi--Inserting WiFi No " + i);
 

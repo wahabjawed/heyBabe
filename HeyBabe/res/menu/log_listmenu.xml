@@ -2,7 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item android:id="@+id/lUpdate" android:title="Update"></item>
     <item android:id="@+id/lDelete" android:title="Delete"></item>
-    <item android:id="@+id/lDetail" android:title="Detail"></item>
     
 
 </menu>

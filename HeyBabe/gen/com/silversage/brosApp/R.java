@@ -999,7 +999,7 @@ containing a value of this type.
         public static final int abs__textButton=0x7f040013;
         public static final int abs__title=0x7f04001b;
         public static final int abs__up=0x7f04000b;
-        public static final int action_settings=0x7f04008a;
+        public static final int action_settings=0x7f040089;
         public static final int add_message=0x7f040043;
         public static final int add_wifi=0x7f040040;
         public static final int all_good=0x7f040054;
@@ -1028,7 +1028,6 @@ containing a value of this type.
         public static final int item3=0x7f040085;
         public static final int item4=0x7f040086;
         public static final int lDelete=0x7f040088;
-        public static final int lDetail=0x7f040089;
         public static final int lUpdate=0x7f040087;
         public static final int layout_root=0x7f04006f;
         public static final int line_break=0x7f040038;

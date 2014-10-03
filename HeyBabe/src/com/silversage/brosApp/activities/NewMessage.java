@@ -1,20 +1,16 @@
 package com.silversage.brosApp.activities;
 
-import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager.LayoutParams;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -43,6 +39,7 @@ public class NewMessage extends BrosAppActivity {
 		setContentView(R.layout.include_newmessage);
 		SetupView();
 		PreExecute();
+
 	}
 
 	public void SetupView() {
@@ -128,6 +125,8 @@ public class NewMessage extends BrosAppActivity {
 					BrosApp.contact.messageText = messageItem[selectedMsgID]
 							.getMessageText();
 					Intent i = new Intent(NewMessage.this, MessageDetails.class);
+					i.putExtra("REQUEST",
+							getIntent().getExtras().getString("REQUEST"));
 					startActivity(i);
 				} else {
 					Toast.makeText(NewMessage.this,
@@ -164,12 +163,12 @@ public class NewMessage extends BrosAppActivity {
 
 		_cursor = db.getMessageList(BrosApp.contact.ID);
 
-		Log.d(" BrosApp--MessageList", "Cursor populated");
+		Log.i(" BrosApp--MessageList", "Cursor populated");
 		if (_cursor.getCount() > 0) {
 			messageItem = new MessageObject[_cursor.getCount()];
-			Log.d(" BrosApp--MessageList", "Data Exist");
+			Log.i(" BrosApp--MessageList", "Data Exist");
 			_cursor.moveToFirst();
-			Log.d(" BrosApp--MessageList", "Populating Adapter");
+			Log.i(" BrosApp--MessageList", "Populating Adapter");
 
 			for (int i = 0; i < _cursor.getCount(); i++) {
 
@@ -182,10 +181,23 @@ public class NewMessage extends BrosAppActivity {
 		}
 		_cursor.close();
 
+		if (getIntent().getExtras().getString("REQUEST").equals("UPDATE")) {
+
+			for (int i = 0; i < messageItem.length; i++) {
+				if (Integer.parseInt(messageItem[i].getID()) == BrosApp.contact
+						.getMessageID()) {
+					messageItem[i].setSelected(true);
+					selectedMsgID = i;
+					Log.i(" BrosApp--MessageList", "In Update Mode: "
+							+ BrosApp.contact.getMessageID() + " iteration: "
+							+ i);
+				}
+			}
+		}
 		MessageAdapter adapter = new MessageAdapter(this, messageItem);
 		messageList.setAdapter(adapter);
 
-		Log.d(" BrosApp--MessageList", "Populated");
+		Log.i(" BrosApp--MessageList", "Populated");
 	}
 
 	@Override

@@ -5,17 +5,21 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.silversage.brosApp.BrosApp;
 import com.silversage.brosApp.R;
 import com.silversage.brosApp.activities.abstracts.BrosAppActivity;
 import com.silversage.brosApp.adapters.LogMessage;
 import com.silversage.brosApp.objects.adapters.MessageObject;
+import com.silversage.brosApp.util.SQLHelper;
 
 public class MessageLog extends BrosAppActivity {
 
@@ -48,20 +52,20 @@ public class MessageLog extends BrosAppActivity {
 				"AdobeGothicStd.otf");
 		Selectbropowered.setTypeface(face2);
 
-		messageList.setOnItemClickListener(new OnItemClickListener() {
+		// messageList.setOnItemClickListener(new OnItemClickListener() {
+		//
+		// @Override
+		// public void onItemClick(AdapterView<?> parent, View view,
+		// int position, long id) {
+		// // TODO Auto-generated method stub
+		// Intent i = new Intent(MessageLog.this, Confirmation.class);
+		// i.putExtra("ACTION", "DELETE");
+		// i.putExtra("ID", messageItem[position].getID());
+		// startActivity(i);
+		// }
+		// });
 
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// TODO Auto-generated method stub
-				Intent i = new Intent(MessageLog.this, Confirmation.class);
-				i.putExtra("ACTION", "DELETE");
-				i.putExtra("ID", messageItem[position].getID());
-				startActivity(i);
-			}
-		});
-
-		// registerForContextMenu(messageList);
+		registerForContextMenu(messageList);
 	}
 
 	@Override
@@ -110,39 +114,38 @@ public class MessageLog extends BrosAppActivity {
 
 	}
 
-	// @Override
-	// public boolean onContextItemSelected(MenuItem item) {
-	// AdapterView.AdapterContextMenuInfo info =
-	// (AdapterView.AdapterContextMenuInfo) item
-	// .getMenuInfo();
-	// if (item.getItemId() == R.id.lUpdate) {
-	//
-	// Intent activity = new Intent(MessageLog.this, MessageDetails.class);
-	// activity.putExtra("REQUEST", "UPDATE");
-	// startActivity(activity);
-	// } else if (item.getItemId() == R.id.lDelete) {
-	//
-	// db.DeleteTran(BrosApp.contact.ID,
-	// messageItem[info.position].getID());
-	// PreExecute();
-	// }
-	//
-	// return super.onContextItemSelected(item);
-	//
-	// }
-	//
-	// @Override
-	// public void onCreateContextMenu(ContextMenu menu, View v,
-	// ContextMenuInfo menuInfo) {
-	// if (v.getId() == R.id.default_messages) {
-	// AdapterView.AdapterContextMenuInfo info =
-	// (AdapterView.AdapterContextMenuInfo) menuInfo;
-	// menu.setHeaderTitle("Bros App");
-	// Log.d("BroApp--Log Message", "Index " + info.position);
-	//
-	// MenuInflater inflater = getMenuInflater();
-	// inflater.inflate(R.menu.log_listmenu, menu);
-	// }
-	// }
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
+				.getMenuInfo();
+		if (item.getItemId() == R.id.lUpdate) {
+			SQLHelper.getTran(messageItem[info.position].getID());
+			Intent activity = new Intent(MessageLog.this, NewMessage.class);
+			activity.putExtra("REQUEST", "UPDATE");
+			startActivity(activity);
+
+		} else if (item.getItemId() == R.id.lDelete) {
+
+			SQLHelper.DeleteTran(BrosApp.contact.ID,
+					messageItem[info.position].getID());
+			PreExecute();
+		}
+
+		return super.onContextItemSelected(item);
+
+	}
+
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		if (v.getId() == R.id.default_messages) {
+			AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+			menu.setHeaderTitle("Bros App");
+			Log.d("BroApp--Log Message", "Index " + info.position);
+
+			MenuInflater inflater = getMenuInflater();
+			inflater.inflate(R.menu.log_listmenu, menu);
+		}
+	}
 
 }

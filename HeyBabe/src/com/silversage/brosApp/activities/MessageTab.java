@@ -10,6 +10,7 @@ import android.widget.TabHost.TabSpec;
 
 import com.silversage.brosApp.R;
 
+@SuppressWarnings("deprecation")
 public class MessageTab extends TabActivity {
 
 	@Override
@@ -21,21 +22,20 @@ public class MessageTab extends TabActivity {
 		TabHost tabHost = getTabHost();
 
 		TabSpec newmsg = tabHost.newTabSpec("tab1");
-		newmsg.setIndicator("",
-				getResources().getDrawable(R.drawable.compose));
+		newmsg.setIndicator("", getResources().getDrawable(R.drawable.compose));
 		Intent newmsgIntent = new Intent(this, NewMessage.class);
+		newmsgIntent.putExtra("REQUEST", "NEW");
 		newmsg.setContent(newmsgIntent);
 
 		TabSpec log = tabHost.newTabSpec("tab2");
-		log.setIndicator("",
-				getResources().getDrawable(R.drawable.logs));
+		log.setIndicator("", getResources().getDrawable(R.drawable.logs));
 		Intent logIntent = new Intent(this, MessageLog.class);
 		log.setContent(logIntent);
 
 		tabHost.addTab(newmsg);
 		tabHost.addTab(log);
 	}
-	
+
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	private void actionBarSetup() {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {

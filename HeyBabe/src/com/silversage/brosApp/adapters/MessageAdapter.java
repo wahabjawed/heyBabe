@@ -9,16 +9,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.Checkable;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RadioButton;
 import android.widget.TextView;
-
 import com.silversage.brosApp.BrosApp;
 import com.silversage.brosApp.R;
-import com.silversage.brosApp.activities.Dashboard;
 import com.silversage.brosApp.activities.NewMessage;
 import com.silversage.brosApp.objects.adapters.MessageObject;
 
@@ -67,7 +61,23 @@ public class MessageAdapter extends ArrayAdapter<MessageObject> {
 		ViewHolder holder = (ViewHolder) vi.getTag();
 		MessageObject obj = data[position];
 		holder.text.setText(obj.getMessageText());
-		holder.select.setChecked(obj.isSelected());
+		mSelectedPosition = (obj.isSelected()) ? position : mSelectedPosition;
+		mSelectedRB = (obj.isSelected()) ? (RadioButton) holder.select
+				: mSelectedRB;
+		data[position].setSelected((obj.isSelected()) ? !data[position]
+				.isSelected() : data[position].isSelected());
+
+		if (mSelectedPosition != position) {
+			holder.select.setChecked(false);
+		} else {
+			holder.select.setChecked(true);
+			if (mSelectedRB != null && holder.select != mSelectedRB) {
+				mSelectedRB = holder.select;
+				Log.e("kjh", "hfg1 " + position + " " + mSelectedRB.isChecked());
+
+			}
+		}
+
 		holder.select.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -87,14 +97,6 @@ public class MessageAdapter extends ArrayAdapter<MessageObject> {
 			}
 		});
 
-		if (mSelectedPosition != position) {
-			holder.select.setChecked(false);
-		} else {
-			holder.select.setChecked(true);
-			if (mSelectedRB != null && holder.select != mSelectedRB) {
-				mSelectedRB = holder.select;
-			}
-		}
 		return vi;
 	}
 }

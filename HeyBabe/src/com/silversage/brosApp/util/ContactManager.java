@@ -17,7 +17,6 @@ public class ContactManager {
 	static SQLiteDatabase db = BrosApp.db;
 	static Context context = BrosApp.context;
 
-	@SuppressWarnings("deprecation")
 	public static void CopyContactList() {
 		String contactNumber = null;
 		String nameOfContact = null;

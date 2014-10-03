@@ -13,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -106,7 +105,8 @@ public class WiFiCondition extends BrosAppActivity {
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
 		if (v.getId() == R.id.add_wifi) {
-			AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+			// AdapterView.AdapterContextMenuInfo info =
+			// (AdapterView.AdapterContextMenuInfo) menuInfo;
 			menu.setHeaderTitle("Pick Wifi");
 
 			for (int i = 0; i < menuItems.length; i++) {

@@ -34,7 +34,7 @@ public class LogMessage extends ArrayAdapter<MessageObject> {
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		View vi = convertView;
-		final int pos = position;
+		//final int pos = position;
 		if (vi == null) {
 			LayoutInflater inflater = (LayoutInflater) activity
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

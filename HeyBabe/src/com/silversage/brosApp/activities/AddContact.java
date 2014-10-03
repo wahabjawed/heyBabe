@@ -35,6 +35,7 @@ import android.widget.Toast;
 
 import com.silversage.brosApp.R;
 import com.silversage.brosApp.activities.abstracts.BrosAppActivity;
+import com.silversage.brosApp.util.SQLHelper;
 
 public class AddContact extends BrosAppActivity {
 	private static final int CAMERA = 0;
@@ -176,20 +177,22 @@ public class AddContact extends BrosAppActivity {
 								Bitmap.CompressFormat.PNG, 10, stream);
 						byte[] byteArray = stream.toByteArray();
 						if (!isUpdate) {
-							db.insertContact(name.getText().toString(), number
-									.getText().toString(), byteArray);
-						} else {
-							db.updateContact(ID, name.getText().toString(),
+							SQLHelper.insertContact(name.getText().toString(),
 									number.getText().toString(), byteArray);
+						} else {
+							SQLHelper.updateContact(ID, name.getText()
+									.toString(), number.getText().toString(),
+									byteArray);
 						}
 					} else {
 
 						if (!isUpdate) {
-							db.insertContact(name.getText().toString(), number
-									.getText().toString(), null);
-						} else {
-							db.updateContact(ID, name.getText().toString(),
+							SQLHelper.insertContact(name.getText().toString(),
 									number.getText().toString(), null);
+						} else {
+							SQLHelper.updateContact(ID, name.getText()
+									.toString(), number.getText().toString(),
+									null);
 						}
 					}
 					AddContact.this.finish();
@@ -203,7 +206,7 @@ public class AddContact extends BrosAppActivity {
 			Log.d(" BrosApp--AddContact", "Activity--Update Mode");
 			isUpdate = true;
 			ID = getIntent().getExtras().getInt("ID");
-			Cursor _cursor = db.getDashboardContactList(ID);
+			Cursor _cursor = SQLHelper.getDashboardContactList(ID);
 			if (_cursor.moveToFirst()) {
 				name.setText(_cursor.getString(_cursor.getColumnIndex("name")));
 				number.setText(_cursor.getString(_cursor
@@ -265,6 +268,7 @@ public class AddContact extends BrosAppActivity {
 				name.setText(null);
 				number.setText(null);
 
+				@SuppressWarnings("deprecation")
 				Cursor c = managedQuery(contactData, null, null, null, null);
 				if (c.moveToFirst()) {
 

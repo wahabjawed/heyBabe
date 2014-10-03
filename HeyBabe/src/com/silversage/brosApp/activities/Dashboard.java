@@ -116,7 +116,7 @@ public class Dashboard extends BrosAppSherlockActivity {
 			startActivity(activity);
 		} else if (item.getItemId() == R.id.dLDelete) {
 
-			db.DeleteContact(dashboardItem[info.position].getID());
+			SQLHelper.DeleteContact(dashboardItem[info.position].getID());
 			PreExecute();
 		}
 
@@ -178,7 +178,7 @@ public class Dashboard extends BrosAppSherlockActivity {
 
 		Cursor _cursor = null;
 
-		_cursor = db.getDashboardContactList();
+		_cursor = SQLHelper.getDashboardContactList();
 
 		Log.d(" BrosApp--DashboardList", "Cursor populated");
 		if (_cursor.getCount() > 0) {
@@ -237,6 +237,7 @@ public class Dashboard extends BrosAppSherlockActivity {
 	}
 
 	// The method that displays the popup.
+	@SuppressWarnings("deprecation")
 	private void showPopup() {
 
 		int popupWidth = 200;
@@ -258,6 +259,7 @@ public class Dashboard extends BrosAppSherlockActivity {
 		// Clear the default translucent background
 		popup.setBackgroundDrawable(new BitmapDrawable());
 		layout.post(new Runnable() {
+
 			public void run() {
 				// Displaying the popup at the specified location, + offsets.
 				Display display = getWindowManager().getDefaultDisplay();

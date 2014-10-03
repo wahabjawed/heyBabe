@@ -18,10 +18,4 @@ public class SMSService extends Service {
 		super.onCreate();
 	}
 
-	@Override
-	public void onStart(Intent intent, int startId) {
-		// TODO Auto-generated method stub
-		super.onStart(intent, startId);
-	}
-
 }

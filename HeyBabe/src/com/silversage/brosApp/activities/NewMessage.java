@@ -22,6 +22,7 @@ import com.silversage.brosApp.R;
 import com.silversage.brosApp.activities.abstracts.BrosAppActivity;
 import com.silversage.brosApp.adapters.MessageAdapter;
 import com.silversage.brosApp.objects.adapters.MessageObject;
+import com.silversage.brosApp.util.SQLHelper;
 
 public class NewMessage extends BrosAppActivity {
 
@@ -88,7 +89,7 @@ public class NewMessage extends BrosAppActivity {
 										// get user input and set it to result
 										// edit text
 										if (userInput.getText().toString() != "") {
-											db.insertRefMessage(
+											SQLHelper.insertRefMessage(
 													BrosApp.contact.ID,
 													userInput.getText()
 															.toString());
@@ -161,7 +162,7 @@ public class NewMessage extends BrosAppActivity {
 
 		Cursor _cursor = null;
 
-		_cursor = db.getMessageList(BrosApp.contact.ID);
+		_cursor = SQLHelper.getMessageList(BrosApp.contact.ID);
 
 		Log.i(" BrosApp--MessageList", "Cursor populated");
 		if (_cursor.getCount() > 0) {

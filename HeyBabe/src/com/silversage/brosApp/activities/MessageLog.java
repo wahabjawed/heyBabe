@@ -11,9 +11,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.silversage.brosApp.BrosApp;
 import com.silversage.brosApp.R;
 import com.silversage.brosApp.activities.abstracts.BrosAppActivity;
@@ -79,7 +79,7 @@ public class MessageLog extends BrosAppActivity {
 		// TODO Auto-generated method stub
 
 		Log.d("", "" + BrosApp.contact.ID);
-		Cursor _cursor = db.getLogMessageList(BrosApp.contact.ID);
+		Cursor _cursor = SQLHelper.getLogMessageList(BrosApp.contact.ID);
 
 		Log.d(" BrosApp--MessageList", "Cursor populated");
 		if (_cursor.getCount() > 0) {

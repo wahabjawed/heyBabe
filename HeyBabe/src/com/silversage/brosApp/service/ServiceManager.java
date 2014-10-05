@@ -1,6 +1,7 @@
 package com.silversage.brosApp.service;
 
-import com.silversage.brosApp.service.SMSService.SMSService;
+import com.silversage.brosApp.service.MessagingService.MessagingService;
+import com.silversage.brosApp.util.Notification;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -11,7 +12,8 @@ public class ServiceManager extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		Intent service = new Intent(context, SMSService.class);
+		Notification.NewMessageNotification("Hello", "Hello");
+		Intent service = new Intent(context, MessagingService.class);
 		context.startService(service);
 	}
 

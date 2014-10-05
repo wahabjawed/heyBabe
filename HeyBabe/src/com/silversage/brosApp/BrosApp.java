@@ -1,7 +1,7 @@
 package com.silversage.brosApp;
 
 import com.silversage.brosApp.objects.ContactVO;
-import com.silversage.brosApp.service.SMSService.SMSService;
+import com.silversage.brosApp.service.MessagingService.MessagingService;
 
 import android.app.Application;
 import android.content.Context;
@@ -29,7 +29,7 @@ public class BrosApp extends Application {
 
 		db = openOrCreateDatabase("brosApp", MODE_PRIVATE, null);
 		context = getApplicationContext();
-		startService(new Intent(getApplicationContext(), SMSService.class));
+		startService(new Intent(getApplicationContext(), MessagingService.class));
 		super.onCreate();
 
 	}

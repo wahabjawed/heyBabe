@@ -1,5 +1,6 @@
 package com.silversage.brosApp.util;
 
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -13,7 +14,6 @@ import com.silversage.brosApp.R;
 import com.silversage.brosApp.activities.Dashboard;
 
 public class Notification {
-
 	public static void NewMessageNotification(String message, String title) {
 		// Creates an explicit intent for an Activity in your app
 		Intent resultIntent = new Intent(BrosApp.context, Dashboard.class);

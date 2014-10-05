@@ -1,5 +1,7 @@
 package com.silversage.brosApp.activities;
 
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,7 +36,10 @@ import com.silversage.brosApp.activities.abstracts.BrosAppSherlockActivity;
 import com.silversage.brosApp.adapters.DashboardAdapter;
 import com.silversage.brosApp.objects.ContactVO;
 import com.silversage.brosApp.objects.adapters.DashboardObject;
+import com.silversage.brosApp.service.ServiceManager;
+import com.silversage.brosApp.service.MessagingService.MessagingService;
 import com.silversage.brosApp.util.NetworkManager;
+import com.silversage.brosApp.util.Notification;
 import com.silversage.brosApp.util.SQLHelper;
 
 public class Dashboard extends BrosAppSherlockActivity {
@@ -58,6 +63,8 @@ public class Dashboard extends BrosAppSherlockActivity {
 
 			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 			setupView();
+			Intent service = new Intent(this, MessagingService.class);
+			startService(service);
 
 		} else {
 			this.requestWindowFeature(Window.FEATURE_NO_TITLE);
